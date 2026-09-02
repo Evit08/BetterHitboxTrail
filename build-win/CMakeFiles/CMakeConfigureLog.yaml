@@ -1,0 +1,455 @@
+
+---
+events:
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/home/vite/.local/tools/cmake-3.31.8-linux-x86_64/share/cmake-3.31/Modules/CMakeDetermineSystem.cmake:200 (message)"
+      - "CMakeLists.txt:2 (project)"
+    message: |
+      The target system is: Windows - 10.0 - AMD64
+      The host system is: Linux - 7.1.8-1-cachyos - x86_64
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/home/vite/.local/tools/cmake-3.31.8-linux-x86_64/share/cmake-3.31/Modules/CMakeDetermineCompilerId.cmake:17 (message)"
+      - "/home/vite/.local/tools/cmake-3.31.8-linux-x86_64/share/cmake-3.31/Modules/CMakeDetermineCompilerId.cmake:64 (__determine_compiler_id_test)"
+      - "/home/vite/.local/tools/cmake-3.31.8-linux-x86_64/share/cmake-3.31/Modules/CMakeDetermineCCompiler.cmake:123 (CMAKE_DETERMINE_COMPILER_ID)"
+      - "CMakeLists.txt:2 (project)"
+    message: |
+      Compiling the C compiler identification source file "CMakeCCompilerId.c" failed.
+      Compiler: /usr/bin/clang 
+      Build flags: -fexceptions;-fcxx-exceptions;-D_CRT_SECURE_NO_WARNINGS;--target=x86_64-windows-msvc;-fms-compatibility-version=19.37;-Wno-unused-command-line-argument;-isystem;/usr/lib/clang/22/include;-isystem/home/vite/.local/share/Geode/cross-tools/splat/crt/include;-isystem/home/vite/.local/share/Geode/cross-tools/splat/sdk/include/ucrt;-isystem/home/vite/.local/share/Geode/cross-tools/splat/sdk/include/shared;-isystem/home/vite/.local/share/Geode/cross-tools/splat/sdk/include/um;-isystem/home/vite/.local/share/Geode/cross-tools/splat/sdk/include/winrt;-ivfsoverlay/home/vite/click-hitbox-trail/build-win/winsdk_vfs_overlay.yaml
+      Id flags:  
+      
+      The output was:
+      1
+      clang: warning: unable to find a Visual Studio installation; try running Clang from a developer command prompt [-Wmsvc-not-found]
+      clang: error: unable to execute command: posix_spawn failed: No such file or directory
+      clang: error: linker command failed with exit code 1 (use -v to see invocation)
+      
+      
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/home/vite/.local/tools/cmake-3.31.8-linux-x86_64/share/cmake-3.31/Modules/CMakeDetermineCompilerId.cmake:17 (message)"
+      - "/home/vite/.local/tools/cmake-3.31.8-linux-x86_64/share/cmake-3.31/Modules/CMakeDetermineCompilerId.cmake:64 (__determine_compiler_id_test)"
+      - "/home/vite/.local/tools/cmake-3.31.8-linux-x86_64/share/cmake-3.31/Modules/CMakeDetermineCCompiler.cmake:123 (CMAKE_DETERMINE_COMPILER_ID)"
+      - "CMakeLists.txt:2 (project)"
+    message: |
+      Compiling the C compiler identification source file "CMakeCCompilerId.c" succeeded.
+      Compiler: /usr/bin/clang 
+      Build flags: -fexceptions;-fcxx-exceptions;-D_CRT_SECURE_NO_WARNINGS;--target=x86_64-windows-msvc;-fms-compatibility-version=19.37;-Wno-unused-command-line-argument;-isystem;/usr/lib/clang/22/include;-isystem/home/vite/.local/share/Geode/cross-tools/splat/crt/include;-isystem/home/vite/.local/share/Geode/cross-tools/splat/sdk/include/ucrt;-isystem/home/vite/.local/share/Geode/cross-tools/splat/sdk/include/shared;-isystem/home/vite/.local/share/Geode/cross-tools/splat/sdk/include/um;-isystem/home/vite/.local/share/Geode/cross-tools/splat/sdk/include/winrt;-ivfsoverlay/home/vite/click-hitbox-trail/build-win/winsdk_vfs_overlay.yaml
+      Id flags: -c 
+      
+      The output was:
+      0
+      
+      
+      Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "CMakeCCompilerId.o"
+      
+      The C compiler identification is Clang, found in:
+        /home/vite/click-hitbox-trail/build-win/CMakeFiles/3.31.8/CompilerIdC/CMakeCCompilerId.o
+      
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/home/vite/.local/tools/cmake-3.31.8-linux-x86_64/share/cmake-3.31/Modules/CMakeDetermineCompilerId.cmake:1289 (message)"
+      - "/home/vite/.local/tools/cmake-3.31.8-linux-x86_64/share/cmake-3.31/Modules/CMakeDetermineCompilerId.cmake:250 (CMAKE_DETERMINE_MSVC_SHOWINCLUDES_PREFIX)"
+      - "/home/vite/.local/tools/cmake-3.31.8-linux-x86_64/share/cmake-3.31/Modules/CMakeDetermineCCompiler.cmake:123 (CMAKE_DETERMINE_COMPILER_ID)"
+      - "CMakeLists.txt:2 (project)"
+    message: |
+      Detecting C compiler /showIncludes prefix:
+        
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/home/vite/.local/tools/cmake-3.31.8-linux-x86_64/share/cmake-3.31/Modules/CMakeDetermineCompilerId.cmake:1289 (message)"
+      - "/home/vite/.local/tools/cmake-3.31.8-linux-x86_64/share/cmake-3.31/Modules/CMakeDetermineCompilerId.cmake:250 (CMAKE_DETERMINE_MSVC_SHOWINCLUDES_PREFIX)"
+      - "/home/vite/.local/tools/cmake-3.31.8-linux-x86_64/share/cmake-3.31/Modules/CMakeDetermineCCompiler.cmake:123 (CMAKE_DETERMINE_COMPILER_ID)"
+      - "CMakeLists.txt:2 (project)"
+    message: |
+      Detecting C compiler /showIncludes prefix:
+        
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/home/vite/.local/tools/cmake-3.31.8-linux-x86_64/share/cmake-3.31/Modules/CMakeDetermineCompilerId.cmake:17 (message)"
+      - "/home/vite/.local/tools/cmake-3.31.8-linux-x86_64/share/cmake-3.31/Modules/CMakeDetermineCompilerId.cmake:64 (__determine_compiler_id_test)"
+      - "/home/vite/.local/tools/cmake-3.31.8-linux-x86_64/share/cmake-3.31/Modules/CMakeDetermineCXXCompiler.cmake:126 (CMAKE_DETERMINE_COMPILER_ID)"
+      - "CMakeLists.txt:2 (project)"
+    message: |
+      Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" failed.
+      Compiler: /usr/bin/clang++ 
+      Build flags: -fexceptions;-fcxx-exceptions;-D_CRT_SECURE_NO_WARNINGS;--target=x86_64-windows-msvc;-fms-compatibility-version=19.37;-Wno-unused-command-line-argument;-isystem;/usr/lib/clang/22/include;-isystem/home/vite/.local/share/Geode/cross-tools/splat/crt/include;-isystem/home/vite/.local/share/Geode/cross-tools/splat/sdk/include/ucrt;-isystem/home/vite/.local/share/Geode/cross-tools/splat/sdk/include/shared;-isystem/home/vite/.local/share/Geode/cross-tools/splat/sdk/include/um;-isystem/home/vite/.local/share/Geode/cross-tools/splat/sdk/include/winrt;-ivfsoverlay/home/vite/click-hitbox-trail/build-win/winsdk_vfs_overlay.yaml
+      Id flags:  
+      
+      The output was:
+      1
+      clang++: warning: unable to find a Visual Studio installation; try running Clang from a developer command prompt [-Wmsvc-not-found]
+      clang++: error: unable to execute command: posix_spawn failed: No such file or directory
+      clang++: error: linker command failed with exit code 1 (use -v to see invocation)
+      
+      
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/home/vite/.local/tools/cmake-3.31.8-linux-x86_64/share/cmake-3.31/Modules/CMakeDetermineCompilerId.cmake:17 (message)"
+      - "/home/vite/.local/tools/cmake-3.31.8-linux-x86_64/share/cmake-3.31/Modules/CMakeDetermineCompilerId.cmake:64 (__determine_compiler_id_test)"
+      - "/home/vite/.local/tools/cmake-3.31.8-linux-x86_64/share/cmake-3.31/Modules/CMakeDetermineCXXCompiler.cmake:126 (CMAKE_DETERMINE_COMPILER_ID)"
+      - "CMakeLists.txt:2 (project)"
+    message: |
+      Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" succeeded.
+      Compiler: /usr/bin/clang++ 
+      Build flags: -fexceptions;-fcxx-exceptions;-D_CRT_SECURE_NO_WARNINGS;--target=x86_64-windows-msvc;-fms-compatibility-version=19.37;-Wno-unused-command-line-argument;-isystem;/usr/lib/clang/22/include;-isystem/home/vite/.local/share/Geode/cross-tools/splat/crt/include;-isystem/home/vite/.local/share/Geode/cross-tools/splat/sdk/include/ucrt;-isystem/home/vite/.local/share/Geode/cross-tools/splat/sdk/include/shared;-isystem/home/vite/.local/share/Geode/cross-tools/splat/sdk/include/um;-isystem/home/vite/.local/share/Geode/cross-tools/splat/sdk/include/winrt;-ivfsoverlay/home/vite/click-hitbox-trail/build-win/winsdk_vfs_overlay.yaml
+      Id flags: -c 
+      
+      The output was:
+      0
+      
+      
+      Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "CMakeCXXCompilerId.o"
+      
+      The CXX compiler identification is Clang, found in:
+        /home/vite/click-hitbox-trail/build-win/CMakeFiles/3.31.8/CompilerIdCXX/CMakeCXXCompilerId.o
+      
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/home/vite/.local/tools/cmake-3.31.8-linux-x86_64/share/cmake-3.31/Modules/CMakeDetermineCompilerId.cmake:1289 (message)"
+      - "/home/vite/.local/tools/cmake-3.31.8-linux-x86_64/share/cmake-3.31/Modules/CMakeDetermineCompilerId.cmake:250 (CMAKE_DETERMINE_MSVC_SHOWINCLUDES_PREFIX)"
+      - "/home/vite/.local/tools/cmake-3.31.8-linux-x86_64/share/cmake-3.31/Modules/CMakeDetermineCXXCompiler.cmake:126 (CMAKE_DETERMINE_COMPILER_ID)"
+      - "CMakeLists.txt:2 (project)"
+    message: |
+      Detecting CXX compiler /showIncludes prefix:
+        
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/home/vite/.local/tools/cmake-3.31.8-linux-x86_64/share/cmake-3.31/Modules/CMakeDetermineCompilerId.cmake:1289 (message)"
+      - "/home/vite/.local/tools/cmake-3.31.8-linux-x86_64/share/cmake-3.31/Modules/CMakeDetermineCompilerId.cmake:250 (CMAKE_DETERMINE_MSVC_SHOWINCLUDES_PREFIX)"
+      - "/home/vite/.local/tools/cmake-3.31.8-linux-x86_64/share/cmake-3.31/Modules/CMakeDetermineCXXCompiler.cmake:126 (CMAKE_DETERMINE_COMPILER_ID)"
+      - "CMakeLists.txt:2 (project)"
+    message: |
+      Detecting CXX compiler /showIncludes prefix:
+        
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/home/vite/.local/tools/cmake-3.31.8-linux-x86_64/share/cmake-3.31/Modules/CMakeDetermineCompilerABI.cmake:74 (try_compile)"
+      - "/home/vite/.local/tools/cmake-3.31.8-linux-x86_64/share/cmake-3.31/Modules/CMakeTestCCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:2 (project)"
+    checks:
+      - "Detecting C compiler ABI info"
+    directories:
+      source: "/home/vite/click-hitbox-trail/build-win/CMakeFiles/CMakeScratch/TryCompile-ljD7Fb"
+      binary: "/home/vite/click-hitbox-trail/build-win/CMakeFiles/CMakeScratch/TryCompile-ljD7Fb"
+    cmakeVariables:
+      CMAKE_CXX_COMPILER_CLANG_SCAN_DEPS: "/usr/bin/clang-scan-deps"
+      CMAKE_C_FLAGS: " -fexceptions -fcxx-exceptions -D_CRT_SECURE_NO_WARNINGS --target=x86_64-windows-msvc -fms-compatibility-version=19.37 -Wno-unused-command-line-argument -isystem /usr/lib/clang/22/include -isystem\"/home/vite/.local/share/Geode/cross-tools/splat/crt/include\" -isystem\"/home/vite/.local/share/Geode/cross-tools/splat/sdk/include/ucrt\" -isystem\"/home/vite/.local/share/Geode/cross-tools/splat/sdk/include/shared\" -isystem\"/home/vite/.local/share/Geode/cross-tools/splat/sdk/include/um\" -isystem\"/home/vite/.local/share/Geode/cross-tools/splat/sdk/include/winrt\" -ivfsoverlay\"/home/vite/click-hitbox-trail/build-win/winsdk_vfs_overlay.yaml\""
+      CMAKE_C_FLAGS_DEBUG: "-O0 -g -Xclang -gcodeview"
+      CMAKE_EXE_LINKER_FLAGS: " -L\"/home/vite/.local/share/Geode/cross-tools/splat/crt/lib/x86_64\" -L\"/home/vite/.local/share/Geode/cross-tools/splat/sdk/lib/ucrt/x86_64\" -L\"/home/vite/.local/share/Geode/cross-tools/splat/sdk/lib/um/x86_64\" -L\"/home/vite/click-hitbox-trail/build-win/winsdk_lib_symlinks\""
+    buildResult:
+      variable: "CMAKE_C_ABI_COMPILED"
+      cached: true
+      stdout: |
+        Change Dir: '/home/vite/click-hitbox-trail/build-win/CMakeFiles/CMakeScratch/TryCompile-ljD7Fb'
+        
+        Run Build Command(s): /home/vite/.local/tools/cmake-3.31.8-linux-x86_64/bin/cmake -E env VERBOSE=1 /usr/bin/make -f Makefile cmTC_93755/fast
+        /usr/bin/make  -f CMakeFiles/cmTC_93755.dir/build.make CMakeFiles/cmTC_93755.dir/build
+        make[1]: Entering directory '/home/vite/click-hitbox-trail/build-win/CMakeFiles/CMakeScratch/TryCompile-ljD7Fb'
+        Building C object CMakeFiles/cmTC_93755.dir/CMakeCCompilerABI.c.obj
+        /usr/bin/clang   -fexceptions -fcxx-exceptions -D_CRT_SECURE_NO_WARNINGS --target=x86_64-windows-msvc -fms-compatibility-version=19.37 -Wno-unused-command-line-argument -isystem /usr/lib/clang/22/include -isystem"/home/vite/.local/share/Geode/cross-tools/splat/crt/include" -isystem"/home/vite/.local/share/Geode/cross-tools/splat/sdk/include/ucrt" -isystem"/home/vite/.local/share/Geode/cross-tools/splat/sdk/include/shared" -isystem"/home/vite/.local/share/Geode/cross-tools/splat/sdk/include/um" -isystem"/home/vite/.local/share/Geode/cross-tools/splat/sdk/include/winrt" -ivfsoverlay"/home/vite/click-hitbox-trail/build-win/winsdk_vfs_overlay.yaml"  -O0 -g -Xclang -gcodeview -D_DEBUG -D_DLL -D_MT -Xclang --dependent-lib=msvcrtd -MD -MT CMakeFiles/cmTC_93755.dir/CMakeCCompilerABI.c.obj -MF CMakeFiles/cmTC_93755.dir/CMakeCCompilerABI.c.obj.d -o CMakeFiles/cmTC_93755.dir/CMakeCCompilerABI.c.obj -c /home/vite/.local/tools/cmake-3.31.8-linux-x86_64/share/cmake-3.31/Modules/CMakeCCompilerABI.c
+        Linking C executable cmTC_93755.exe
+        /home/vite/.local/tools/cmake-3.31.8-linux-x86_64/bin/cmake -E cmake_link_script CMakeFiles/cmTC_93755.dir/link.txt --verbose=1
+        clang version 22.1.8
+        Target: x86_64-unknown-windows-msvc
+        Thread model: posix
+        InstalledDir: /usr/bin
+         "/usr/bin/lld-link" -out:cmTC_93755.exe -libpath:lib/amd64 -libpath:atlmfc/lib/amd64 -libpath:/home/vite/.local/share/Geode/cross-tools/splat/crt/lib/x86_64 -libpath:/home/vite/.local/share/Geode/cross-tools/splat/sdk/lib/ucrt/x86_64 -libpath:/home/vite/.local/share/Geode/cross-tools/splat/sdk/lib/um/x86_64 -libpath:/home/vite/click-hitbox-trail/build-win/winsdk_lib_symlinks -nologo -debug /subsystem:console CMakeFiles/cmTC_93755.dir/CMakeCCompilerABI.c.obj /MANIFEST:EMBED /implib:cmTC_93755.lib /pdb:/home/vite/click-hitbox-trail/build-win/CMakeFiles/CMakeScratch/TryCompile-ljD7Fb/cmTC_93755.pdb /version:0.0 user32.lib kernel32.lib shell32.lib ole32.lib crypt32.lib advapi32.lib delayimp.lib gdi32.lib
+        /usr/bin/clang -nostartfiles -nostdlib  -fexceptions -fcxx-exceptions -D_CRT_SECURE_NO_WARNINGS --target=x86_64-windows-msvc -fms-compatibility-version=19.37 -Wno-unused-command-line-argument -isystem /usr/lib/clang/22/include -isystem"/home/vite/.local/share/Geode/cross-tools/splat/crt/include" -isystem"/home/vite/.local/share/Geode/cross-tools/splat/sdk/include/ucrt" -isystem"/home/vite/.local/share/Geode/cross-tools/splat/sdk/include/shared" -isystem"/home/vite/.local/share/Geode/cross-tools/splat/sdk/include/um" -isystem"/home/vite/.local/share/Geode/cross-tools/splat/sdk/include/winrt" -ivfsoverlay"/home/vite/click-hitbox-trail/build-win/winsdk_vfs_overlay.yaml"  -O0 -g -Xclang -gcodeview -D_DEBUG -D_DLL -D_MT -Xclang --dependent-lib=msvcrtd  -L"/home/vite/.local/share/Geode/cross-tools/splat/crt/lib/x86_64" -L"/home/vite/.local/share/Geode/cross-tools/splat/sdk/lib/ucrt/x86_64" -L"/home/vite/.local/share/Geode/cross-tools/splat/sdk/lib/um/x86_64" -L"/home/vite/click-hitbox-trail/build-win/winsdk_lib_symlinks" -v -Xlinker /subsystem:console -fuse-ld=lld-link @CMakeFiles/cmTC_93755.dir/objects1.rsp -o cmTC_93755.exe -Xlinker /MANIFEST:EMBED -Xlinker /implib:cmTC_93755.lib -Xlinker /pdb:/home/vite/click-hitbox-trail/build-win/CMakeFiles/CMakeScratch/TryCompile-ljD7Fb/cmTC_93755.pdb -Xlinker /version:0.0  @CMakeFiles/cmTC_93755.dir/linkLibs.rsp
+        make[1]: Leaving directory '/home/vite/click-hitbox-trail/build-win/CMakeFiles/CMakeScratch/TryCompile-ljD7Fb'
+        
+      exitCode: 0
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/home/vite/.local/tools/cmake-3.31.8-linux-x86_64/share/cmake-3.31/Modules/CMakeDetermineCompilerABI.cmake:218 (message)"
+      - "/home/vite/.local/tools/cmake-3.31.8-linux-x86_64/share/cmake-3.31/Modules/CMakeTestCCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:2 (project)"
+    message: |
+      Parsed C implicit link information:
+        link line regex: [^( *|.*[/\\])(ld[0-9]*(\\.[a-z]+)?|link\\.exe|lld-link(\\.exe)?|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\\]+-)?ld|collect2)[^/\\]*( |$)]
+        linker tool regex: [^[ 	]*(->|")?[ 	]*(([^"]*[/\\])?(ld[0-9]*(\\.[a-z]+)?|link\\.exe|lld-link(\\.exe)?))("|,| |$)]
+        linker tool for 'C': /usr/bin/lld-link
+        implicit libs: []
+        implicit objs: []
+        implicit dirs: []
+        implicit fwks: []
+      
+      
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/home/vite/.local/tools/cmake-3.31.8-linux-x86_64/share/cmake-3.31/Modules/Internal/CMakeDetermineLinkerId.cmake:40 (message)"
+      - "/home/vite/.local/tools/cmake-3.31.8-linux-x86_64/share/cmake-3.31/Modules/CMakeDetermineCompilerABI.cmake:255 (cmake_determine_linker_id)"
+      - "/home/vite/.local/tools/cmake-3.31.8-linux-x86_64/share/cmake-3.31/Modules/CMakeTestCCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:2 (project)"
+    message: |
+      Running the C compiler's linker: "/usr/bin/lld-link" "-v"
+      lld-link: warning: ignoring unknown argument '-v'
+      lld-link: error: no input files
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/home/vite/.local/tools/cmake-3.31.8-linux-x86_64/share/cmake-3.31/Modules/Internal/CMakeDetermineLinkerId.cmake:40 (message)"
+      - "/home/vite/.local/tools/cmake-3.31.8-linux-x86_64/share/cmake-3.31/Modules/CMakeDetermineCompilerABI.cmake:255 (cmake_determine_linker_id)"
+      - "/home/vite/.local/tools/cmake-3.31.8-linux-x86_64/share/cmake-3.31/Modules/CMakeTestCCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:2 (project)"
+    message: |
+      Running the C compiler's linker: "/usr/bin/lld-link" "-V"
+      lld-link: warning: ignoring unknown argument '-V'
+      lld-link: error: no input files
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/home/vite/.local/tools/cmake-3.31.8-linux-x86_64/share/cmake-3.31/Modules/Internal/CMakeDetermineLinkerId.cmake:40 (message)"
+      - "/home/vite/.local/tools/cmake-3.31.8-linux-x86_64/share/cmake-3.31/Modules/CMakeDetermineCompilerABI.cmake:255 (cmake_determine_linker_id)"
+      - "/home/vite/.local/tools/cmake-3.31.8-linux-x86_64/share/cmake-3.31/Modules/CMakeTestCCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:2 (project)"
+    message: |
+      Running the C compiler's linker: "/usr/bin/lld-link" "--version"
+      LLD 22.1.8
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/home/vite/.local/tools/cmake-3.31.8-linux-x86_64/share/cmake-3.31/Modules/CMakeDetermineCompilerABI.cmake:74 (try_compile)"
+      - "/home/vite/.local/tools/cmake-3.31.8-linux-x86_64/share/cmake-3.31/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:2 (project)"
+    checks:
+      - "Detecting CXX compiler ABI info"
+    directories:
+      source: "/home/vite/click-hitbox-trail/build-win/CMakeFiles/CMakeScratch/TryCompile-1tRLpy"
+      binary: "/home/vite/click-hitbox-trail/build-win/CMakeFiles/CMakeScratch/TryCompile-1tRLpy"
+    cmakeVariables:
+      CMAKE_CXX_COMPILER_CLANG_SCAN_DEPS: "/usr/bin/clang-scan-deps"
+      CMAKE_CXX_FLAGS: " -fexceptions -fcxx-exceptions -D_CRT_SECURE_NO_WARNINGS --target=x86_64-windows-msvc -fms-compatibility-version=19.37 -Wno-unused-command-line-argument -isystem /usr/lib/clang/22/include -isystem\"/home/vite/.local/share/Geode/cross-tools/splat/crt/include\" -isystem\"/home/vite/.local/share/Geode/cross-tools/splat/sdk/include/ucrt\" -isystem\"/home/vite/.local/share/Geode/cross-tools/splat/sdk/include/shared\" -isystem\"/home/vite/.local/share/Geode/cross-tools/splat/sdk/include/um\" -isystem\"/home/vite/.local/share/Geode/cross-tools/splat/sdk/include/winrt\" -ivfsoverlay\"/home/vite/click-hitbox-trail/build-win/winsdk_vfs_overlay.yaml\""
+      CMAKE_CXX_FLAGS_DEBUG: "-O0 -g -Xclang -gcodeview"
+      CMAKE_CXX_SCAN_FOR_MODULES: "OFF"
+      CMAKE_EXE_LINKER_FLAGS: " -L\"/home/vite/.local/share/Geode/cross-tools/splat/crt/lib/x86_64\" -L\"/home/vite/.local/share/Geode/cross-tools/splat/sdk/lib/ucrt/x86_64\" -L\"/home/vite/.local/share/Geode/cross-tools/splat/sdk/lib/um/x86_64\" -L\"/home/vite/click-hitbox-trail/build-win/winsdk_lib_symlinks\""
+    buildResult:
+      variable: "CMAKE_CXX_ABI_COMPILED"
+      cached: true
+      stdout: |
+        Change Dir: '/home/vite/click-hitbox-trail/build-win/CMakeFiles/CMakeScratch/TryCompile-1tRLpy'
+        
+        Run Build Command(s): /home/vite/.local/tools/cmake-3.31.8-linux-x86_64/bin/cmake -E env VERBOSE=1 /usr/bin/make -f Makefile cmTC_b36a5/fast
+        /usr/bin/make  -f CMakeFiles/cmTC_b36a5.dir/build.make CMakeFiles/cmTC_b36a5.dir/build
+        make[1]: Entering directory '/home/vite/click-hitbox-trail/build-win/CMakeFiles/CMakeScratch/TryCompile-1tRLpy'
+        Building CXX object CMakeFiles/cmTC_b36a5.dir/CMakeCXXCompilerABI.cpp.obj
+        /usr/bin/clang++   -fexceptions -fcxx-exceptions -D_CRT_SECURE_NO_WARNINGS --target=x86_64-windows-msvc -fms-compatibility-version=19.37 -Wno-unused-command-line-argument -isystem /usr/lib/clang/22/include -isystem"/home/vite/.local/share/Geode/cross-tools/splat/crt/include" -isystem"/home/vite/.local/share/Geode/cross-tools/splat/sdk/include/ucrt" -isystem"/home/vite/.local/share/Geode/cross-tools/splat/sdk/include/shared" -isystem"/home/vite/.local/share/Geode/cross-tools/splat/sdk/include/um" -isystem"/home/vite/.local/share/Geode/cross-tools/splat/sdk/include/winrt" -ivfsoverlay"/home/vite/click-hitbox-trail/build-win/winsdk_vfs_overlay.yaml"  -O0 -g -Xclang -gcodeview -D_DEBUG -D_DLL -D_MT -Xclang --dependent-lib=msvcrtd -MD -MT CMakeFiles/cmTC_b36a5.dir/CMakeCXXCompilerABI.cpp.obj -MF CMakeFiles/cmTC_b36a5.dir/CMakeCXXCompilerABI.cpp.obj.d -o CMakeFiles/cmTC_b36a5.dir/CMakeCXXCompilerABI.cpp.obj -c /home/vite/.local/tools/cmake-3.31.8-linux-x86_64/share/cmake-3.31/Modules/CMakeCXXCompilerABI.cpp
+        Linking CXX executable cmTC_b36a5.exe
+        /home/vite/.local/tools/cmake-3.31.8-linux-x86_64/bin/cmake -E cmake_link_script CMakeFiles/cmTC_b36a5.dir/link.txt --verbose=1
+        clang version 22.1.8
+        Target: x86_64-unknown-windows-msvc
+        Thread model: posix
+        InstalledDir: /usr/bin
+         "/usr/bin/lld-link" -out:cmTC_b36a5.exe -libpath:lib/amd64 -libpath:atlmfc/lib/amd64 -libpath:/home/vite/.local/share/Geode/cross-tools/splat/crt/lib/x86_64 -libpath:/home/vite/.local/share/Geode/cross-tools/splat/sdk/lib/ucrt/x86_64 -libpath:/home/vite/.local/share/Geode/cross-tools/splat/sdk/lib/um/x86_64 -libpath:/home/vite/click-hitbox-trail/build-win/winsdk_lib_symlinks -nologo -debug /subsystem:console CMakeFiles/cmTC_b36a5.dir/CMakeCXXCompilerABI.cpp.obj /MANIFEST:EMBED /implib:cmTC_b36a5.lib /pdb:/home/vite/click-hitbox-trail/build-win/CMakeFiles/CMakeScratch/TryCompile-1tRLpy/cmTC_b36a5.pdb /version:0.0 user32.lib kernel32.lib shell32.lib ole32.lib crypt32.lib advapi32.lib delayimp.lib gdi32.lib
+        /usr/bin/clang++ -nostartfiles -nostdlib  -fexceptions -fcxx-exceptions -D_CRT_SECURE_NO_WARNINGS --target=x86_64-windows-msvc -fms-compatibility-version=19.37 -Wno-unused-command-line-argument -isystem /usr/lib/clang/22/include -isystem"/home/vite/.local/share/Geode/cross-tools/splat/crt/include" -isystem"/home/vite/.local/share/Geode/cross-tools/splat/sdk/include/ucrt" -isystem"/home/vite/.local/share/Geode/cross-tools/splat/sdk/include/shared" -isystem"/home/vite/.local/share/Geode/cross-tools/splat/sdk/include/um" -isystem"/home/vite/.local/share/Geode/cross-tools/splat/sdk/include/winrt" -ivfsoverlay"/home/vite/click-hitbox-trail/build-win/winsdk_vfs_overlay.yaml"  -O0 -g -Xclang -gcodeview -D_DEBUG -D_DLL -D_MT -Xclang --dependent-lib=msvcrtd  -L"/home/vite/.local/share/Geode/cross-tools/splat/crt/lib/x86_64" -L"/home/vite/.local/share/Geode/cross-tools/splat/sdk/lib/ucrt/x86_64" -L"/home/vite/.local/share/Geode/cross-tools/splat/sdk/lib/um/x86_64" -L"/home/vite/click-hitbox-trail/build-win/winsdk_lib_symlinks" -v -Xlinker /subsystem:console -fuse-ld=lld-link @CMakeFiles/cmTC_b36a5.dir/objects1.rsp -o cmTC_b36a5.exe -Xlinker /MANIFEST:EMBED -Xlinker /implib:cmTC_b36a5.lib -Xlinker /pdb:/home/vite/click-hitbox-trail/build-win/CMakeFiles/CMakeScratch/TryCompile-1tRLpy/cmTC_b36a5.pdb -Xlinker /version:0.0  @CMakeFiles/cmTC_b36a5.dir/linkLibs.rsp
+        make[1]: Leaving directory '/home/vite/click-hitbox-trail/build-win/CMakeFiles/CMakeScratch/TryCompile-1tRLpy'
+        
+      exitCode: 0
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/home/vite/.local/tools/cmake-3.31.8-linux-x86_64/share/cmake-3.31/Modules/CMakeDetermineCompilerABI.cmake:218 (message)"
+      - "/home/vite/.local/tools/cmake-3.31.8-linux-x86_64/share/cmake-3.31/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:2 (project)"
+    message: |
+      Parsed CXX implicit link information:
+        link line regex: [^( *|.*[/\\])(ld[0-9]*(\\.[a-z]+)?|link\\.exe|lld-link(\\.exe)?|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\\]+-)?ld|collect2)[^/\\]*( |$)]
+        linker tool regex: [^[ 	]*(->|")?[ 	]*(([^"]*[/\\])?(ld[0-9]*(\\.[a-z]+)?|link\\.exe|lld-link(\\.exe)?))("|,| |$)]
+        linker tool for 'CXX': /usr/bin/lld-link
+        implicit libs: []
+        implicit objs: []
+        implicit dirs: []
+        implicit fwks: []
+      
+      
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/home/vite/.local/tools/cmake-3.31.8-linux-x86_64/share/cmake-3.31/Modules/Internal/CMakeDetermineLinkerId.cmake:40 (message)"
+      - "/home/vite/.local/tools/cmake-3.31.8-linux-x86_64/share/cmake-3.31/Modules/CMakeDetermineCompilerABI.cmake:255 (cmake_determine_linker_id)"
+      - "/home/vite/.local/tools/cmake-3.31.8-linux-x86_64/share/cmake-3.31/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:2 (project)"
+    message: |
+      Running the CXX compiler's linker: "/usr/bin/lld-link" "-v"
+      lld-link: warning: ignoring unknown argument '-v'
+      lld-link: error: no input files
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/home/vite/.local/tools/cmake-3.31.8-linux-x86_64/share/cmake-3.31/Modules/Internal/CMakeDetermineLinkerId.cmake:40 (message)"
+      - "/home/vite/.local/tools/cmake-3.31.8-linux-x86_64/share/cmake-3.31/Modules/CMakeDetermineCompilerABI.cmake:255 (cmake_determine_linker_id)"
+      - "/home/vite/.local/tools/cmake-3.31.8-linux-x86_64/share/cmake-3.31/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:2 (project)"
+    message: |
+      Running the CXX compiler's linker: "/usr/bin/lld-link" "-V"
+      lld-link: warning: ignoring unknown argument '-V'
+      lld-link: error: no input files
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/home/vite/.local/tools/cmake-3.31.8-linux-x86_64/share/cmake-3.31/Modules/Internal/CMakeDetermineLinkerId.cmake:40 (message)"
+      - "/home/vite/.local/tools/cmake-3.31.8-linux-x86_64/share/cmake-3.31/Modules/CMakeDetermineCompilerABI.cmake:255 (cmake_determine_linker_id)"
+      - "/home/vite/.local/tools/cmake-3.31.8-linux-x86_64/share/cmake-3.31/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:2 (project)"
+    message: |
+      Running the CXX compiler's linker: "/usr/bin/lld-link" "--version"
+      LLD 22.1.8
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/home/vite/.local/tools/cmake-3.31.8-linux-x86_64/share/cmake-3.31/Modules/Internal/FeatureTesting.cmake:34 (try_compile)"
+      - "/home/vite/.local/tools/cmake-3.31.8-linux-x86_64/share/cmake-3.31/Modules/Internal/FeatureTesting.cmake:87 (_record_compiler_features)"
+      - "/home/vite/.local/tools/cmake-3.31.8-linux-x86_64/share/cmake-3.31/Modules/Compiler/CMakeCommonCompilerMacros.cmake:124 (_record_compiler_features_cxx)"
+      - "/home/vite/.local/tools/cmake-3.31.8-linux-x86_64/share/cmake-3.31/Modules/CMakeDetermineCompilerSupport.cmake:70 (cmake_record_cxx_compile_features)"
+      - "/home/vite/.local/tools/cmake-3.31.8-linux-x86_64/share/cmake-3.31/Modules/CMakeTestCXXCompiler.cmake:83 (CMAKE_DETERMINE_COMPILER_SUPPORT)"
+      - "CMakeLists.txt:2 (project)"
+    checks:
+      - "Detecting CXX compile features"
+    directories:
+      source: "/home/vite/click-hitbox-trail/build-win/CMakeFiles/CMakeScratch/TryCompile-f4nTsk"
+      binary: "/home/vite/click-hitbox-trail/build-win/CMakeFiles/CMakeScratch/TryCompile-f4nTsk"
+    cmakeVariables:
+      CMAKE_CXX_COMPILER_CLANG_SCAN_DEPS: "/usr/bin/clang-scan-deps"
+      CMAKE_CXX_FLAGS: " -fexceptions -fcxx-exceptions -D_CRT_SECURE_NO_WARNINGS --target=x86_64-windows-msvc -fms-compatibility-version=19.37 -Wno-unused-command-line-argument -isystem /usr/lib/clang/22/include -isystem\"/home/vite/.local/share/Geode/cross-tools/splat/crt/include\" -isystem\"/home/vite/.local/share/Geode/cross-tools/splat/sdk/include/ucrt\" -isystem\"/home/vite/.local/share/Geode/cross-tools/splat/sdk/include/shared\" -isystem\"/home/vite/.local/share/Geode/cross-tools/splat/sdk/include/um\" -isystem\"/home/vite/.local/share/Geode/cross-tools/splat/sdk/include/winrt\" -ivfsoverlay\"/home/vite/click-hitbox-trail/build-win/winsdk_vfs_overlay.yaml\""
+      CMAKE_CXX_FLAGS_DEBUG: "-O0 -g -Xclang -gcodeview"
+      CMAKE_EXE_LINKER_FLAGS: " -L\"/home/vite/.local/share/Geode/cross-tools/splat/crt/lib/x86_64\" -L\"/home/vite/.local/share/Geode/cross-tools/splat/sdk/lib/ucrt/x86_64\" -L\"/home/vite/.local/share/Geode/cross-tools/splat/sdk/lib/um/x86_64\" -L\"/home/vite/click-hitbox-trail/build-win/winsdk_lib_symlinks\""
+    buildResult:
+      variable: "CMAKE_CXX_FEATURE_TEST"
+      cached: true
+      stdout: |
+        Change Dir: '/home/vite/click-hitbox-trail/build-win/CMakeFiles/CMakeScratch/TryCompile-f4nTsk'
+        
+        Run Build Command(s): /home/vite/.local/tools/cmake-3.31.8-linux-x86_64/bin/cmake -E env VERBOSE=1 /usr/bin/make -f Makefile cmTC_c06d6/fast
+        /usr/bin/make  -f CMakeFiles/cmTC_c06d6.dir/build.make CMakeFiles/cmTC_c06d6.dir/build
+        make[1]: Entering directory '/home/vite/click-hitbox-trail/build-win/CMakeFiles/CMakeScratch/TryCompile-f4nTsk'
+        Building CXX object CMakeFiles/cmTC_c06d6.dir/feature_tests.cxx.obj
+        /usr/bin/clang++   -fexceptions -fcxx-exceptions -D_CRT_SECURE_NO_WARNINGS --target=x86_64-windows-msvc -fms-compatibility-version=19.37 -Wno-unused-command-line-argument -isystem /usr/lib/clang/22/include -isystem"/home/vite/.local/share/Geode/cross-tools/splat/crt/include" -isystem"/home/vite/.local/share/Geode/cross-tools/splat/sdk/include/ucrt" -isystem"/home/vite/.local/share/Geode/cross-tools/splat/sdk/include/shared" -isystem"/home/vite/.local/share/Geode/cross-tools/splat/sdk/include/um" -isystem"/home/vite/.local/share/Geode/cross-tools/splat/sdk/include/winrt" -ivfsoverlay"/home/vite/click-hitbox-trail/build-win/winsdk_vfs_overlay.yaml"  -O0 -g -Xclang -gcodeview -D_DEBUG -D_DLL -D_MT -Xclang --dependent-lib=msvcrtd   -std=c++14 -MD -MT CMakeFiles/cmTC_c06d6.dir/feature_tests.cxx.obj -MF CMakeFiles/cmTC_c06d6.dir/feature_tests.cxx.obj.d -o CMakeFiles/cmTC_c06d6.dir/feature_tests.cxx.obj -c /home/vite/click-hitbox-trail/build-win/CMakeFiles/CMakeScratch/TryCompile-f4nTsk/feature_tests.cxx
+        Linking CXX executable cmTC_c06d6.exe
+        /home/vite/.local/tools/cmake-3.31.8-linux-x86_64/bin/cmake -E cmake_link_script CMakeFiles/cmTC_c06d6.dir/link.txt --verbose=1
+        /usr/bin/clang++ -nostartfiles -nostdlib  -fexceptions -fcxx-exceptions -D_CRT_SECURE_NO_WARNINGS --target=x86_64-windows-msvc -fms-compatibility-version=19.37 -Wno-unused-command-line-argument -isystem /usr/lib/clang/22/include -isystem"/home/vite/.local/share/Geode/cross-tools/splat/crt/include" -isystem"/home/vite/.local/share/Geode/cross-tools/splat/sdk/include/ucrt" -isystem"/home/vite/.local/share/Geode/cross-tools/splat/sdk/include/shared" -isystem"/home/vite/.local/share/Geode/cross-tools/splat/sdk/include/um" -isystem"/home/vite/.local/share/Geode/cross-tools/splat/sdk/include/winrt" -ivfsoverlay"/home/vite/click-hitbox-trail/build-win/winsdk_vfs_overlay.yaml"  -O0 -g -Xclang -gcodeview -D_DEBUG -D_DLL -D_MT -Xclang --dependent-lib=msvcrtd  -L"/home/vite/.local/share/Geode/cross-tools/splat/crt/lib/x86_64" -L"/home/vite/.local/share/Geode/cross-tools/splat/sdk/lib/ucrt/x86_64" -L"/home/vite/.local/share/Geode/cross-tools/splat/sdk/lib/um/x86_64" -L"/home/vite/click-hitbox-trail/build-win/winsdk_lib_symlinks"  -Xlinker /subsystem:console -fuse-ld=lld-link @CMakeFiles/cmTC_c06d6.dir/objects1.rsp -o cmTC_c06d6.exe -Xlinker /MANIFEST:EMBED -Xlinker /implib:cmTC_c06d6.lib -Xlinker /pdb:/home/vite/click-hitbox-trail/build-win/CMakeFiles/CMakeScratch/TryCompile-f4nTsk/cmTC_c06d6.pdb -Xlinker /version:0.0  @CMakeFiles/cmTC_c06d6.dir/linkLibs.rsp
+        make[1]: Leaving directory '/home/vite/click-hitbox-trail/build-win/CMakeFiles/CMakeScratch/TryCompile-f4nTsk'
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/home/vite/.local/tools/cmake-3.31.8-linux-x86_64/share/cmake-3.31/Modules/Internal/FeatureTesting.cmake:34 (try_compile)"
+      - "/home/vite/.local/tools/cmake-3.31.8-linux-x86_64/share/cmake-3.31/Modules/Internal/FeatureTesting.cmake:87 (_record_compiler_features)"
+      - "/home/vite/.local/tools/cmake-3.31.8-linux-x86_64/share/cmake-3.31/Modules/Compiler/CMakeCommonCompilerMacros.cmake:132 (_record_compiler_features_cxx)"
+      - "/home/vite/.local/tools/cmake-3.31.8-linux-x86_64/share/cmake-3.31/Modules/CMakeDetermineCompilerSupport.cmake:70 (cmake_record_cxx_compile_features)"
+      - "/home/vite/.local/tools/cmake-3.31.8-linux-x86_64/share/cmake-3.31/Modules/CMakeTestCXXCompiler.cmake:83 (CMAKE_DETERMINE_COMPILER_SUPPORT)"
+      - "CMakeLists.txt:2 (project)"
+    checks:
+      - "Detecting CXX compile features"
+    directories:
+      source: "/home/vite/click-hitbox-trail/build-win/CMakeFiles/CMakeScratch/TryCompile-lrj1CE"
+      binary: "/home/vite/click-hitbox-trail/build-win/CMakeFiles/CMakeScratch/TryCompile-lrj1CE"
+    cmakeVariables:
+      CMAKE_CXX_COMPILER_CLANG_SCAN_DEPS: "/usr/bin/clang-scan-deps"
+      CMAKE_CXX_FLAGS: " -fexceptions -fcxx-exceptions -D_CRT_SECURE_NO_WARNINGS --target=x86_64-windows-msvc -fms-compatibility-version=19.37 -Wno-unused-command-line-argument -isystem /usr/lib/clang/22/include -isystem\"/home/vite/.local/share/Geode/cross-tools/splat/crt/include\" -isystem\"/home/vite/.local/share/Geode/cross-tools/splat/sdk/include/ucrt\" -isystem\"/home/vite/.local/share/Geode/cross-tools/splat/sdk/include/shared\" -isystem\"/home/vite/.local/share/Geode/cross-tools/splat/sdk/include/um\" -isystem\"/home/vite/.local/share/Geode/cross-tools/splat/sdk/include/winrt\" -ivfsoverlay\"/home/vite/click-hitbox-trail/build-win/winsdk_vfs_overlay.yaml\""
+      CMAKE_CXX_FLAGS_DEBUG: "-O0 -g -Xclang -gcodeview"
+      CMAKE_EXE_LINKER_FLAGS: " -L\"/home/vite/.local/share/Geode/cross-tools/splat/crt/lib/x86_64\" -L\"/home/vite/.local/share/Geode/cross-tools/splat/sdk/lib/ucrt/x86_64\" -L\"/home/vite/.local/share/Geode/cross-tools/splat/sdk/lib/um/x86_64\" -L\"/home/vite/click-hitbox-trail/build-win/winsdk_lib_symlinks\""
+    buildResult:
+      variable: "CMAKE_CXX_FEATURE_TEST"
+      cached: true
+      stdout: |
+        Change Dir: '/home/vite/click-hitbox-trail/build-win/CMakeFiles/CMakeScratch/TryCompile-lrj1CE'
+        
+        Run Build Command(s): /home/vite/.local/tools/cmake-3.31.8-linux-x86_64/bin/cmake -E env VERBOSE=1 /usr/bin/make -f Makefile cmTC_e6fa2/fast
+        /usr/bin/make  -f CMakeFiles/cmTC_e6fa2.dir/build.make CMakeFiles/cmTC_e6fa2.dir/build
+        make[1]: Entering directory '/home/vite/click-hitbox-trail/build-win/CMakeFiles/CMakeScratch/TryCompile-lrj1CE'
+        Building CXX object CMakeFiles/cmTC_e6fa2.dir/feature_tests.cxx.obj
+        /usr/bin/clang++   -fexceptions -fcxx-exceptions -D_CRT_SECURE_NO_WARNINGS --target=x86_64-windows-msvc -fms-compatibility-version=19.37 -Wno-unused-command-line-argument -isystem /usr/lib/clang/22/include -isystem"/home/vite/.local/share/Geode/cross-tools/splat/crt/include" -isystem"/home/vite/.local/share/Geode/cross-tools/splat/sdk/include/ucrt" -isystem"/home/vite/.local/share/Geode/cross-tools/splat/sdk/include/shared" -isystem"/home/vite/.local/share/Geode/cross-tools/splat/sdk/include/um" -isystem"/home/vite/.local/share/Geode/cross-tools/splat/sdk/include/winrt" -ivfsoverlay"/home/vite/click-hitbox-trail/build-win/winsdk_vfs_overlay.yaml"  -O0 -g -Xclang -gcodeview -D_DEBUG -D_DLL -D_MT -Xclang --dependent-lib=msvcrtd   -std=c++14 -MD -MT CMakeFiles/cmTC_e6fa2.dir/feature_tests.cxx.obj -MF CMakeFiles/cmTC_e6fa2.dir/feature_tests.cxx.obj.d -o CMakeFiles/cmTC_e6fa2.dir/feature_tests.cxx.obj -c /home/vite/click-hitbox-trail/build-win/CMakeFiles/CMakeScratch/TryCompile-lrj1CE/feature_tests.cxx
+        Linking CXX executable cmTC_e6fa2.exe
+        /home/vite/.local/tools/cmake-3.31.8-linux-x86_64/bin/cmake -E cmake_link_script CMakeFiles/cmTC_e6fa2.dir/link.txt --verbose=1
+        /usr/bin/clang++ -nostartfiles -nostdlib  -fexceptions -fcxx-exceptions -D_CRT_SECURE_NO_WARNINGS --target=x86_64-windows-msvc -fms-compatibility-version=19.37 -Wno-unused-command-line-argument -isystem /usr/lib/clang/22/include -isystem"/home/vite/.local/share/Geode/cross-tools/splat/crt/include" -isystem"/home/vite/.local/share/Geode/cross-tools/splat/sdk/include/ucrt" -isystem"/home/vite/.local/share/Geode/cross-tools/splat/sdk/include/shared" -isystem"/home/vite/.local/share/Geode/cross-tools/splat/sdk/include/um" -isystem"/home/vite/.local/share/Geode/cross-tools/splat/sdk/include/winrt" -ivfsoverlay"/home/vite/click-hitbox-trail/build-win/winsdk_vfs_overlay.yaml"  -O0 -g -Xclang -gcodeview -D_DEBUG -D_DLL -D_MT -Xclang --dependent-lib=msvcrtd  -L"/home/vite/.local/share/Geode/cross-tools/splat/crt/lib/x86_64" -L"/home/vite/.local/share/Geode/cross-tools/splat/sdk/lib/ucrt/x86_64" -L"/home/vite/.local/share/Geode/cross-tools/splat/sdk/lib/um/x86_64" -L"/home/vite/click-hitbox-trail/build-win/winsdk_lib_symlinks"  -Xlinker /subsystem:console -fuse-ld=lld-link @CMakeFiles/cmTC_e6fa2.dir/objects1.rsp -o cmTC_e6fa2.exe -Xlinker /MANIFEST:EMBED -Xlinker /implib:cmTC_e6fa2.lib -Xlinker /pdb:/home/vite/click-hitbox-trail/build-win/CMakeFiles/CMakeScratch/TryCompile-lrj1CE/cmTC_e6fa2.pdb -Xlinker /version:0.0  @CMakeFiles/cmTC_e6fa2.dir/linkLibs.rsp
+        make[1]: Leaving directory '/home/vite/click-hitbox-trail/build-win/CMakeFiles/CMakeScratch/TryCompile-lrj1CE'
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/home/vite/.local/tools/cmake-3.31.8-linux-x86_64/share/cmake-3.31/Modules/Internal/CheckSourceCompiles.cmake:108 (try_compile)"
+      - "/home/vite/.local/tools/cmake-3.31.8-linux-x86_64/share/cmake-3.31/Modules/Internal/CheckCompilerFlag.cmake:18 (cmake_check_source_compiles)"
+      - "/home/vite/.local/tools/cmake-3.31.8-linux-x86_64/share/cmake-3.31/Modules/CheckCXXCompilerFlag.cmake:55 (cmake_check_compiler_flag)"
+      - "build-win/_deps/fmt-src/CMakeLists.txt:260 (check_cxx_compiler_flag)"
+    checks:
+      - "Performing Test HAS_NULLPTR_WARNING"
+    directories:
+      source: "/home/vite/click-hitbox-trail/build-win/CMakeFiles/CMakeScratch/TryCompile-C0gB4m"
+      binary: "/home/vite/click-hitbox-trail/build-win/CMakeFiles/CMakeScratch/TryCompile-C0gB4m"
+    cmakeVariables:
+      CMAKE_CXX_COMPILER_CLANG_SCAN_DEPS: "/usr/bin/clang-scan-deps"
+      CMAKE_CXX_FLAGS: " -fexceptions -fcxx-exceptions -D_CRT_SECURE_NO_WARNINGS --target=x86_64-windows-msvc -fms-compatibility-version=19.37 -Wno-unused-command-line-argument -isystem /usr/lib/clang/22/include -isystem\"/home/vite/.local/share/Geode/cross-tools/splat/crt/include\" -isystem\"/home/vite/.local/share/Geode/cross-tools/splat/sdk/include/ucrt\" -isystem\"/home/vite/.local/share/Geode/cross-tools/splat/sdk/include/shared\" -isystem\"/home/vite/.local/share/Geode/cross-tools/splat/sdk/include/um\" -isystem\"/home/vite/.local/share/Geode/cross-tools/splat/sdk/include/winrt\" -ivfsoverlay\"/home/vite/click-hitbox-trail/build-win/winsdk_vfs_overlay.yaml\""
+      CMAKE_CXX_FLAGS_DEBUG: "-O0 -g -Xclang -gcodeview"
+      CMAKE_EXE_LINKER_FLAGS: " -L\"/home/vite/.local/share/Geode/cross-tools/splat/crt/lib/x86_64\" -L\"/home/vite/.local/share/Geode/cross-tools/splat/sdk/lib/ucrt/x86_64\" -L\"/home/vite/.local/share/Geode/cross-tools/splat/sdk/lib/um/x86_64\" -L\"/home/vite/click-hitbox-trail/build-win/winsdk_lib_symlinks\""
+      CMAKE_MODULE_PATH: "/home/vite/click-hitbox-trail/build-win/_deps/fmt-src/support/cmake"
+      CMAKE_MSVC_DEBUG_INFORMATION_FORMAT: "Embedded"
+    buildResult:
+      variable: "HAS_NULLPTR_WARNING"
+      cached: true
+      stdout: |
+        Change Dir: '/home/vite/click-hitbox-trail/build-win/CMakeFiles/CMakeScratch/TryCompile-C0gB4m'
+        
+        Run Build Command(s): /home/vite/.local/tools/cmake-3.31.8-linux-x86_64/bin/cmake -E env VERBOSE=1 /usr/bin/make -f Makefile cmTC_c23cc/fast
+        /usr/bin/make  -f CMakeFiles/cmTC_c23cc.dir/build.make CMakeFiles/cmTC_c23cc.dir/build
+        make[1]: Entering directory '/home/vite/click-hitbox-trail/build-win/CMakeFiles/CMakeScratch/TryCompile-C0gB4m'
+        Building CXX object CMakeFiles/cmTC_c23cc.dir/src.cxx.obj
+        /usr/bin/clang++ -DHAS_NULLPTR_WARNING  -fexceptions -fcxx-exceptions -D_CRT_SECURE_NO_WARNINGS --target=x86_64-windows-msvc -fms-compatibility-version=19.37 -Wno-unused-command-line-argument -isystem /usr/lib/clang/22/include -isystem"/home/vite/.local/share/Geode/cross-tools/splat/crt/include" -isystem"/home/vite/.local/share/Geode/cross-tools/splat/sdk/include/ucrt" -isystem"/home/vite/.local/share/Geode/cross-tools/splat/sdk/include/shared" -isystem"/home/vite/.local/share/Geode/cross-tools/splat/sdk/include/um" -isystem"/home/vite/.local/share/Geode/cross-tools/splat/sdk/include/winrt" -ivfsoverlay"/home/vite/click-hitbox-trail/build-win/winsdk_vfs_overlay.yaml"  -O0 -g -Xclang -gcodeview -D_DEBUG -D_DLL -D_MT -Xclang --dependent-lib=msvcrtd   -Wzero-as-null-pointer-constant -MD -MT CMakeFiles/cmTC_c23cc.dir/src.cxx.obj -MF CMakeFiles/cmTC_c23cc.dir/src.cxx.obj.d -o CMakeFiles/cmTC_c23cc.dir/src.cxx.obj -c /home/vite/click-hitbox-trail/build-win/CMakeFiles/CMakeScratch/TryCompile-C0gB4m/src.cxx
+        Linking CXX executable cmTC_c23cc.exe
+        /home/vite/.local/tools/cmake-3.31.8-linux-x86_64/bin/cmake -E cmake_link_script CMakeFiles/cmTC_c23cc.dir/link.txt --verbose=1
+        /usr/bin/clang++ -nostartfiles -nostdlib  -fexceptions -fcxx-exceptions -D_CRT_SECURE_NO_WARNINGS --target=x86_64-windows-msvc -fms-compatibility-version=19.37 -Wno-unused-command-line-argument -isystem /usr/lib/clang/22/include -isystem"/home/vite/.local/share/Geode/cross-tools/splat/crt/include" -isystem"/home/vite/.local/share/Geode/cross-tools/splat/sdk/include/ucrt" -isystem"/home/vite/.local/share/Geode/cross-tools/splat/sdk/include/shared" -isystem"/home/vite/.local/share/Geode/cross-tools/splat/sdk/include/um" -isystem"/home/vite/.local/share/Geode/cross-tools/splat/sdk/include/winrt" -ivfsoverlay"/home/vite/click-hitbox-trail/build-win/winsdk_vfs_overlay.yaml"  -O0 -g -Xclang -gcodeview -D_DEBUG -D_DLL -D_MT -Xclang --dependent-lib=msvcrtd  -L"/home/vite/.local/share/Geode/cross-tools/splat/crt/lib/x86_64" -L"/home/vite/.local/share/Geode/cross-tools/splat/sdk/lib/ucrt/x86_64" -L"/home/vite/.local/share/Geode/cross-tools/splat/sdk/lib/um/x86_64" -L"/home/vite/click-hitbox-trail/build-win/winsdk_lib_symlinks"  -Xlinker /subsystem:console -fuse-ld=lld-link @CMakeFiles/cmTC_c23cc.dir/objects1.rsp -o cmTC_c23cc.exe -Xlinker /MANIFEST:EMBED -Xlinker /implib:cmTC_c23cc.lib -Xlinker /pdb:/home/vite/click-hitbox-trail/build-win/CMakeFiles/CMakeScratch/TryCompile-C0gB4m/cmTC_c23cc.pdb -Xlinker /version:0.0  @CMakeFiles/cmTC_c23cc.dir/linkLibs.rsp
+        make[1]: Leaving directory '/home/vite/click-hitbox-trail/build-win/CMakeFiles/CMakeScratch/TryCompile-C0gB4m'
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/home/vite/.local/tools/cmake-3.31.8-linux-x86_64/share/cmake-3.31/Modules/Internal/CheckSourceCompiles.cmake:108 (try_compile)"
+      - "/home/vite/.local/tools/cmake-3.31.8-linux-x86_64/share/cmake-3.31/Modules/Internal/CheckCompilerFlag.cmake:18 (cmake_check_source_compiles)"
+      - "/home/vite/.local/tools/cmake-3.31.8-linux-x86_64/share/cmake-3.31/Modules/CheckCXXCompilerFlag.cmake:55 (cmake_check_compiler_flag)"
+      - "/home/vite/hitbox-trail-sdk/CMakeLists.txt:332 (check_cxx_compiler_flag)"
+    checks:
+      - "Performing Test SUPPORTS_W_NO_EVERYTHING"
+    directories:
+      source: "/home/vite/click-hitbox-trail/build-win/CMakeFiles/CMakeScratch/TryCompile-Nax70h"
+      binary: "/home/vite/click-hitbox-trail/build-win/CMakeFiles/CMakeScratch/TryCompile-Nax70h"
+    cmakeVariables:
+      CMAKE_CXX_COMPILER_CLANG_SCAN_DEPS: "/usr/bin/clang-scan-deps"
+      CMAKE_CXX_FLAGS: " -fexceptions -fcxx-exceptions -D_CRT_SECURE_NO_WARNINGS --target=x86_64-windows-msvc -fms-compatibility-version=19.37 -Wno-unused-command-line-argument -isystem /usr/lib/clang/22/include -isystem\"/home/vite/.local/share/Geode/cross-tools/splat/crt/include\" -isystem\"/home/vite/.local/share/Geode/cross-tools/splat/sdk/include/ucrt\" -isystem\"/home/vite/.local/share/Geode/cross-tools/splat/sdk/include/shared\" -isystem\"/home/vite/.local/share/Geode/cross-tools/splat/sdk/include/um\" -isystem\"/home/vite/.local/share/Geode/cross-tools/splat/sdk/include/winrt\" -ivfsoverlay\"/home/vite/click-hitbox-trail/build-win/winsdk_vfs_overlay.yaml\""
+      CMAKE_CXX_FLAGS_DEBUG: "-O0 -g -Xclang -gcodeview"
+      CMAKE_EXE_LINKER_FLAGS: " -L\"/home/vite/.local/share/Geode/cross-tools/splat/crt/lib/x86_64\" -L\"/home/vite/.local/share/Geode/cross-tools/splat/sdk/lib/ucrt/x86_64\" -L\"/home/vite/.local/share/Geode/cross-tools/splat/sdk/lib/um/x86_64\" -L\"/home/vite/click-hitbox-trail/build-win/winsdk_lib_symlinks\""
+      CMAKE_MSVC_DEBUG_INFORMATION_FORMAT: "Embedded"
+      CMAKE_WARN_DEPRECATED: "ON"
+    buildResult:
+      variable: "SUPPORTS_W_NO_EVERYTHING"
+      cached: true
+      stdout: |
+        Change Dir: '/home/vite/click-hitbox-trail/build-win/CMakeFiles/CMakeScratch/TryCompile-Nax70h'
+        
+        Run Build Command(s): /home/vite/.local/tools/cmake-3.31.8-linux-x86_64/bin/cmake -E env VERBOSE=1 /usr/bin/make -f Makefile cmTC_80900/fast
+        /usr/bin/make  -f CMakeFiles/cmTC_80900.dir/build.make CMakeFiles/cmTC_80900.dir/build
+        make[1]: Entering directory '/home/vite/click-hitbox-trail/build-win/CMakeFiles/CMakeScratch/TryCompile-Nax70h'
+        Building CXX object CMakeFiles/cmTC_80900.dir/src.cxx.obj
+        /usr/bin/clang++ -DSUPPORTS_W_NO_EVERYTHING  -fexceptions -fcxx-exceptions -D_CRT_SECURE_NO_WARNINGS --target=x86_64-windows-msvc -fms-compatibility-version=19.37 -Wno-unused-command-line-argument -isystem /usr/lib/clang/22/include -isystem"/home/vite/.local/share/Geode/cross-tools/splat/crt/include" -isystem"/home/vite/.local/share/Geode/cross-tools/splat/sdk/include/ucrt" -isystem"/home/vite/.local/share/Geode/cross-tools/splat/sdk/include/shared" -isystem"/home/vite/.local/share/Geode/cross-tools/splat/sdk/include/um" -isystem"/home/vite/.local/share/Geode/cross-tools/splat/sdk/include/winrt" -ivfsoverlay"/home/vite/click-hitbox-trail/build-win/winsdk_vfs_overlay.yaml"  -O0 -g -Xclang -gcodeview -D_DEBUG -D_DLL -D_MT -Xclang --dependent-lib=msvcrtd   -Wno-everything -MD -MT CMakeFiles/cmTC_80900.dir/src.cxx.obj -MF CMakeFiles/cmTC_80900.dir/src.cxx.obj.d -o CMakeFiles/cmTC_80900.dir/src.cxx.obj -c /home/vite/click-hitbox-trail/build-win/CMakeFiles/CMakeScratch/TryCompile-Nax70h/src.cxx
+        Linking CXX executable cmTC_80900.exe
+        /home/vite/.local/tools/cmake-3.31.8-linux-x86_64/bin/cmake -E cmake_link_script CMakeFiles/cmTC_80900.dir/link.txt --verbose=1
+        /usr/bin/clang++ -nostartfiles -nostdlib  -fexceptions -fcxx-exceptions -D_CRT_SECURE_NO_WARNINGS --target=x86_64-windows-msvc -fms-compatibility-version=19.37 -Wno-unused-command-line-argument -isystem /usr/lib/clang/22/include -isystem"/home/vite/.local/share/Geode/cross-tools/splat/crt/include" -isystem"/home/vite/.local/share/Geode/cross-tools/splat/sdk/include/ucrt" -isystem"/home/vite/.local/share/Geode/cross-tools/splat/sdk/include/shared" -isystem"/home/vite/.local/share/Geode/cross-tools/splat/sdk/include/um" -isystem"/home/vite/.local/share/Geode/cross-tools/splat/sdk/include/winrt" -ivfsoverlay"/home/vite/click-hitbox-trail/build-win/winsdk_vfs_overlay.yaml"  -O0 -g -Xclang -gcodeview -D_DEBUG -D_DLL -D_MT -Xclang --dependent-lib=msvcrtd  -L"/home/vite/.local/share/Geode/cross-tools/splat/crt/lib/x86_64" -L"/home/vite/.local/share/Geode/cross-tools/splat/sdk/lib/ucrt/x86_64" -L"/home/vite/.local/share/Geode/cross-tools/splat/sdk/lib/um/x86_64" -L"/home/vite/click-hitbox-trail/build-win/winsdk_lib_symlinks"  -Xlinker /subsystem:console -fuse-ld=lld-link @CMakeFiles/cmTC_80900.dir/objects1.rsp -o cmTC_80900.exe -Xlinker /MANIFEST:EMBED -Xlinker /implib:cmTC_80900.lib -Xlinker /pdb:/home/vite/click-hitbox-trail/build-win/CMakeFiles/CMakeScratch/TryCompile-Nax70h/cmTC_80900.pdb -Xlinker /version:0.0  @CMakeFiles/cmTC_80900.dir/linkLibs.rsp
+        make[1]: Leaving directory '/home/vite/click-hitbox-trail/build-win/CMakeFiles/CMakeScratch/TryCompile-Nax70h'
+        
+      exitCode: 0
+...

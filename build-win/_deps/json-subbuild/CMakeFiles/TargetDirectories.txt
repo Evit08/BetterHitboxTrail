@@ -1,0 +1,3 @@
+/home/vite/click-hitbox-trail/build-win/_deps/json-subbuild/CMakeFiles/json-populate.dir
+/home/vite/click-hitbox-trail/build-win/_deps/json-subbuild/CMakeFiles/edit_cache.dir
+/home/vite/click-hitbox-trail/build-win/_deps/json-subbuild/CMakeFiles/rebuild_cache.dir

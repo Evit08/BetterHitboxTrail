@@ -1,0 +1,110 @@
+{
+  "geode": "5.9.0",
+  "gd": {
+    "win": "2.2081"
+  },
+  "id": "local.click-hitbox-trail",
+  "name": "Click Hitbox Trail",
+  "version": "v1.1.0",
+  "developer": "Local build",
+  "description": "Shows a colour-coded player hitbox trail after death.",
+  "dependencies": {
+    "eclipse.eclipse-menu": {
+      "version": ">=1.9.4",
+      "required": false
+    }
+  },
+  "settings": {
+    "stored-positions": {
+      "type": "int",
+      "name": "Stored Positions",
+      "description": "Number of recent hitbox positions to retain (maximum 1024).",
+      "default": 120,
+      "min": 1,
+      "max": 1024,
+      "control": { "input": true, "arrows": true }
+    },
+    "reset-on-death": {
+      "type": "bool",
+      "name": "Reset Positions on Death",
+      "description": "Clear the previous trail when an attempt ends.",
+      "default": false
+    },
+    "darken-by-age": {
+      "type": "bool",
+      "name": "Darken by Age",
+      "description": "Darken older positions in the trail.",
+      "default": false
+    },
+    "colour-clicks": {
+      "type": "bool",
+      "name": "Colour Clicks",
+      "description": "Use separate colours for clicks and releases.",
+      "default": true
+    },
+    "click-colour": {
+      "type": "color",
+      "name": "Click Colour",
+      "default": [0, 255, 0]
+    },
+    "release-colour": {
+      "type": "color",
+      "name": "Release Colour",
+      "default": [0, 255, 255]
+    },
+    "colour-when-held": {
+      "type": "bool",
+      "name": "Colour When Held",
+      "default": true
+    },
+    "hold-colour": {
+      "type": "color",
+      "name": "Hold Colour",
+      "default": [0, 210, 0]
+    },
+    "opacity": {
+      "type": "float",
+      "name": "Opacity",
+      "default": 1.0,
+      "min": 0.0,
+      "max": 1.0,
+      "control": { "slider": true, "arrows": true }
+    },
+    "normal-thickness": {
+      "type": "float",
+      "name": "Normal Trail Thickness",
+      "description": "Outline thickness while the player is normal size.",
+      "default": 0.35,
+      "min": 0.05,
+      "max": 1.0,
+      "control": { "slider": true, "arrows": true }
+    },
+    "mini-thickness": {
+      "type": "float",
+      "name": "Mini Trail Thickness",
+      "description": "Outline thickness while the player is mini size.",
+      "default": 0.175,
+      "min": 0.025,
+      "max": 0.5,
+      "control": { "slider": true, "arrows": true }
+    },
+    "blue-hitbox-thickness": {
+      "type": "float",
+      "name": "Blue Hitbox Thickness",
+      "description": "Outline thickness of the small blue collision hitbox.",
+      "default": 0.2,
+      "min": 0.025,
+      "max": 0.75,
+      "control": { "slider": true, "arrows": true }
+    },
+    "mini-blue-hitbox-thickness": {
+      "type": "float",
+      "name": "Mini Blue Hitbox Thickness",
+      "description": "Outline thickness of the small blue collision hitbox while mini.",
+      "default": 0.1,
+      "min": 0.01,
+      "max": 0.5,
+      "control": { "slider": true, "arrows": true }
+    }
+  }
+}
