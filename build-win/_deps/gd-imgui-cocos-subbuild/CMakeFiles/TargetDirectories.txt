@@ -1,0 +1,3 @@
+/home/vite/click-hitbox-trail/build-win/_deps/gd-imgui-cocos-subbuild/CMakeFiles/gd-imgui-cocos-populate.dir
+/home/vite/click-hitbox-trail/build-win/_deps/gd-imgui-cocos-subbuild/CMakeFiles/edit_cache.dir
+/home/vite/click-hitbox-trail/build-win/_deps/gd-imgui-cocos-subbuild/CMakeFiles/rebuild_cache.dir
