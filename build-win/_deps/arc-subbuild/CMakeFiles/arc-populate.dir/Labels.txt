@@ -1,0 +1,14 @@
+# Target labels
+ arc-populate
+# Source files and their labels
+/home/vite/click-hitbox-trail/build-win/_deps/arc-subbuild/CMakeFiles/arc-populate
+/home/vite/click-hitbox-trail/build-win/_deps/arc-subbuild/CMakeFiles/arc-populate.rule
+/home/vite/click-hitbox-trail/build-win/_deps/arc-subbuild/CMakeFiles/arc-populate-complete.rule
+/home/vite/click-hitbox-trail/build-win/_deps/arc-subbuild/arc-populate-prefix/src/arc-populate-stamp/arc-populate-build.rule
+/home/vite/click-hitbox-trail/build-win/_deps/arc-subbuild/arc-populate-prefix/src/arc-populate-stamp/arc-populate-configure.rule
+/home/vite/click-hitbox-trail/build-win/_deps/arc-subbuild/arc-populate-prefix/src/arc-populate-stamp/arc-populate-download.rule
+/home/vite/click-hitbox-trail/build-win/_deps/arc-subbuild/arc-populate-prefix/src/arc-populate-stamp/arc-populate-install.rule
+/home/vite/click-hitbox-trail/build-win/_deps/arc-subbuild/arc-populate-prefix/src/arc-populate-stamp/arc-populate-mkdir.rule
+/home/vite/click-hitbox-trail/build-win/_deps/arc-subbuild/arc-populate-prefix/src/arc-populate-stamp/arc-populate-patch.rule
+/home/vite/click-hitbox-trail/build-win/_deps/arc-subbuild/arc-populate-prefix/src/arc-populate-stamp/arc-populate-test.rule
+/home/vite/click-hitbox-trail/build-win/_deps/arc-subbuild/arc-populate-prefix/src/arc-populate-stamp/arc-populate-update.rule
