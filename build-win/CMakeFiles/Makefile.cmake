@@ -71,6 +71,7 @@ set(CMAKE_MAKEFILE_DEPENDS
   "_deps/bindings-src/CMakeLists.txt"
   "_deps/fmt-src/CMakeLists.txt"
   "_deps/fmt-src/support/cmake/JoinPaths.cmake"
+  "_deps/gd-imgui-cocos-src/CMakeLists.txt"
   "_deps/json-src/CMakeLists.txt"
   "_deps/nontype_functional-src/CMakeLists.txt"
   "_deps/result-src/CMakeLists.txt"
@@ -94,6 +95,7 @@ set(CMAKE_MAKEFILE_OUTPUTS
 
 # Byproducts of CMake generate step:
 set(CMAKE_MAKEFILE_PRODUCTS
+  "_deps/gd-imgui-cocos-subbuild/CMakeLists.txt"
   "what.txt"
   "CMakeFiles/CMakeDirectoryInformation.cmake"
   "_deps/bindings-subbuild/CMakeLists.txt"
@@ -114,11 +116,14 @@ set(CMAKE_MAKEFILE_PRODUCTS
   "_deps/arc-build/CMakeFiles/CMakeDirectoryInformation.cmake"
   "_deps/tuliphook-build/CMakeFiles/CMakeDirectoryInformation.cmake"
   "bindings/CMakeFiles/CMakeDirectoryInformation.cmake"
+  "_deps/imgui-subbuild/CMakeLists.txt"
+  "_deps/gd-imgui-cocos-build/CMakeFiles/CMakeDirectoryInformation.cmake"
   )
 
 # Dependency information for all targets:
 set(CMAKE_DEPEND_INFO_FILES
   "CMakeFiles/ClickHitboxTrail.dir/DependInfo.cmake"
+  "CMakeFiles/ClickHitboxTrailBuildStamp.dir/DependInfo.cmake"
   "CMakeFiles/ClickHitboxTrail_PACKAGE.dir/DependInfo.cmake"
   "_deps/nontype_functional-build/CMakeFiles/Experimental.dir/DependInfo.cmake"
   "_deps/nontype_functional-build/CMakeFiles/Nightly.dir/DependInfo.cmake"

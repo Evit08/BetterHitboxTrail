@@ -1,4 +1,5 @@
 # Hashes of file build rules.
+27ca6d618b758838799e9ea773764286 CMakeFiles/ClickHitboxTrailBuildStamp
 366ffe53665443d45819248fb749b261 CMakeFiles/ClickHitboxTrail_PACKAGE
 90e7bdb8c4f80feaae40b3b3e82027e0 _deps/nontype_functional-build/CMakeFiles/Continuous
 4f4845638d644a1237fdb6be8d868558 _deps/nontype_functional-build/CMakeFiles/ContinuousBuild

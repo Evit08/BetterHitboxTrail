@@ -80,8 +80,10 @@ preinstall: geode/preinstall
 
 # The main recursive "clean" target.
 clean: CMakeFiles/ClickHitboxTrail.dir/clean
+clean: CMakeFiles/ClickHitboxTrailBuildStamp.dir/clean
 clean: CMakeFiles/ClickHitboxTrail_PACKAGE.dir/clean
 clean: geode/clean
+clean: _deps/gd-imgui-cocos-build/clean
 .PHONY : clean
 
 #=============================================================================
@@ -140,6 +142,25 @@ _deps/fmt-build/preinstall:
 # Recursive "clean" directory target.
 _deps/fmt-build/clean: _deps/fmt-build/CMakeFiles/fmt.dir/clean
 .PHONY : _deps/fmt-build/clean
+
+#=============================================================================
+# Directory level rules for directory _deps/gd-imgui-cocos-build
+
+# Recursive "all" directory target.
+_deps/gd-imgui-cocos-build/all:
+.PHONY : _deps/gd-imgui-cocos-build/all
+
+# Recursive "codegen" directory target.
+_deps/gd-imgui-cocos-build/codegen:
+.PHONY : _deps/gd-imgui-cocos-build/codegen
+
+# Recursive "preinstall" directory target.
+_deps/gd-imgui-cocos-build/preinstall:
+.PHONY : _deps/gd-imgui-cocos-build/preinstall
+
+# Recursive "clean" directory target.
+_deps/gd-imgui-cocos-build/clean:
+.PHONY : _deps/gd-imgui-cocos-build/clean
 
 #=============================================================================
 # Directory level rules for directory _deps/json-build
@@ -293,18 +314,19 @@ geode/clean: bindings/clean
 # Target rules for target CMakeFiles/ClickHitboxTrail.dir
 
 # All Build rule for target.
+CMakeFiles/ClickHitboxTrail.dir/all: CMakeFiles/ClickHitboxTrailBuildStamp.dir/all
 CMakeFiles/ClickHitboxTrail.dir/all: _deps/fmt-build/CMakeFiles/fmt.dir/all
 CMakeFiles/ClickHitboxTrail.dir/all: _deps/asp2-build/CMakeFiles/asp.dir/all
 CMakeFiles/ClickHitboxTrail.dir/all: _deps/arc-build/CMakeFiles/arc.dir/all
 CMakeFiles/ClickHitboxTrail.dir/all: bindings/CMakeFiles/GeodeBindings.dir/all
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/ClickHitboxTrail.dir/build.make CMakeFiles/ClickHitboxTrail.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/ClickHitboxTrail.dir/build.make CMakeFiles/ClickHitboxTrail.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/vite/click-hitbox-trail/build-win/CMakeFiles --progress-num=1,2,3,4 "Built target ClickHitboxTrail"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/vite/click-hitbox-trail/build-win/CMakeFiles --progress-num=1,2,3,4,5,6,7,8,9,10,11,12 "Built target ClickHitboxTrail"
 .PHONY : CMakeFiles/ClickHitboxTrail.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/ClickHitboxTrail.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/vite/click-hitbox-trail/build-win/CMakeFiles 28
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/vite/click-hitbox-trail/build-win/CMakeFiles 36
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/ClickHitboxTrail.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/vite/click-hitbox-trail/build-win/CMakeFiles 0
 .PHONY : CMakeFiles/ClickHitboxTrail.dir/rule
@@ -314,15 +336,47 @@ ClickHitboxTrail: CMakeFiles/ClickHitboxTrail.dir/rule
 .PHONY : ClickHitboxTrail
 
 # codegen rule for target.
-CMakeFiles/ClickHitboxTrail.dir/codegen:
+CMakeFiles/ClickHitboxTrail.dir/codegen: CMakeFiles/ClickHitboxTrailBuildStamp.dir/all
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/ClickHitboxTrail.dir/build.make CMakeFiles/ClickHitboxTrail.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/vite/click-hitbox-trail/build-win/CMakeFiles --progress-num=1,2,3,4 "Finished codegen for target ClickHitboxTrail"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/vite/click-hitbox-trail/build-win/CMakeFiles --progress-num=1,2,3,4,5,6,7,8,9,10,11,12 "Finished codegen for target ClickHitboxTrail"
 .PHONY : CMakeFiles/ClickHitboxTrail.dir/codegen
 
 # clean rule for target.
 CMakeFiles/ClickHitboxTrail.dir/clean:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/ClickHitboxTrail.dir/build.make CMakeFiles/ClickHitboxTrail.dir/clean
 .PHONY : CMakeFiles/ClickHitboxTrail.dir/clean
+
+#=============================================================================
+# Target rules for target CMakeFiles/ClickHitboxTrailBuildStamp.dir
+
+# All Build rule for target.
+CMakeFiles/ClickHitboxTrailBuildStamp.dir/all:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ClickHitboxTrailBuildStamp.dir/build.make CMakeFiles/ClickHitboxTrailBuildStamp.dir/depend
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ClickHitboxTrailBuildStamp.dir/build.make CMakeFiles/ClickHitboxTrailBuildStamp.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/vite/click-hitbox-trail/build-win/CMakeFiles --progress-num= "Built target ClickHitboxTrailBuildStamp"
+.PHONY : CMakeFiles/ClickHitboxTrailBuildStamp.dir/all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/ClickHitboxTrailBuildStamp.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/vite/click-hitbox-trail/build-win/CMakeFiles 0
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/ClickHitboxTrailBuildStamp.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/vite/click-hitbox-trail/build-win/CMakeFiles 0
+.PHONY : CMakeFiles/ClickHitboxTrailBuildStamp.dir/rule
+
+# Convenience name for target.
+ClickHitboxTrailBuildStamp: CMakeFiles/ClickHitboxTrailBuildStamp.dir/rule
+.PHONY : ClickHitboxTrailBuildStamp
+
+# codegen rule for target.
+CMakeFiles/ClickHitboxTrailBuildStamp.dir/codegen:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ClickHitboxTrailBuildStamp.dir/build.make CMakeFiles/ClickHitboxTrailBuildStamp.dir/codegen
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/vite/click-hitbox-trail/build-win/CMakeFiles --progress-num= "Finished codegen for target ClickHitboxTrailBuildStamp"
+.PHONY : CMakeFiles/ClickHitboxTrailBuildStamp.dir/codegen
+
+# clean rule for target.
+CMakeFiles/ClickHitboxTrailBuildStamp.dir/clean:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ClickHitboxTrailBuildStamp.dir/build.make CMakeFiles/ClickHitboxTrailBuildStamp.dir/clean
+.PHONY : CMakeFiles/ClickHitboxTrailBuildStamp.dir/clean
 
 #=============================================================================
 # Target rules for target CMakeFiles/ClickHitboxTrail_PACKAGE.dir
@@ -336,7 +390,7 @@ CMakeFiles/ClickHitboxTrail_PACKAGE.dir/all: CMakeFiles/ClickHitboxTrail.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/ClickHitboxTrail_PACKAGE.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/vite/click-hitbox-trail/build-win/CMakeFiles 28
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/vite/click-hitbox-trail/build-win/CMakeFiles 36
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/ClickHitboxTrail_PACKAGE.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/vite/click-hitbox-trail/build-win/CMakeFiles 0
 .PHONY : CMakeFiles/ClickHitboxTrail_PACKAGE.dir/rule
@@ -1259,7 +1313,7 @@ _deps/nontype_functional-build/CMakeFiles/ContinuousSubmit.dir/clean:
 _deps/fmt-build/CMakeFiles/fmt.dir/all:
 	$(MAKE) $(MAKESILENT) -f _deps/fmt-build/CMakeFiles/fmt.dir/build.make _deps/fmt-build/CMakeFiles/fmt.dir/depend
 	$(MAKE) $(MAKESILENT) -f _deps/fmt-build/CMakeFiles/fmt.dir/build.make _deps/fmt-build/CMakeFiles/fmt.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/vite/click-hitbox-trail/build-win/CMakeFiles --progress-num=26,27,28 "Built target fmt"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/vite/click-hitbox-trail/build-win/CMakeFiles --progress-num=34,35,36 "Built target fmt"
 .PHONY : _deps/fmt-build/CMakeFiles/fmt.dir/all
 
 # Build rule for subdir invocation for target.
@@ -1276,7 +1330,7 @@ fmt: _deps/fmt-build/CMakeFiles/fmt.dir/rule
 # codegen rule for target.
 _deps/fmt-build/CMakeFiles/fmt.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f _deps/fmt-build/CMakeFiles/fmt.dir/build.make _deps/fmt-build/CMakeFiles/fmt.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/vite/click-hitbox-trail/build-win/CMakeFiles --progress-num=26,27,28 "Finished codegen for target fmt"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/vite/click-hitbox-trail/build-win/CMakeFiles --progress-num=34,35,36 "Finished codegen for target fmt"
 .PHONY : _deps/fmt-build/CMakeFiles/fmt.dir/codegen
 
 # clean rule for target.
@@ -1291,7 +1345,7 @@ _deps/fmt-build/CMakeFiles/fmt.dir/clean:
 _deps/asp2-build/CMakeFiles/asp.dir/all: _deps/fmt-build/CMakeFiles/fmt.dir/all
 	$(MAKE) $(MAKESILENT) -f _deps/asp2-build/CMakeFiles/asp.dir/build.make _deps/asp2-build/CMakeFiles/asp.dir/depend
 	$(MAKE) $(MAKESILENT) -f _deps/asp2-build/CMakeFiles/asp.dir/build.make _deps/asp2-build/CMakeFiles/asp.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/vite/click-hitbox-trail/build-win/CMakeFiles --progress-num=24,25 "Built target asp"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/vite/click-hitbox-trail/build-win/CMakeFiles --progress-num=32,33 "Built target asp"
 .PHONY : _deps/asp2-build/CMakeFiles/asp.dir/all
 
 # Build rule for subdir invocation for target.
@@ -1308,7 +1362,7 @@ asp: _deps/asp2-build/CMakeFiles/asp.dir/rule
 # codegen rule for target.
 _deps/asp2-build/CMakeFiles/asp.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f _deps/asp2-build/CMakeFiles/asp.dir/build.make _deps/asp2-build/CMakeFiles/asp.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/vite/click-hitbox-trail/build-win/CMakeFiles --progress-num=24,25 "Finished codegen for target asp"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/vite/click-hitbox-trail/build-win/CMakeFiles --progress-num=32,33 "Finished codegen for target asp"
 .PHONY : _deps/asp2-build/CMakeFiles/asp.dir/codegen
 
 # clean rule for target.
@@ -1324,7 +1378,7 @@ _deps/arc-build/CMakeFiles/arc.dir/all: _deps/fmt-build/CMakeFiles/fmt.dir/all
 _deps/arc-build/CMakeFiles/arc.dir/all: _deps/asp2-build/CMakeFiles/asp.dir/all
 	$(MAKE) $(MAKESILENT) -f _deps/arc-build/CMakeFiles/arc.dir/build.make _deps/arc-build/CMakeFiles/arc.dir/depend
 	$(MAKE) $(MAKESILENT) -f _deps/arc-build/CMakeFiles/arc.dir/build.make _deps/arc-build/CMakeFiles/arc.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/vite/click-hitbox-trail/build-win/CMakeFiles --progress-num=22,23 "Built target arc"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/vite/click-hitbox-trail/build-win/CMakeFiles --progress-num=30,31 "Built target arc"
 .PHONY : _deps/arc-build/CMakeFiles/arc.dir/all
 
 # Build rule for subdir invocation for target.
@@ -1341,7 +1395,7 @@ arc: _deps/arc-build/CMakeFiles/arc.dir/rule
 # codegen rule for target.
 _deps/arc-build/CMakeFiles/arc.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f _deps/arc-build/CMakeFiles/arc.dir/build.make _deps/arc-build/CMakeFiles/arc.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/vite/click-hitbox-trail/build-win/CMakeFiles --progress-num=22,23 "Finished codegen for target arc"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/vite/click-hitbox-trail/build-win/CMakeFiles --progress-num=30,31 "Finished codegen for target arc"
 .PHONY : _deps/arc-build/CMakeFiles/arc.dir/codegen
 
 # clean rule for target.
@@ -1358,7 +1412,7 @@ bindings/CMakeFiles/GeodeBindings.dir/all: _deps/asp2-build/CMakeFiles/asp.dir/a
 bindings/CMakeFiles/GeodeBindings.dir/all: _deps/arc-build/CMakeFiles/arc.dir/all
 	$(MAKE) $(MAKESILENT) -f bindings/CMakeFiles/GeodeBindings.dir/build.make bindings/CMakeFiles/GeodeBindings.dir/depend
 	$(MAKE) $(MAKESILENT) -f bindings/CMakeFiles/GeodeBindings.dir/build.make bindings/CMakeFiles/GeodeBindings.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/vite/click-hitbox-trail/build-win/CMakeFiles --progress-num=5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21 "Built target GeodeBindings"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/vite/click-hitbox-trail/build-win/CMakeFiles --progress-num=13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29 "Built target GeodeBindings"
 .PHONY : bindings/CMakeFiles/GeodeBindings.dir/all
 
 # Build rule for subdir invocation for target.
@@ -1375,7 +1429,7 @@ GeodeBindings: bindings/CMakeFiles/GeodeBindings.dir/rule
 # codegen rule for target.
 bindings/CMakeFiles/GeodeBindings.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f bindings/CMakeFiles/GeodeBindings.dir/build.make bindings/CMakeFiles/GeodeBindings.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/vite/click-hitbox-trail/build-win/CMakeFiles --progress-num=5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21 "Finished codegen for target GeodeBindings"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/vite/click-hitbox-trail/build-win/CMakeFiles --progress-num=13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29 "Finished codegen for target GeodeBindings"
 .PHONY : bindings/CMakeFiles/GeodeBindings.dir/codegen
 
 # clean rule for target.

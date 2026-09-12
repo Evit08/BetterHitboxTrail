@@ -91,6 +91,7 @@ CMakeFiles/ClickHitboxTrail.dir/cmake_pch.hxx.s: cmake_force
 CMakeFiles/ClickHitboxTrail.dir/src/main.cpp.obj: CMakeFiles/ClickHitboxTrail.dir/flags.make
 CMakeFiles/ClickHitboxTrail.dir/src/main.cpp.obj: CMakeFiles/ClickHitboxTrail.dir/includes_CXX.rsp
 CMakeFiles/ClickHitboxTrail.dir/src/main.cpp.obj: /home/vite/click-hitbox-trail/src/main.cpp
+CMakeFiles/ClickHitboxTrail.dir/src/main.cpp.obj: click-hitbox-trail-build.stamp
 CMakeFiles/ClickHitboxTrail.dir/src/main.cpp.obj: CMakeFiles/ClickHitboxTrail.dir/cmake_pch.hxx
 CMakeFiles/ClickHitboxTrail.dir/src/main.cpp.obj: CMakeFiles/ClickHitboxTrail.dir/cmake_pch.hxx.pch
 CMakeFiles/ClickHitboxTrail.dir/src/main.cpp.obj: CMakeFiles/ClickHitboxTrail.dir/compiler_depend.ts
@@ -105,13 +106,149 @@ CMakeFiles/ClickHitboxTrail.dir/src/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/ClickHitboxTrail.dir/src/main.cpp.s"
 	$(CMAKE_COMMAND) -E cmake_unimplemented_variable CMAKE_CXX_CREATE_ASSEMBLY_SOURCE
 
+CMakeFiles/ClickHitboxTrail.dir/_deps/gd-imgui-cocos-src/src/backend.cpp.obj: CMakeFiles/ClickHitboxTrail.dir/flags.make
+CMakeFiles/ClickHitboxTrail.dir/_deps/gd-imgui-cocos-src/src/backend.cpp.obj: CMakeFiles/ClickHitboxTrail.dir/includes_CXX.rsp
+CMakeFiles/ClickHitboxTrail.dir/_deps/gd-imgui-cocos-src/src/backend.cpp.obj: _deps/gd-imgui-cocos-src/src/backend.cpp
+CMakeFiles/ClickHitboxTrail.dir/_deps/gd-imgui-cocos-src/src/backend.cpp.obj: CMakeFiles/ClickHitboxTrail.dir/cmake_pch.hxx
+CMakeFiles/ClickHitboxTrail.dir/_deps/gd-imgui-cocos-src/src/backend.cpp.obj: CMakeFiles/ClickHitboxTrail.dir/cmake_pch.hxx.pch
+CMakeFiles/ClickHitboxTrail.dir/_deps/gd-imgui-cocos-src/src/backend.cpp.obj: CMakeFiles/ClickHitboxTrail.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/vite/click-hitbox-trail/build-win/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/ClickHitboxTrail.dir/_deps/gd-imgui-cocos-src/src/backend.cpp.obj"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -Xclang -include-pch -Xclang /home/vite/click-hitbox-trail/build-win/CMakeFiles/ClickHitboxTrail.dir/cmake_pch.hxx.pch -Xclang -include -Xclang /home/vite/click-hitbox-trail/build-win/CMakeFiles/ClickHitboxTrail.dir/cmake_pch.hxx -MD -MT CMakeFiles/ClickHitboxTrail.dir/_deps/gd-imgui-cocos-src/src/backend.cpp.obj -MF CMakeFiles/ClickHitboxTrail.dir/_deps/gd-imgui-cocos-src/src/backend.cpp.obj.d -o CMakeFiles/ClickHitboxTrail.dir/_deps/gd-imgui-cocos-src/src/backend.cpp.obj -c /home/vite/click-hitbox-trail/build-win/_deps/gd-imgui-cocos-src/src/backend.cpp
+
+CMakeFiles/ClickHitboxTrail.dir/_deps/gd-imgui-cocos-src/src/backend.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/ClickHitboxTrail.dir/_deps/gd-imgui-cocos-src/src/backend.cpp.i"
+	$(CMAKE_COMMAND) -E cmake_unimplemented_variable CMAKE_CXX_CREATE_PREPROCESSED_SOURCE
+
+CMakeFiles/ClickHitboxTrail.dir/_deps/gd-imgui-cocos-src/src/backend.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/ClickHitboxTrail.dir/_deps/gd-imgui-cocos-src/src/backend.cpp.s"
+	$(CMAKE_COMMAND) -E cmake_unimplemented_variable CMAKE_CXX_CREATE_ASSEMBLY_SOURCE
+
+CMakeFiles/ClickHitboxTrail.dir/_deps/gd-imgui-cocos-src/src/hooks.cpp.obj: CMakeFiles/ClickHitboxTrail.dir/flags.make
+CMakeFiles/ClickHitboxTrail.dir/_deps/gd-imgui-cocos-src/src/hooks.cpp.obj: CMakeFiles/ClickHitboxTrail.dir/includes_CXX.rsp
+CMakeFiles/ClickHitboxTrail.dir/_deps/gd-imgui-cocos-src/src/hooks.cpp.obj: _deps/gd-imgui-cocos-src/src/hooks.cpp
+CMakeFiles/ClickHitboxTrail.dir/_deps/gd-imgui-cocos-src/src/hooks.cpp.obj: CMakeFiles/ClickHitboxTrail.dir/cmake_pch.hxx
+CMakeFiles/ClickHitboxTrail.dir/_deps/gd-imgui-cocos-src/src/hooks.cpp.obj: CMakeFiles/ClickHitboxTrail.dir/cmake_pch.hxx.pch
+CMakeFiles/ClickHitboxTrail.dir/_deps/gd-imgui-cocos-src/src/hooks.cpp.obj: CMakeFiles/ClickHitboxTrail.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/vite/click-hitbox-trail/build-win/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/ClickHitboxTrail.dir/_deps/gd-imgui-cocos-src/src/hooks.cpp.obj"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -Xclang -include-pch -Xclang /home/vite/click-hitbox-trail/build-win/CMakeFiles/ClickHitboxTrail.dir/cmake_pch.hxx.pch -Xclang -include -Xclang /home/vite/click-hitbox-trail/build-win/CMakeFiles/ClickHitboxTrail.dir/cmake_pch.hxx -MD -MT CMakeFiles/ClickHitboxTrail.dir/_deps/gd-imgui-cocos-src/src/hooks.cpp.obj -MF CMakeFiles/ClickHitboxTrail.dir/_deps/gd-imgui-cocos-src/src/hooks.cpp.obj.d -o CMakeFiles/ClickHitboxTrail.dir/_deps/gd-imgui-cocos-src/src/hooks.cpp.obj -c /home/vite/click-hitbox-trail/build-win/_deps/gd-imgui-cocos-src/src/hooks.cpp
+
+CMakeFiles/ClickHitboxTrail.dir/_deps/gd-imgui-cocos-src/src/hooks.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/ClickHitboxTrail.dir/_deps/gd-imgui-cocos-src/src/hooks.cpp.i"
+	$(CMAKE_COMMAND) -E cmake_unimplemented_variable CMAKE_CXX_CREATE_PREPROCESSED_SOURCE
+
+CMakeFiles/ClickHitboxTrail.dir/_deps/gd-imgui-cocos-src/src/hooks.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/ClickHitboxTrail.dir/_deps/gd-imgui-cocos-src/src/hooks.cpp.s"
+	$(CMAKE_COMMAND) -E cmake_unimplemented_variable CMAKE_CXX_CREATE_ASSEMBLY_SOURCE
+
+CMakeFiles/ClickHitboxTrail.dir/_deps/imgui-src/imgui.cpp.obj: CMakeFiles/ClickHitboxTrail.dir/flags.make
+CMakeFiles/ClickHitboxTrail.dir/_deps/imgui-src/imgui.cpp.obj: CMakeFiles/ClickHitboxTrail.dir/includes_CXX.rsp
+CMakeFiles/ClickHitboxTrail.dir/_deps/imgui-src/imgui.cpp.obj: _deps/imgui-src/imgui.cpp
+CMakeFiles/ClickHitboxTrail.dir/_deps/imgui-src/imgui.cpp.obj: CMakeFiles/ClickHitboxTrail.dir/cmake_pch.hxx
+CMakeFiles/ClickHitboxTrail.dir/_deps/imgui-src/imgui.cpp.obj: CMakeFiles/ClickHitboxTrail.dir/cmake_pch.hxx.pch
+CMakeFiles/ClickHitboxTrail.dir/_deps/imgui-src/imgui.cpp.obj: CMakeFiles/ClickHitboxTrail.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/vite/click-hitbox-trail/build-win/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/ClickHitboxTrail.dir/_deps/imgui-src/imgui.cpp.obj"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -Xclang -include-pch -Xclang /home/vite/click-hitbox-trail/build-win/CMakeFiles/ClickHitboxTrail.dir/cmake_pch.hxx.pch -Xclang -include -Xclang /home/vite/click-hitbox-trail/build-win/CMakeFiles/ClickHitboxTrail.dir/cmake_pch.hxx -MD -MT CMakeFiles/ClickHitboxTrail.dir/_deps/imgui-src/imgui.cpp.obj -MF CMakeFiles/ClickHitboxTrail.dir/_deps/imgui-src/imgui.cpp.obj.d -o CMakeFiles/ClickHitboxTrail.dir/_deps/imgui-src/imgui.cpp.obj -c /home/vite/click-hitbox-trail/build-win/_deps/imgui-src/imgui.cpp
+
+CMakeFiles/ClickHitboxTrail.dir/_deps/imgui-src/imgui.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/ClickHitboxTrail.dir/_deps/imgui-src/imgui.cpp.i"
+	$(CMAKE_COMMAND) -E cmake_unimplemented_variable CMAKE_CXX_CREATE_PREPROCESSED_SOURCE
+
+CMakeFiles/ClickHitboxTrail.dir/_deps/imgui-src/imgui.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/ClickHitboxTrail.dir/_deps/imgui-src/imgui.cpp.s"
+	$(CMAKE_COMMAND) -E cmake_unimplemented_variable CMAKE_CXX_CREATE_ASSEMBLY_SOURCE
+
+CMakeFiles/ClickHitboxTrail.dir/_deps/imgui-src/imgui_widgets.cpp.obj: CMakeFiles/ClickHitboxTrail.dir/flags.make
+CMakeFiles/ClickHitboxTrail.dir/_deps/imgui-src/imgui_widgets.cpp.obj: CMakeFiles/ClickHitboxTrail.dir/includes_CXX.rsp
+CMakeFiles/ClickHitboxTrail.dir/_deps/imgui-src/imgui_widgets.cpp.obj: _deps/imgui-src/imgui_widgets.cpp
+CMakeFiles/ClickHitboxTrail.dir/_deps/imgui-src/imgui_widgets.cpp.obj: CMakeFiles/ClickHitboxTrail.dir/cmake_pch.hxx
+CMakeFiles/ClickHitboxTrail.dir/_deps/imgui-src/imgui_widgets.cpp.obj: CMakeFiles/ClickHitboxTrail.dir/cmake_pch.hxx.pch
+CMakeFiles/ClickHitboxTrail.dir/_deps/imgui-src/imgui_widgets.cpp.obj: CMakeFiles/ClickHitboxTrail.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/vite/click-hitbox-trail/build-win/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/ClickHitboxTrail.dir/_deps/imgui-src/imgui_widgets.cpp.obj"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -Xclang -include-pch -Xclang /home/vite/click-hitbox-trail/build-win/CMakeFiles/ClickHitboxTrail.dir/cmake_pch.hxx.pch -Xclang -include -Xclang /home/vite/click-hitbox-trail/build-win/CMakeFiles/ClickHitboxTrail.dir/cmake_pch.hxx -MD -MT CMakeFiles/ClickHitboxTrail.dir/_deps/imgui-src/imgui_widgets.cpp.obj -MF CMakeFiles/ClickHitboxTrail.dir/_deps/imgui-src/imgui_widgets.cpp.obj.d -o CMakeFiles/ClickHitboxTrail.dir/_deps/imgui-src/imgui_widgets.cpp.obj -c /home/vite/click-hitbox-trail/build-win/_deps/imgui-src/imgui_widgets.cpp
+
+CMakeFiles/ClickHitboxTrail.dir/_deps/imgui-src/imgui_widgets.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/ClickHitboxTrail.dir/_deps/imgui-src/imgui_widgets.cpp.i"
+	$(CMAKE_COMMAND) -E cmake_unimplemented_variable CMAKE_CXX_CREATE_PREPROCESSED_SOURCE
+
+CMakeFiles/ClickHitboxTrail.dir/_deps/imgui-src/imgui_widgets.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/ClickHitboxTrail.dir/_deps/imgui-src/imgui_widgets.cpp.s"
+	$(CMAKE_COMMAND) -E cmake_unimplemented_variable CMAKE_CXX_CREATE_ASSEMBLY_SOURCE
+
+CMakeFiles/ClickHitboxTrail.dir/_deps/imgui-src/imgui_tables.cpp.obj: CMakeFiles/ClickHitboxTrail.dir/flags.make
+CMakeFiles/ClickHitboxTrail.dir/_deps/imgui-src/imgui_tables.cpp.obj: CMakeFiles/ClickHitboxTrail.dir/includes_CXX.rsp
+CMakeFiles/ClickHitboxTrail.dir/_deps/imgui-src/imgui_tables.cpp.obj: _deps/imgui-src/imgui_tables.cpp
+CMakeFiles/ClickHitboxTrail.dir/_deps/imgui-src/imgui_tables.cpp.obj: CMakeFiles/ClickHitboxTrail.dir/cmake_pch.hxx
+CMakeFiles/ClickHitboxTrail.dir/_deps/imgui-src/imgui_tables.cpp.obj: CMakeFiles/ClickHitboxTrail.dir/cmake_pch.hxx.pch
+CMakeFiles/ClickHitboxTrail.dir/_deps/imgui-src/imgui_tables.cpp.obj: CMakeFiles/ClickHitboxTrail.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/vite/click-hitbox-trail/build-win/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/ClickHitboxTrail.dir/_deps/imgui-src/imgui_tables.cpp.obj"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -Xclang -include-pch -Xclang /home/vite/click-hitbox-trail/build-win/CMakeFiles/ClickHitboxTrail.dir/cmake_pch.hxx.pch -Xclang -include -Xclang /home/vite/click-hitbox-trail/build-win/CMakeFiles/ClickHitboxTrail.dir/cmake_pch.hxx -MD -MT CMakeFiles/ClickHitboxTrail.dir/_deps/imgui-src/imgui_tables.cpp.obj -MF CMakeFiles/ClickHitboxTrail.dir/_deps/imgui-src/imgui_tables.cpp.obj.d -o CMakeFiles/ClickHitboxTrail.dir/_deps/imgui-src/imgui_tables.cpp.obj -c /home/vite/click-hitbox-trail/build-win/_deps/imgui-src/imgui_tables.cpp
+
+CMakeFiles/ClickHitboxTrail.dir/_deps/imgui-src/imgui_tables.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/ClickHitboxTrail.dir/_deps/imgui-src/imgui_tables.cpp.i"
+	$(CMAKE_COMMAND) -E cmake_unimplemented_variable CMAKE_CXX_CREATE_PREPROCESSED_SOURCE
+
+CMakeFiles/ClickHitboxTrail.dir/_deps/imgui-src/imgui_tables.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/ClickHitboxTrail.dir/_deps/imgui-src/imgui_tables.cpp.s"
+	$(CMAKE_COMMAND) -E cmake_unimplemented_variable CMAKE_CXX_CREATE_ASSEMBLY_SOURCE
+
+CMakeFiles/ClickHitboxTrail.dir/_deps/imgui-src/imgui_draw.cpp.obj: CMakeFiles/ClickHitboxTrail.dir/flags.make
+CMakeFiles/ClickHitboxTrail.dir/_deps/imgui-src/imgui_draw.cpp.obj: CMakeFiles/ClickHitboxTrail.dir/includes_CXX.rsp
+CMakeFiles/ClickHitboxTrail.dir/_deps/imgui-src/imgui_draw.cpp.obj: _deps/imgui-src/imgui_draw.cpp
+CMakeFiles/ClickHitboxTrail.dir/_deps/imgui-src/imgui_draw.cpp.obj: CMakeFiles/ClickHitboxTrail.dir/cmake_pch.hxx
+CMakeFiles/ClickHitboxTrail.dir/_deps/imgui-src/imgui_draw.cpp.obj: CMakeFiles/ClickHitboxTrail.dir/cmake_pch.hxx.pch
+CMakeFiles/ClickHitboxTrail.dir/_deps/imgui-src/imgui_draw.cpp.obj: CMakeFiles/ClickHitboxTrail.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/vite/click-hitbox-trail/build-win/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/ClickHitboxTrail.dir/_deps/imgui-src/imgui_draw.cpp.obj"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -Xclang -include-pch -Xclang /home/vite/click-hitbox-trail/build-win/CMakeFiles/ClickHitboxTrail.dir/cmake_pch.hxx.pch -Xclang -include -Xclang /home/vite/click-hitbox-trail/build-win/CMakeFiles/ClickHitboxTrail.dir/cmake_pch.hxx -MD -MT CMakeFiles/ClickHitboxTrail.dir/_deps/imgui-src/imgui_draw.cpp.obj -MF CMakeFiles/ClickHitboxTrail.dir/_deps/imgui-src/imgui_draw.cpp.obj.d -o CMakeFiles/ClickHitboxTrail.dir/_deps/imgui-src/imgui_draw.cpp.obj -c /home/vite/click-hitbox-trail/build-win/_deps/imgui-src/imgui_draw.cpp
+
+CMakeFiles/ClickHitboxTrail.dir/_deps/imgui-src/imgui_draw.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/ClickHitboxTrail.dir/_deps/imgui-src/imgui_draw.cpp.i"
+	$(CMAKE_COMMAND) -E cmake_unimplemented_variable CMAKE_CXX_CREATE_PREPROCESSED_SOURCE
+
+CMakeFiles/ClickHitboxTrail.dir/_deps/imgui-src/imgui_draw.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/ClickHitboxTrail.dir/_deps/imgui-src/imgui_draw.cpp.s"
+	$(CMAKE_COMMAND) -E cmake_unimplemented_variable CMAKE_CXX_CREATE_ASSEMBLY_SOURCE
+
+CMakeFiles/ClickHitboxTrail.dir/_deps/imgui-src/imgui_demo.cpp.obj: CMakeFiles/ClickHitboxTrail.dir/flags.make
+CMakeFiles/ClickHitboxTrail.dir/_deps/imgui-src/imgui_demo.cpp.obj: CMakeFiles/ClickHitboxTrail.dir/includes_CXX.rsp
+CMakeFiles/ClickHitboxTrail.dir/_deps/imgui-src/imgui_demo.cpp.obj: _deps/imgui-src/imgui_demo.cpp
+CMakeFiles/ClickHitboxTrail.dir/_deps/imgui-src/imgui_demo.cpp.obj: CMakeFiles/ClickHitboxTrail.dir/cmake_pch.hxx
+CMakeFiles/ClickHitboxTrail.dir/_deps/imgui-src/imgui_demo.cpp.obj: CMakeFiles/ClickHitboxTrail.dir/cmake_pch.hxx.pch
+CMakeFiles/ClickHitboxTrail.dir/_deps/imgui-src/imgui_demo.cpp.obj: CMakeFiles/ClickHitboxTrail.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/vite/click-hitbox-trail/build-win/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/ClickHitboxTrail.dir/_deps/imgui-src/imgui_demo.cpp.obj"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -Xclang -include-pch -Xclang /home/vite/click-hitbox-trail/build-win/CMakeFiles/ClickHitboxTrail.dir/cmake_pch.hxx.pch -Xclang -include -Xclang /home/vite/click-hitbox-trail/build-win/CMakeFiles/ClickHitboxTrail.dir/cmake_pch.hxx -MD -MT CMakeFiles/ClickHitboxTrail.dir/_deps/imgui-src/imgui_demo.cpp.obj -MF CMakeFiles/ClickHitboxTrail.dir/_deps/imgui-src/imgui_demo.cpp.obj.d -o CMakeFiles/ClickHitboxTrail.dir/_deps/imgui-src/imgui_demo.cpp.obj -c /home/vite/click-hitbox-trail/build-win/_deps/imgui-src/imgui_demo.cpp
+
+CMakeFiles/ClickHitboxTrail.dir/_deps/imgui-src/imgui_demo.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/ClickHitboxTrail.dir/_deps/imgui-src/imgui_demo.cpp.i"
+	$(CMAKE_COMMAND) -E cmake_unimplemented_variable CMAKE_CXX_CREATE_PREPROCESSED_SOURCE
+
+CMakeFiles/ClickHitboxTrail.dir/_deps/imgui-src/imgui_demo.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/ClickHitboxTrail.dir/_deps/imgui-src/imgui_demo.cpp.s"
+	$(CMAKE_COMMAND) -E cmake_unimplemented_variable CMAKE_CXX_CREATE_ASSEMBLY_SOURCE
+
+CMakeFiles/ClickHitboxTrail.dir/_deps/imgui-src/misc/cpp/imgui_stdlib.cpp.obj: CMakeFiles/ClickHitboxTrail.dir/flags.make
+CMakeFiles/ClickHitboxTrail.dir/_deps/imgui-src/misc/cpp/imgui_stdlib.cpp.obj: CMakeFiles/ClickHitboxTrail.dir/includes_CXX.rsp
+CMakeFiles/ClickHitboxTrail.dir/_deps/imgui-src/misc/cpp/imgui_stdlib.cpp.obj: _deps/imgui-src/misc/cpp/imgui_stdlib.cpp
+CMakeFiles/ClickHitboxTrail.dir/_deps/imgui-src/misc/cpp/imgui_stdlib.cpp.obj: CMakeFiles/ClickHitboxTrail.dir/cmake_pch.hxx
+CMakeFiles/ClickHitboxTrail.dir/_deps/imgui-src/misc/cpp/imgui_stdlib.cpp.obj: CMakeFiles/ClickHitboxTrail.dir/cmake_pch.hxx.pch
+CMakeFiles/ClickHitboxTrail.dir/_deps/imgui-src/misc/cpp/imgui_stdlib.cpp.obj: CMakeFiles/ClickHitboxTrail.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/vite/click-hitbox-trail/build-win/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/ClickHitboxTrail.dir/_deps/imgui-src/misc/cpp/imgui_stdlib.cpp.obj"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -Xclang -include-pch -Xclang /home/vite/click-hitbox-trail/build-win/CMakeFiles/ClickHitboxTrail.dir/cmake_pch.hxx.pch -Xclang -include -Xclang /home/vite/click-hitbox-trail/build-win/CMakeFiles/ClickHitboxTrail.dir/cmake_pch.hxx -MD -MT CMakeFiles/ClickHitboxTrail.dir/_deps/imgui-src/misc/cpp/imgui_stdlib.cpp.obj -MF CMakeFiles/ClickHitboxTrail.dir/_deps/imgui-src/misc/cpp/imgui_stdlib.cpp.obj.d -o CMakeFiles/ClickHitboxTrail.dir/_deps/imgui-src/misc/cpp/imgui_stdlib.cpp.obj -c /home/vite/click-hitbox-trail/build-win/_deps/imgui-src/misc/cpp/imgui_stdlib.cpp
+
+CMakeFiles/ClickHitboxTrail.dir/_deps/imgui-src/misc/cpp/imgui_stdlib.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/ClickHitboxTrail.dir/_deps/imgui-src/misc/cpp/imgui_stdlib.cpp.i"
+	$(CMAKE_COMMAND) -E cmake_unimplemented_variable CMAKE_CXX_CREATE_PREPROCESSED_SOURCE
+
+CMakeFiles/ClickHitboxTrail.dir/_deps/imgui-src/misc/cpp/imgui_stdlib.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/ClickHitboxTrail.dir/_deps/imgui-src/misc/cpp/imgui_stdlib.cpp.s"
+	$(CMAKE_COMMAND) -E cmake_unimplemented_variable CMAKE_CXX_CREATE_ASSEMBLY_SOURCE
+
 CMakeFiles/ClickHitboxTrail.dir/home/vite/hitbox-trail-sdk/entry.cpp.obj: CMakeFiles/ClickHitboxTrail.dir/flags.make
 CMakeFiles/ClickHitboxTrail.dir/home/vite/hitbox-trail-sdk/entry.cpp.obj: CMakeFiles/ClickHitboxTrail.dir/includes_CXX.rsp
 CMakeFiles/ClickHitboxTrail.dir/home/vite/hitbox-trail-sdk/entry.cpp.obj: /home/vite/hitbox-trail-sdk/entry.cpp
 CMakeFiles/ClickHitboxTrail.dir/home/vite/hitbox-trail-sdk/entry.cpp.obj: CMakeFiles/ClickHitboxTrail.dir/cmake_pch.hxx
 CMakeFiles/ClickHitboxTrail.dir/home/vite/hitbox-trail-sdk/entry.cpp.obj: CMakeFiles/ClickHitboxTrail.dir/cmake_pch.hxx.pch
 CMakeFiles/ClickHitboxTrail.dir/home/vite/hitbox-trail-sdk/entry.cpp.obj: CMakeFiles/ClickHitboxTrail.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/vite/click-hitbox-trail/build-win/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/ClickHitboxTrail.dir/home/vite/hitbox-trail-sdk/entry.cpp.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/vite/click-hitbox-trail/build-win/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/ClickHitboxTrail.dir/home/vite/hitbox-trail-sdk/entry.cpp.obj"
 	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -Xclang -include-pch -Xclang /home/vite/click-hitbox-trail/build-win/CMakeFiles/ClickHitboxTrail.dir/cmake_pch.hxx.pch -Xclang -include -Xclang /home/vite/click-hitbox-trail/build-win/CMakeFiles/ClickHitboxTrail.dir/cmake_pch.hxx -MD -MT CMakeFiles/ClickHitboxTrail.dir/home/vite/hitbox-trail-sdk/entry.cpp.obj -MF CMakeFiles/ClickHitboxTrail.dir/home/vite/hitbox-trail-sdk/entry.cpp.obj.d -o CMakeFiles/ClickHitboxTrail.dir/home/vite/hitbox-trail-sdk/entry.cpp.obj -c /home/vite/hitbox-trail-sdk/entry.cpp
 
 CMakeFiles/ClickHitboxTrail.dir/home/vite/hitbox-trail-sdk/entry.cpp.i: cmake_force
@@ -125,6 +262,14 @@ CMakeFiles/ClickHitboxTrail.dir/home/vite/hitbox-trail-sdk/entry.cpp.s: cmake_fo
 # Object files for target ClickHitboxTrail
 ClickHitboxTrail_OBJECTS = \
 "CMakeFiles/ClickHitboxTrail.dir/src/main.cpp.obj" \
+"CMakeFiles/ClickHitboxTrail.dir/_deps/gd-imgui-cocos-src/src/backend.cpp.obj" \
+"CMakeFiles/ClickHitboxTrail.dir/_deps/gd-imgui-cocos-src/src/hooks.cpp.obj" \
+"CMakeFiles/ClickHitboxTrail.dir/_deps/imgui-src/imgui.cpp.obj" \
+"CMakeFiles/ClickHitboxTrail.dir/_deps/imgui-src/imgui_widgets.cpp.obj" \
+"CMakeFiles/ClickHitboxTrail.dir/_deps/imgui-src/imgui_tables.cpp.obj" \
+"CMakeFiles/ClickHitboxTrail.dir/_deps/imgui-src/imgui_draw.cpp.obj" \
+"CMakeFiles/ClickHitboxTrail.dir/_deps/imgui-src/imgui_demo.cpp.obj" \
+"CMakeFiles/ClickHitboxTrail.dir/_deps/imgui-src/misc/cpp/imgui_stdlib.cpp.obj" \
 "CMakeFiles/ClickHitboxTrail.dir/home/vite/hitbox-trail-sdk/entry.cpp.obj"
 
 # External object files for target ClickHitboxTrail
@@ -132,6 +277,14 @@ ClickHitboxTrail_EXTERNAL_OBJECTS =
 
 local.click-hitbox-trail.dll: CMakeFiles/ClickHitboxTrail.dir/cmake_pch.hxx.pch
 local.click-hitbox-trail.dll: CMakeFiles/ClickHitboxTrail.dir/src/main.cpp.obj
+local.click-hitbox-trail.dll: CMakeFiles/ClickHitboxTrail.dir/_deps/gd-imgui-cocos-src/src/backend.cpp.obj
+local.click-hitbox-trail.dll: CMakeFiles/ClickHitboxTrail.dir/_deps/gd-imgui-cocos-src/src/hooks.cpp.obj
+local.click-hitbox-trail.dll: CMakeFiles/ClickHitboxTrail.dir/_deps/imgui-src/imgui.cpp.obj
+local.click-hitbox-trail.dll: CMakeFiles/ClickHitboxTrail.dir/_deps/imgui-src/imgui_widgets.cpp.obj
+local.click-hitbox-trail.dll: CMakeFiles/ClickHitboxTrail.dir/_deps/imgui-src/imgui_tables.cpp.obj
+local.click-hitbox-trail.dll: CMakeFiles/ClickHitboxTrail.dir/_deps/imgui-src/imgui_draw.cpp.obj
+local.click-hitbox-trail.dll: CMakeFiles/ClickHitboxTrail.dir/_deps/imgui-src/imgui_demo.cpp.obj
+local.click-hitbox-trail.dll: CMakeFiles/ClickHitboxTrail.dir/_deps/imgui-src/misc/cpp/imgui_stdlib.cpp.obj
 local.click-hitbox-trail.dll: CMakeFiles/ClickHitboxTrail.dir/home/vite/hitbox-trail-sdk/entry.cpp.obj
 local.click-hitbox-trail.dll: CMakeFiles/ClickHitboxTrail.dir/build.make
 local.click-hitbox-trail.dll: /home/vite/hitbox-trail-sdk/loader/include/link/win64/libcocos2d.lib
@@ -146,7 +299,7 @@ local.click-hitbox-trail.dll: /home/vite/hitbox-trail-sdk/bin/5.9.0/Geode.lib
 local.click-hitbox-trail.dll: CMakeFiles/ClickHitboxTrail.dir/linkLibs.rsp
 local.click-hitbox-trail.dll: CMakeFiles/ClickHitboxTrail.dir/objects1.rsp
 local.click-hitbox-trail.dll: CMakeFiles/ClickHitboxTrail.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/vite/click-hitbox-trail/build-win/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking CXX shared library local.click-hitbox-trail.dll"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/vite/click-hitbox-trail/build-win/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Linking CXX shared library local.click-hitbox-trail.dll"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/ClickHitboxTrail.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

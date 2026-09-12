@@ -1,4 +1,5 @@
 /home/vite/click-hitbox-trail/build-win/CMakeFiles/ClickHitboxTrail.dir
+/home/vite/click-hitbox-trail/build-win/CMakeFiles/ClickHitboxTrailBuildStamp.dir
 /home/vite/click-hitbox-trail/build-win/CMakeFiles/ClickHitboxTrail_PACKAGE.dir
 /home/vite/click-hitbox-trail/build-win/CMakeFiles/edit_cache.dir
 /home/vite/click-hitbox-trail/build-win/CMakeFiles/rebuild_cache.dir
@@ -92,3 +93,9 @@
 /home/vite/click-hitbox-trail/build-win/bindings/CMakeFiles/install.dir
 /home/vite/click-hitbox-trail/build-win/bindings/CMakeFiles/install/local.dir
 /home/vite/click-hitbox-trail/build-win/bindings/CMakeFiles/install/strip.dir
+/home/vite/click-hitbox-trail/build-win/_deps/gd-imgui-cocos-build/CMakeFiles/edit_cache.dir
+/home/vite/click-hitbox-trail/build-win/_deps/gd-imgui-cocos-build/CMakeFiles/rebuild_cache.dir
+/home/vite/click-hitbox-trail/build-win/_deps/gd-imgui-cocos-build/CMakeFiles/list_install_components.dir
+/home/vite/click-hitbox-trail/build-win/_deps/gd-imgui-cocos-build/CMakeFiles/install.dir
+/home/vite/click-hitbox-trail/build-win/_deps/gd-imgui-cocos-build/CMakeFiles/install/local.dir
+/home/vite/click-hitbox-trail/build-win/_deps/gd-imgui-cocos-build/CMakeFiles/install/strip.dir

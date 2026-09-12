@@ -8,6 +8,22 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
+  "/home/vite/click-hitbox-trail/build-win/_deps/gd-imgui-cocos-src/src/backend.cpp" "CMakeFiles/ClickHitboxTrail.dir/_deps/gd-imgui-cocos-src/src/backend.cpp.obj" "gcc" "CMakeFiles/ClickHitboxTrail.dir/_deps/gd-imgui-cocos-src/src/backend.cpp.obj.d"
+  "/home/vite/click-hitbox-trail/build-win/CMakeFiles/ClickHitboxTrail.dir/cmake_pch.hxx" "CMakeFiles/ClickHitboxTrail.dir/_deps/gd-imgui-cocos-src/src/backend.cpp.obj" "gcc" "CMakeFiles/ClickHitboxTrail.dir/_deps/gd-imgui-cocos-src/src/backend.cpp.obj.d"
+  "/home/vite/click-hitbox-trail/build-win/_deps/gd-imgui-cocos-src/src/hooks.cpp" "CMakeFiles/ClickHitboxTrail.dir/_deps/gd-imgui-cocos-src/src/hooks.cpp.obj" "gcc" "CMakeFiles/ClickHitboxTrail.dir/_deps/gd-imgui-cocos-src/src/hooks.cpp.obj.d"
+  "/home/vite/click-hitbox-trail/build-win/CMakeFiles/ClickHitboxTrail.dir/cmake_pch.hxx" "CMakeFiles/ClickHitboxTrail.dir/_deps/gd-imgui-cocos-src/src/hooks.cpp.obj" "gcc" "CMakeFiles/ClickHitboxTrail.dir/_deps/gd-imgui-cocos-src/src/hooks.cpp.obj.d"
+  "/home/vite/click-hitbox-trail/build-win/_deps/imgui-src/imgui.cpp" "CMakeFiles/ClickHitboxTrail.dir/_deps/imgui-src/imgui.cpp.obj" "gcc" "CMakeFiles/ClickHitboxTrail.dir/_deps/imgui-src/imgui.cpp.obj.d"
+  "/home/vite/click-hitbox-trail/build-win/CMakeFiles/ClickHitboxTrail.dir/cmake_pch.hxx" "CMakeFiles/ClickHitboxTrail.dir/_deps/imgui-src/imgui.cpp.obj" "gcc" "CMakeFiles/ClickHitboxTrail.dir/_deps/imgui-src/imgui.cpp.obj.d"
+  "/home/vite/click-hitbox-trail/build-win/_deps/imgui-src/imgui_demo.cpp" "CMakeFiles/ClickHitboxTrail.dir/_deps/imgui-src/imgui_demo.cpp.obj" "gcc" "CMakeFiles/ClickHitboxTrail.dir/_deps/imgui-src/imgui_demo.cpp.obj.d"
+  "/home/vite/click-hitbox-trail/build-win/CMakeFiles/ClickHitboxTrail.dir/cmake_pch.hxx" "CMakeFiles/ClickHitboxTrail.dir/_deps/imgui-src/imgui_demo.cpp.obj" "gcc" "CMakeFiles/ClickHitboxTrail.dir/_deps/imgui-src/imgui_demo.cpp.obj.d"
+  "/home/vite/click-hitbox-trail/build-win/_deps/imgui-src/imgui_draw.cpp" "CMakeFiles/ClickHitboxTrail.dir/_deps/imgui-src/imgui_draw.cpp.obj" "gcc" "CMakeFiles/ClickHitboxTrail.dir/_deps/imgui-src/imgui_draw.cpp.obj.d"
+  "/home/vite/click-hitbox-trail/build-win/CMakeFiles/ClickHitboxTrail.dir/cmake_pch.hxx" "CMakeFiles/ClickHitboxTrail.dir/_deps/imgui-src/imgui_draw.cpp.obj" "gcc" "CMakeFiles/ClickHitboxTrail.dir/_deps/imgui-src/imgui_draw.cpp.obj.d"
+  "/home/vite/click-hitbox-trail/build-win/_deps/imgui-src/imgui_tables.cpp" "CMakeFiles/ClickHitboxTrail.dir/_deps/imgui-src/imgui_tables.cpp.obj" "gcc" "CMakeFiles/ClickHitboxTrail.dir/_deps/imgui-src/imgui_tables.cpp.obj.d"
+  "/home/vite/click-hitbox-trail/build-win/CMakeFiles/ClickHitboxTrail.dir/cmake_pch.hxx" "CMakeFiles/ClickHitboxTrail.dir/_deps/imgui-src/imgui_tables.cpp.obj" "gcc" "CMakeFiles/ClickHitboxTrail.dir/_deps/imgui-src/imgui_tables.cpp.obj.d"
+  "/home/vite/click-hitbox-trail/build-win/_deps/imgui-src/imgui_widgets.cpp" "CMakeFiles/ClickHitboxTrail.dir/_deps/imgui-src/imgui_widgets.cpp.obj" "gcc" "CMakeFiles/ClickHitboxTrail.dir/_deps/imgui-src/imgui_widgets.cpp.obj.d"
+  "/home/vite/click-hitbox-trail/build-win/CMakeFiles/ClickHitboxTrail.dir/cmake_pch.hxx" "CMakeFiles/ClickHitboxTrail.dir/_deps/imgui-src/imgui_widgets.cpp.obj" "gcc" "CMakeFiles/ClickHitboxTrail.dir/_deps/imgui-src/imgui_widgets.cpp.obj.d"
+  "/home/vite/click-hitbox-trail/build-win/_deps/imgui-src/misc/cpp/imgui_stdlib.cpp" "CMakeFiles/ClickHitboxTrail.dir/_deps/imgui-src/misc/cpp/imgui_stdlib.cpp.obj" "gcc" "CMakeFiles/ClickHitboxTrail.dir/_deps/imgui-src/misc/cpp/imgui_stdlib.cpp.obj.d"
+  "/home/vite/click-hitbox-trail/build-win/CMakeFiles/ClickHitboxTrail.dir/cmake_pch.hxx" "CMakeFiles/ClickHitboxTrail.dir/_deps/imgui-src/misc/cpp/imgui_stdlib.cpp.obj" "gcc" "CMakeFiles/ClickHitboxTrail.dir/_deps/imgui-src/misc/cpp/imgui_stdlib.cpp.obj.d"
   "/home/vite/click-hitbox-trail/build-win/CMakeFiles/ClickHitboxTrail.dir/cmake_pch.hxx.cxx" "CMakeFiles/ClickHitboxTrail.dir/cmake_pch.hxx.pch" "gcc" "CMakeFiles/ClickHitboxTrail.dir/cmake_pch.hxx.pch.d"
   "/home/vite/click-hitbox-trail/build-win/CMakeFiles/ClickHitboxTrail.dir/cmake_pch.hxx" "CMakeFiles/ClickHitboxTrail.dir/cmake_pch.hxx.pch" "gcc" "CMakeFiles/ClickHitboxTrail.dir/cmake_pch.hxx.pch.d"
   "/home/vite/hitbox-trail-sdk/entry.cpp" "CMakeFiles/ClickHitboxTrail.dir/home/vite/hitbox-trail-sdk/entry.cpp.obj" "gcc" "CMakeFiles/ClickHitboxTrail.dir/home/vite/hitbox-trail-sdk/entry.cpp.obj.d"

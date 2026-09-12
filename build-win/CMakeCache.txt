@@ -70,7 +70,7 @@ CMAKE_AR:FILEPATH=/usr/bin/llvm-ar
 
 //Choose the type of build, options are: None Debug Release RelWithDebInfo
 // MinSizeRel ...
-CMAKE_BUILD_TYPE:STRING=RelWithDebInfo
+CMAKE_BUILD_TYPE:STRING=Release
 
 //Enable/Disable color output during build.
 CMAKE_COLOR_MAKEFILE:BOOL=ON
@@ -336,7 +336,7 @@ CMAKE_STRIP:FILEPATH=/usr/bin/llvm-strip
 CMAKE_TAPI:FILEPATH=CMAKE_TAPI-NOTFOUND
 
 //No help, variable specified on the command line.
-CMAKE_TOOLCHAIN_FILE:UNINITIALIZED=/home/vite/.local/share/Geode/cross-tools/clang-msvc-sdk/clang-msvc.cmake
+CMAKE_TOOLCHAIN_FILE:FILEPATH=/home/vite/.local/share/Geode/cross-tools/clang-msvc-sdk/clang-msvc.cmake
 
 //If this value is on, makefiles will be generated without the
 // .SILENT directive, and all commands will be echoed to the console
@@ -421,6 +421,14 @@ FETCHCONTENT_SOURCE_DIR_ASP2:PATH=
 FETCHCONTENT_SOURCE_DIR_FMT:PATH=
 
 //When not empty, overrides where to find pre-populated content
+// for gd-imgui-cocos
+FETCHCONTENT_SOURCE_DIR_GD-IMGUI-COCOS:PATH=
+
+//When not empty, overrides where to find pre-populated content
+// for imgui
+FETCHCONTENT_SOURCE_DIR_IMGUI:PATH=
+
+//When not empty, overrides where to find pre-populated content
 // for json
 FETCHCONTENT_SOURCE_DIR_JSON:PATH=
 
@@ -447,6 +455,12 @@ FETCHCONTENT_UPDATES_DISCONNECTED_ASP2:BOOL=OFF
 
 //Enables UPDATE_DISCONNECTED behavior just for population of fmt
 FETCHCONTENT_UPDATES_DISCONNECTED_FMT:BOOL=OFF
+
+//Enables UPDATE_DISCONNECTED behavior just for population of gd-imgui-cocos
+FETCHCONTENT_UPDATES_DISCONNECTED_GD-IMGUI-COCOS:BOOL=OFF
+
+//Enables UPDATE_DISCONNECTED behavior just for population of imgui
+FETCHCONTENT_UPDATES_DISCONNECTED_IMGUI:BOOL=OFF
 
 //Enables UPDATE_DISCONNECTED behavior just for population of json
 FETCHCONTENT_UPDATES_DISCONNECTED_JSON:BOOL=OFF
@@ -559,8 +573,18 @@ GeodeResult_IS_TOP_LEVEL:STATIC=OFF
 //Value Computed by CMake
 GeodeResult_SOURCE_DIR:STATIC=/home/vite/click-hitbox-trail/build-win/_deps/result-src
 
+//If imgui is already provided externally
+HAS_IMGUI:BOOL=OFF
+
 //No help, variable specified on the command line.
-HOST_ARCH:UNINITIALIZED=x64
+HOST_ARCH:UNINITIALIZED=x86_64
+
+//Hook swapBuffers early, as to show imgui under mod menus. Disable
+// this if you're a mod menu
+IMGUI_HOOK_EARLY:BOOL=ON
+
+//What imgui version to download and use
+IMGUI_VERSION:STRING=v1.92.4
 
 //Path to a program.
 LLD_LINK_PATH:FILEPATH=/usr/bin/lld-link
@@ -643,6 +667,15 @@ geode-sdk_IS_TOP_LEVEL:STATIC=OFF
 
 //Value Computed by CMake
 geode-sdk_SOURCE_DIR:STATIC=/home/vite/hitbox-trail-sdk
+
+//Value Computed by CMake
+imgui-cocos_BINARY_DIR:STATIC=/home/vite/click-hitbox-trail/build-win/_deps/gd-imgui-cocos-build
+
+//Value Computed by CMake
+imgui-cocos_IS_TOP_LEVEL:STATIC=OFF
+
+//Value Computed by CMake
+imgui-cocos_SOURCE_DIR:STATIC=/home/vite/click-hitbox-trail/build-win/_deps/gd-imgui-cocos-src
 
 //Value Computed by CMake
 mat-json_BINARY_DIR:STATIC=/home/vite/click-hitbox-trail/build-win/_deps/json-build
@@ -809,7 +842,7 @@ CMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_NM
 CMAKE_NM-ADVANCED:INTERNAL=1
 //number of local generators
-CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=10
+CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=11
 //ADVANCED property for variable: CMAKE_OBJCOPY
 CMAKE_OBJCOPY-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_OBJDUMP
@@ -876,7 +909,7 @@ CPM_DIRECTORY:INTERNAL=/home/vite/click-hitbox-trail/build-win/cmake
 CPM_DRY_RUN:INTERNAL=OFF
 CPM_FILE:INTERNAL=/home/vite/click-hitbox-trail/build-win/cmake/CPM_0.42.1.cmake
 CPM_INDENT:INTERNAL=CPM:
-CPM_PACKAGES:INTERNAL=bindings;result;json;nontype_functional;fmt;asp2;arc;TulipHook
+CPM_PACKAGES:INTERNAL=bindings;result;json;nontype_functional;fmt;asp2;arc;TulipHook;gd-imgui-cocos;imgui
 CPM_PACKAGE_LOCK_FILE:INTERNAL=/home/vite/click-hitbox-trail/build-win/cpm-package-lock.cmake
 CPM_PACKAGE_TulipHook_BINARY_DIR:INTERNAL=/home/vite/click-hitbox-trail/build-win/_deps/tuliphook-build
 CPM_PACKAGE_TulipHook_SOURCE_DIR:INTERNAL=/home/vite/click-hitbox-trail/build-win/_deps/tuliphook-src
@@ -893,6 +926,12 @@ CPM_PACKAGE_bindings_VERSION:INTERNAL=
 CPM_PACKAGE_fmt_BINARY_DIR:INTERNAL=/home/vite/click-hitbox-trail/build-win/_deps/fmt-build
 CPM_PACKAGE_fmt_SOURCE_DIR:INTERNAL=/home/vite/click-hitbox-trail/build-win/_deps/fmt-src
 CPM_PACKAGE_fmt_VERSION:INTERNAL=5
+CPM_PACKAGE_gd-imgui-cocos_BINARY_DIR:INTERNAL=/home/vite/click-hitbox-trail/build-win/_deps/gd-imgui-cocos-build
+CPM_PACKAGE_gd-imgui-cocos_SOURCE_DIR:INTERNAL=/home/vite/click-hitbox-trail/build-win/_deps/gd-imgui-cocos-src
+CPM_PACKAGE_gd-imgui-cocos_VERSION:INTERNAL=
+CPM_PACKAGE_imgui_BINARY_DIR:INTERNAL=/home/vite/click-hitbox-trail/build-win/_deps/imgui-build
+CPM_PACKAGE_imgui_SOURCE_DIR:INTERNAL=/home/vite/click-hitbox-trail/build-win/_deps/imgui-src
+CPM_PACKAGE_imgui_VERSION:INTERNAL=1.92.4
 CPM_PACKAGE_json_BINARY_DIR:INTERNAL=/home/vite/click-hitbox-trail/build-win/_deps/json-build
 CPM_PACKAGE_json_SOURCE_DIR:INTERNAL=/home/vite/click-hitbox-trail/build-win/_deps/json-src
 CPM_PACKAGE_json_VERSION:INTERNAL=3.3.1

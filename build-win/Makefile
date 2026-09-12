@@ -176,6 +176,19 @@ ClickHitboxTrail/fast:
 .PHONY : ClickHitboxTrail/fast
 
 #=============================================================================
+# Target rules for targets named ClickHitboxTrailBuildStamp
+
+# Build rule for target.
+ClickHitboxTrailBuildStamp: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 ClickHitboxTrailBuildStamp
+.PHONY : ClickHitboxTrailBuildStamp
+
+# fast build rule for target.
+ClickHitboxTrailBuildStamp/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ClickHitboxTrailBuildStamp.dir/build.make CMakeFiles/ClickHitboxTrailBuildStamp.dir/build
+.PHONY : ClickHitboxTrailBuildStamp/fast
+
+#=============================================================================
 # Target rules for targets named ClickHitboxTrail_PACKAGE
 
 # Build rule for target.
@@ -604,6 +617,198 @@ GeodeBindings/fast:
 	$(MAKE) $(MAKESILENT) -f bindings/CMakeFiles/GeodeBindings.dir/build.make bindings/CMakeFiles/GeodeBindings.dir/build
 .PHONY : GeodeBindings/fast
 
+_deps/gd-imgui-cocos-src/src/backend.obj: _deps/gd-imgui-cocos-src/src/backend.cpp.obj
+.PHONY : _deps/gd-imgui-cocos-src/src/backend.obj
+
+# target to build an object file
+_deps/gd-imgui-cocos-src/src/backend.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ClickHitboxTrail.dir/build.make CMakeFiles/ClickHitboxTrail.dir/_deps/gd-imgui-cocos-src/src/backend.cpp.obj
+.PHONY : _deps/gd-imgui-cocos-src/src/backend.cpp.obj
+
+_deps/gd-imgui-cocos-src/src/backend.i: _deps/gd-imgui-cocos-src/src/backend.cpp.i
+.PHONY : _deps/gd-imgui-cocos-src/src/backend.i
+
+# target to preprocess a source file
+_deps/gd-imgui-cocos-src/src/backend.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ClickHitboxTrail.dir/build.make CMakeFiles/ClickHitboxTrail.dir/_deps/gd-imgui-cocos-src/src/backend.cpp.i
+.PHONY : _deps/gd-imgui-cocos-src/src/backend.cpp.i
+
+_deps/gd-imgui-cocos-src/src/backend.s: _deps/gd-imgui-cocos-src/src/backend.cpp.s
+.PHONY : _deps/gd-imgui-cocos-src/src/backend.s
+
+# target to generate assembly for a file
+_deps/gd-imgui-cocos-src/src/backend.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ClickHitboxTrail.dir/build.make CMakeFiles/ClickHitboxTrail.dir/_deps/gd-imgui-cocos-src/src/backend.cpp.s
+.PHONY : _deps/gd-imgui-cocos-src/src/backend.cpp.s
+
+_deps/gd-imgui-cocos-src/src/hooks.obj: _deps/gd-imgui-cocos-src/src/hooks.cpp.obj
+.PHONY : _deps/gd-imgui-cocos-src/src/hooks.obj
+
+# target to build an object file
+_deps/gd-imgui-cocos-src/src/hooks.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ClickHitboxTrail.dir/build.make CMakeFiles/ClickHitboxTrail.dir/_deps/gd-imgui-cocos-src/src/hooks.cpp.obj
+.PHONY : _deps/gd-imgui-cocos-src/src/hooks.cpp.obj
+
+_deps/gd-imgui-cocos-src/src/hooks.i: _deps/gd-imgui-cocos-src/src/hooks.cpp.i
+.PHONY : _deps/gd-imgui-cocos-src/src/hooks.i
+
+# target to preprocess a source file
+_deps/gd-imgui-cocos-src/src/hooks.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ClickHitboxTrail.dir/build.make CMakeFiles/ClickHitboxTrail.dir/_deps/gd-imgui-cocos-src/src/hooks.cpp.i
+.PHONY : _deps/gd-imgui-cocos-src/src/hooks.cpp.i
+
+_deps/gd-imgui-cocos-src/src/hooks.s: _deps/gd-imgui-cocos-src/src/hooks.cpp.s
+.PHONY : _deps/gd-imgui-cocos-src/src/hooks.s
+
+# target to generate assembly for a file
+_deps/gd-imgui-cocos-src/src/hooks.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ClickHitboxTrail.dir/build.make CMakeFiles/ClickHitboxTrail.dir/_deps/gd-imgui-cocos-src/src/hooks.cpp.s
+.PHONY : _deps/gd-imgui-cocos-src/src/hooks.cpp.s
+
+_deps/imgui-src/imgui.obj: _deps/imgui-src/imgui.cpp.obj
+.PHONY : _deps/imgui-src/imgui.obj
+
+# target to build an object file
+_deps/imgui-src/imgui.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ClickHitboxTrail.dir/build.make CMakeFiles/ClickHitboxTrail.dir/_deps/imgui-src/imgui.cpp.obj
+.PHONY : _deps/imgui-src/imgui.cpp.obj
+
+_deps/imgui-src/imgui.i: _deps/imgui-src/imgui.cpp.i
+.PHONY : _deps/imgui-src/imgui.i
+
+# target to preprocess a source file
+_deps/imgui-src/imgui.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ClickHitboxTrail.dir/build.make CMakeFiles/ClickHitboxTrail.dir/_deps/imgui-src/imgui.cpp.i
+.PHONY : _deps/imgui-src/imgui.cpp.i
+
+_deps/imgui-src/imgui.s: _deps/imgui-src/imgui.cpp.s
+.PHONY : _deps/imgui-src/imgui.s
+
+# target to generate assembly for a file
+_deps/imgui-src/imgui.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ClickHitboxTrail.dir/build.make CMakeFiles/ClickHitboxTrail.dir/_deps/imgui-src/imgui.cpp.s
+.PHONY : _deps/imgui-src/imgui.cpp.s
+
+_deps/imgui-src/imgui_demo.obj: _deps/imgui-src/imgui_demo.cpp.obj
+.PHONY : _deps/imgui-src/imgui_demo.obj
+
+# target to build an object file
+_deps/imgui-src/imgui_demo.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ClickHitboxTrail.dir/build.make CMakeFiles/ClickHitboxTrail.dir/_deps/imgui-src/imgui_demo.cpp.obj
+.PHONY : _deps/imgui-src/imgui_demo.cpp.obj
+
+_deps/imgui-src/imgui_demo.i: _deps/imgui-src/imgui_demo.cpp.i
+.PHONY : _deps/imgui-src/imgui_demo.i
+
+# target to preprocess a source file
+_deps/imgui-src/imgui_demo.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ClickHitboxTrail.dir/build.make CMakeFiles/ClickHitboxTrail.dir/_deps/imgui-src/imgui_demo.cpp.i
+.PHONY : _deps/imgui-src/imgui_demo.cpp.i
+
+_deps/imgui-src/imgui_demo.s: _deps/imgui-src/imgui_demo.cpp.s
+.PHONY : _deps/imgui-src/imgui_demo.s
+
+# target to generate assembly for a file
+_deps/imgui-src/imgui_demo.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ClickHitboxTrail.dir/build.make CMakeFiles/ClickHitboxTrail.dir/_deps/imgui-src/imgui_demo.cpp.s
+.PHONY : _deps/imgui-src/imgui_demo.cpp.s
+
+_deps/imgui-src/imgui_draw.obj: _deps/imgui-src/imgui_draw.cpp.obj
+.PHONY : _deps/imgui-src/imgui_draw.obj
+
+# target to build an object file
+_deps/imgui-src/imgui_draw.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ClickHitboxTrail.dir/build.make CMakeFiles/ClickHitboxTrail.dir/_deps/imgui-src/imgui_draw.cpp.obj
+.PHONY : _deps/imgui-src/imgui_draw.cpp.obj
+
+_deps/imgui-src/imgui_draw.i: _deps/imgui-src/imgui_draw.cpp.i
+.PHONY : _deps/imgui-src/imgui_draw.i
+
+# target to preprocess a source file
+_deps/imgui-src/imgui_draw.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ClickHitboxTrail.dir/build.make CMakeFiles/ClickHitboxTrail.dir/_deps/imgui-src/imgui_draw.cpp.i
+.PHONY : _deps/imgui-src/imgui_draw.cpp.i
+
+_deps/imgui-src/imgui_draw.s: _deps/imgui-src/imgui_draw.cpp.s
+.PHONY : _deps/imgui-src/imgui_draw.s
+
+# target to generate assembly for a file
+_deps/imgui-src/imgui_draw.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ClickHitboxTrail.dir/build.make CMakeFiles/ClickHitboxTrail.dir/_deps/imgui-src/imgui_draw.cpp.s
+.PHONY : _deps/imgui-src/imgui_draw.cpp.s
+
+_deps/imgui-src/imgui_tables.obj: _deps/imgui-src/imgui_tables.cpp.obj
+.PHONY : _deps/imgui-src/imgui_tables.obj
+
+# target to build an object file
+_deps/imgui-src/imgui_tables.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ClickHitboxTrail.dir/build.make CMakeFiles/ClickHitboxTrail.dir/_deps/imgui-src/imgui_tables.cpp.obj
+.PHONY : _deps/imgui-src/imgui_tables.cpp.obj
+
+_deps/imgui-src/imgui_tables.i: _deps/imgui-src/imgui_tables.cpp.i
+.PHONY : _deps/imgui-src/imgui_tables.i
+
+# target to preprocess a source file
+_deps/imgui-src/imgui_tables.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ClickHitboxTrail.dir/build.make CMakeFiles/ClickHitboxTrail.dir/_deps/imgui-src/imgui_tables.cpp.i
+.PHONY : _deps/imgui-src/imgui_tables.cpp.i
+
+_deps/imgui-src/imgui_tables.s: _deps/imgui-src/imgui_tables.cpp.s
+.PHONY : _deps/imgui-src/imgui_tables.s
+
+# target to generate assembly for a file
+_deps/imgui-src/imgui_tables.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ClickHitboxTrail.dir/build.make CMakeFiles/ClickHitboxTrail.dir/_deps/imgui-src/imgui_tables.cpp.s
+.PHONY : _deps/imgui-src/imgui_tables.cpp.s
+
+_deps/imgui-src/imgui_widgets.obj: _deps/imgui-src/imgui_widgets.cpp.obj
+.PHONY : _deps/imgui-src/imgui_widgets.obj
+
+# target to build an object file
+_deps/imgui-src/imgui_widgets.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ClickHitboxTrail.dir/build.make CMakeFiles/ClickHitboxTrail.dir/_deps/imgui-src/imgui_widgets.cpp.obj
+.PHONY : _deps/imgui-src/imgui_widgets.cpp.obj
+
+_deps/imgui-src/imgui_widgets.i: _deps/imgui-src/imgui_widgets.cpp.i
+.PHONY : _deps/imgui-src/imgui_widgets.i
+
+# target to preprocess a source file
+_deps/imgui-src/imgui_widgets.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ClickHitboxTrail.dir/build.make CMakeFiles/ClickHitboxTrail.dir/_deps/imgui-src/imgui_widgets.cpp.i
+.PHONY : _deps/imgui-src/imgui_widgets.cpp.i
+
+_deps/imgui-src/imgui_widgets.s: _deps/imgui-src/imgui_widgets.cpp.s
+.PHONY : _deps/imgui-src/imgui_widgets.s
+
+# target to generate assembly for a file
+_deps/imgui-src/imgui_widgets.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ClickHitboxTrail.dir/build.make CMakeFiles/ClickHitboxTrail.dir/_deps/imgui-src/imgui_widgets.cpp.s
+.PHONY : _deps/imgui-src/imgui_widgets.cpp.s
+
+_deps/imgui-src/misc/cpp/imgui_stdlib.obj: _deps/imgui-src/misc/cpp/imgui_stdlib.cpp.obj
+.PHONY : _deps/imgui-src/misc/cpp/imgui_stdlib.obj
+
+# target to build an object file
+_deps/imgui-src/misc/cpp/imgui_stdlib.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ClickHitboxTrail.dir/build.make CMakeFiles/ClickHitboxTrail.dir/_deps/imgui-src/misc/cpp/imgui_stdlib.cpp.obj
+.PHONY : _deps/imgui-src/misc/cpp/imgui_stdlib.cpp.obj
+
+_deps/imgui-src/misc/cpp/imgui_stdlib.i: _deps/imgui-src/misc/cpp/imgui_stdlib.cpp.i
+.PHONY : _deps/imgui-src/misc/cpp/imgui_stdlib.i
+
+# target to preprocess a source file
+_deps/imgui-src/misc/cpp/imgui_stdlib.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ClickHitboxTrail.dir/build.make CMakeFiles/ClickHitboxTrail.dir/_deps/imgui-src/misc/cpp/imgui_stdlib.cpp.i
+.PHONY : _deps/imgui-src/misc/cpp/imgui_stdlib.cpp.i
+
+_deps/imgui-src/misc/cpp/imgui_stdlib.s: _deps/imgui-src/misc/cpp/imgui_stdlib.cpp.s
+.PHONY : _deps/imgui-src/misc/cpp/imgui_stdlib.s
+
+# target to generate assembly for a file
+_deps/imgui-src/misc/cpp/imgui_stdlib.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ClickHitboxTrail.dir/build.make CMakeFiles/ClickHitboxTrail.dir/_deps/imgui-src/misc/cpp/imgui_stdlib.cpp.s
+.PHONY : _deps/imgui-src/misc/cpp/imgui_stdlib.cpp.s
+
 # target to build an object file
 cmake_pch.hxx.pch:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/ClickHitboxTrail.dir/build.make CMakeFiles/ClickHitboxTrail.dir/cmake_pch.hxx.pch
@@ -679,6 +884,7 @@ help:
 	@echo "... install/strip"
 	@echo "... list_install_components"
 	@echo "... rebuild_cache"
+	@echo "... ClickHitboxTrailBuildStamp"
 	@echo "... ClickHitboxTrail_PACKAGE"
 	@echo "... Continuous"
 	@echo "... ContinuousBuild"
@@ -713,6 +919,30 @@ help:
 	@echo "... arc"
 	@echo "... asp"
 	@echo "... fmt"
+	@echo "... _deps/gd-imgui-cocos-src/src/backend.obj"
+	@echo "... _deps/gd-imgui-cocos-src/src/backend.i"
+	@echo "... _deps/gd-imgui-cocos-src/src/backend.s"
+	@echo "... _deps/gd-imgui-cocos-src/src/hooks.obj"
+	@echo "... _deps/gd-imgui-cocos-src/src/hooks.i"
+	@echo "... _deps/gd-imgui-cocos-src/src/hooks.s"
+	@echo "... _deps/imgui-src/imgui.obj"
+	@echo "... _deps/imgui-src/imgui.i"
+	@echo "... _deps/imgui-src/imgui.s"
+	@echo "... _deps/imgui-src/imgui_demo.obj"
+	@echo "... _deps/imgui-src/imgui_demo.i"
+	@echo "... _deps/imgui-src/imgui_demo.s"
+	@echo "... _deps/imgui-src/imgui_draw.obj"
+	@echo "... _deps/imgui-src/imgui_draw.i"
+	@echo "... _deps/imgui-src/imgui_draw.s"
+	@echo "... _deps/imgui-src/imgui_tables.obj"
+	@echo "... _deps/imgui-src/imgui_tables.i"
+	@echo "... _deps/imgui-src/imgui_tables.s"
+	@echo "... _deps/imgui-src/imgui_widgets.obj"
+	@echo "... _deps/imgui-src/imgui_widgets.i"
+	@echo "... _deps/imgui-src/imgui_widgets.s"
+	@echo "... _deps/imgui-src/misc/cpp/imgui_stdlib.obj"
+	@echo "... _deps/imgui-src/misc/cpp/imgui_stdlib.i"
+	@echo "... _deps/imgui-src/misc/cpp/imgui_stdlib.s"
 	@echo "... cmake_pch.hxx.pch"
 	@echo "... cmake_pch.hxx.i"
 	@echo "... cmake_pch.hxx.s"

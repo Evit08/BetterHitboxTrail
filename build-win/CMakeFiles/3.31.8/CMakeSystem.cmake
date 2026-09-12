@@ -1,6 +1,6 @@
-set(CMAKE_HOST_SYSTEM "Linux-7.1.8-1-cachyos")
+set(CMAKE_HOST_SYSTEM "Linux-7.2.2-1-cachyos")
 set(CMAKE_HOST_SYSTEM_NAME "Linux")
-set(CMAKE_HOST_SYSTEM_VERSION "7.1.8-1-cachyos")
+set(CMAKE_HOST_SYSTEM_VERSION "7.2.2-1-cachyos")
 set(CMAKE_HOST_SYSTEM_PROCESSOR "x86_64")
 
 include("/home/vite/.local/share/Geode/cross-tools/clang-msvc-sdk/clang-msvc.cmake")

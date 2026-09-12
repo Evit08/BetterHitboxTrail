@@ -1492,6 +1492,14 @@ CMakeFiles/ClickHitboxTrail.dir/src/main.cpp.obj: \
   /home/vite/hitbox-trail-sdk/loader/include/Geode/modify/IDManager.hpp \
   /home/vite/click-hitbox-trail/src/main.cpp \
   /home/vite/click-hitbox-trail/build-win/bindings/bindings/Geode/modify/GJBaseGameLayer.hpp \
+  /home/vite/click-hitbox-trail/build-win/bindings/bindings/Geode/modify/LevelEditorLayer.hpp \
   /home/vite/hitbox-trail-sdk/loader/include/Geode/utils/file.hpp \
   /home/vite/click-hitbox-trail/build-win/geode-deps/eclipse.eclipse-menu/include/modules.hpp \
-  /home/vite/click-hitbox-trail/build-win/geode-deps/eclipse.eclipse-menu/include/events.hpp
+  /home/vite/click-hitbox-trail/build-win/geode-deps/eclipse.eclipse-menu/include/events.hpp \
+  /home/vite/click-hitbox-trail/build-win/geode-deps/eclipse.eclipse-menu/include/config.hpp \
+  /home/vite/click-hitbox-trail/build-win/_deps/gd-imgui-cocos-src/include/imgui-cocos.hpp \
+  /home/vite/hitbox-trail-sdk/loader/include/Geode/cocos/include/cocos2d.h \
+  /home/vite/click-hitbox-trail/build-win/_deps/imgui-src/imgui.h \
+  /home/vite/click-hitbox-trail/build-win/_deps/imgui-src/imconfig.h \
+  /home/vite/.local/share/Geode/cross-tools/splat/crt/include/stdarg.h \
+  /home/vite/.local/share/Geode/cross-tools/splat/sdk/include/ucrt/stddef.h
