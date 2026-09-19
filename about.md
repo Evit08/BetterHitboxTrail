@@ -4,7 +4,7 @@ Better Hitbox Trail adds an in-game settings popup for a more customizable hitbo
 
 ## Usage
 
-Open the in-game settings with the configured keybind (default **F7**) for quick tweaks. Per-hitbox and per-game-mode opacity, color, and thickness are configured separately in the mod's Geode settings page.
+Open the in-game settings with the configured keybind(default **F7**) for quick tweaks. Per-hitbox and per-game-mode opacity, color, and thickness are configured separately in the mod's Geode settings page.
 
 ## Features
 
@@ -26,9 +26,11 @@ Open the in-game settings with the configured keybind (default **F7**) for quick
 
 All popup settings take effect immediately, even while paused.
 
+Automatically displays hitbox trails when **Show Hitbox** is enabled in other mod menus (QOLMod, MegaHack, Eclipse).
+
 ## Notes
 
-Please turn off any built-in Hitbox Trail feature in other mods (QOLMod, MegaHack, Eclipse) to prevent overlap.
+Please turn off any built-in **Hitbox Trail** feature in other mod menus to prevent overlap.
 
 If you also use MegaHack, turn off **Player** under MegaHack's Show Hitboxes sub-settings.
 
