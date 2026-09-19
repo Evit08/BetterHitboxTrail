@@ -1,28 +1,22 @@
 {
   "geode": "5.9.0",
   "gd": {
-    "win": "2.2081"
+    "win": "2.2081",
+    "mac": "2.2081"
   },
   "id": "evit.hitbox-trail",
-  "name": "Hitbox Trail",
+  "name": "Better Hitbox Trail",
   "version": "v1.0.0",
   "developer": "Evit",
-  "description": "more options and better hitbox trails",
-  "dependencies": {
-    "eclipse.eclipse-menu": {
-      "version": ">=1.9.4",
-      "required": false
-    }
-  },
+  "description": "more options and better hitbox trail",
   "settings": {
     "open-settings": {
       "type": "keybind",
       "name": "Open In-Game Settings",
-      "description": "Open the Click Hitbox Trail settings popup while playing or editing.",
       "default": "F7",
       "category": "gameplay"
     },
-    "stored-positions": {
+    "trail-length": {
       "type": "int",
       "name": "Trail Length",
       "description": "Number of recent hitbox positions to retain (maximum 1024).",
@@ -36,8 +30,8 @@
     },
     "trail-capture-rate": {
       "type": "float",
-      "name": "Trail Capture Rate (Hz)",
-      "description": "Number of regular (Hold/None) hitbox positions recorded per second. Click/release positions are never throttled by this and always get recorded. Set to 0 to record no regular positions at all, leaving only the click/release hitboxes visible.",
+      "name": "Trail Capture Rate",
+      "description": "Number of regular hitbox positions recorded per second. Clicks and releases are recorded regardless of this setting.",
       "default": 240,
       "min": 0,
       "max": 240,
@@ -46,58 +40,100 @@
         "arrows": true
       }
     },
-    "circle-hitbox-color-clicks": {
+    "batch-layer-overlap": {
       "type": "bool",
-      "name": "Circle Hitbox Color Clicks",
-      "description": "Color the circular hitbox guide by press/release/hold too, using the same Click/Release/Hold Color settings as the main trail. Only applies while Color Clicks is also on.",
-      "default": true
-    },
-    "rotation-color-clicks": {
-      "type": "bool",
-      "name": "Rotation Color Clicks",
-      "description": "Color the rotated player outline by press/release/hold too, using the same Click/Release/Hold Color settings as the main trail. Only applies while Color Clicks is also on.",
-      "default": true
+      "name": "Batch Layer Overlap",
+      "description": "Draws hitbox outlines grouped by layer type across the whole trail instead of the default per-position overlap.",
+      "default": false
     },
     "color-category": {
       "name": "Color",
       "type": "title"
     },
+    "blue-hitbox-color-clicks": {
+      "type": "bool",
+      "name": "Blue Hitbox Color Clicks",
+      "description": "Applies the Click and Release colors to the blue hitbox when clicked. (Follows the 'Color Clicks' and 'Color when Held' popup settings.)",
+      "default": false
+    },
+    "circle-hitbox-color-clicks": {
+      "type": "bool",
+      "name": "Circle Hitbox Color Clicks",
+      "description": "Applies the Click and Release colors to the circle hitbox when clicked. (Follows the 'Color Clicks' and 'Color when Held' popup settings.)",
+      "default": true
+    },
+    "rotation-color-clicks": {
+      "type": "bool",
+      "name": "Rotation Color Clicks",
+      "description": "Applies the Click and Release colors to the rotation hitbox when clicked. (Follows the 'Color Clicks' and 'Color when Held' popup settings.)",
+      "default": true
+    },
     "click-color": {
       "type": "color",
       "name": "Click Color",
-      "default": [0, 255, 0]
+      "default": [
+        0,
+        255,
+        0
+      ]
     },
     "release-color": {
       "type": "color",
       "name": "Release Color",
-      "default": [0, 255, 255]
+      "default": [
+        0,
+        255,
+        255
+      ]
     },
     "hold-color": {
       "type": "color",
       "name": "Hold Color",
-      "default": [0, 210, 0]
+      "default": [
+        0,
+        208,
+        0
+      ]
     },
-    "hitbox-trail-color": {
+    "square-hitbox-color": {
       "type": "color",
       "name": "Square Hitbox Color",
-      "description": "Base color of the hitbox trail outline. Overridden per press/release/hold while Color Clicks is on.",
-      "default": [255, 0, 0]
+      "description": "Color of the main square hitbox outline.",
+      "default": [
+        255,
+        0,
+        0
+      ]
     },
     "blue-hitbox-color": {
       "type": "color",
       "name": "Blue Hitbox Color",
-      "description": "Color of the small blue collision hitbox.",
-      "default": [0, 0, 255]
+      "description": "Color of the internal blue hitbox outline.",
+      "default": [
+        0,
+        0,
+        255
+      ]
     },
     "circle-hitbox-color": {
       "type": "color",
       "name": "Circle Hitbox Color",
-      "default": [178, 0, 0]
+      "description": "Color of the circle hitbox outline.",
+      "default": [
+        178,
+        0,
+        0
+      ]
     },
     "player-rotation-color": {
       "type": "color",
       "name": "Rotation Hitbox Color",
-      "default": [178, 0, 0]
+      "description": "Color of the rotation hitbox outline.",
+      "default": [
+        178,
+        0,
+        0
+      ]
     },
     "opacity-category": {
       "name": "Opacity",
@@ -106,65 +142,67 @@
     "opacity": {
       "type": "float",
       "name": "Opacity",
+      "description": "Master opacity multiplier, shown as the single Opacity control in the in-game settings popup. Multiplied with every individual opacity setting below.",
       "default": 1.0,
       "min": 0.0,
       "max": 1.0,
       "control": {
         "slider": true,
-        "arrows": true
+        "arrows": true,
+        "arrow-step": 0.1
       }
     },
     "square-hitbox-opacity": {
       "type": "float",
       "name": "Square Opacity",
-      "description": "Opacity of the main square hitbox outline, multiplied with the main Opacity setting (e.g. Opacity 50% and Square Opacity 80% renders at 40%). Changing the main Opacity in the settings popup never rewrites this value.",
+      "description": "Opacity of the square hitbox outline, multiplied with the main opacity setting.",
       "default": 1.0,
       "min": 0.0,
       "max": 1.0,
       "control": {
         "slider": true,
-        "arrows": true
+        "arrows": true,
+        "arrow-step": 0.1
       }
     },
     "blue-hitbox-opacity": {
       "type": "float",
       "name": "Blue Opacity",
-      "description": "Opacity of the small blue collision hitbox, multiplied with the main Opacity setting (e.g. Opacity 50% and Blue Opacity 80% renders at 40%). Changing the main Opacity in the settings popup never rewrites this value.",
+      "description": "Opacity of the internal blue hitbox, multiplied with the main opacity setting.",
       "default": 1.0,
       "min": 0.0,
       "max": 1.0,
       "control": {
         "slider": true,
-        "arrows": true
+        "arrows": true,
+        "arrow-step": 0.1
       }
     },
     "circle-hitbox-opacity": {
       "type": "float",
       "name": "Circle Opacity",
-      "description": "Opacity of the circular hitbox guide, multiplied with the main Opacity setting (e.g. Opacity 50% and Circle Opacity 80% renders at 40%). Changing the main Opacity in the settings popup never rewrites this value.",
+      "description": "Opacity of the circle hitbox, multiplied with the main opacity setting.",
       "default": 1.0,
       "min": 0.0,
       "max": 1.0,
       "control": {
         "slider": true,
-        "arrows": true
+        "arrows": true,
+        "arrow-step": 0.1
       }
     },
     "player-rotation-opacity": {
       "type": "float",
       "name": "Rotation Hitbox Opacity",
-      "description": "Opacity of the rotated player outline, multiplied with the main Opacity setting (e.g. Opacity 50% and Rotation Hitbox Opacity 80% renders at 40%). Changing the main Opacity in the settings popup never rewrites this value.",
+      "description": "Opacity of the rotation hitbox outline, multiplied with the main opacity setting.",
       "default": 1.0,
       "min": 0.0,
       "max": 1.0,
       "control": {
         "slider": true,
-        "arrows": true
+        "arrows": true,
+        "arrow-step": 0.1
       }
-    },
-    "fill-category": {
-      "name": "Fill",
-      "type": "title"
     },
     "thickness-category": {
       "name": "Thickness",
@@ -173,350 +211,220 @@
     "thickness": {
       "type": "float",
       "name": "Thickness",
-      "description": "Master thickness multiplier, shown as the single Thickness control in the in-game settings popup. Multiplied with every individual thickness setting below (e.g. Thickness 50% and Trail Thickness 1.0 renders at 0.5) - changing this never rewrites any of the individual values below.",
+      "description": "Master thickness multiplier, shown as the single Thickness control in the in-game settings popup. Multiplied with every individual thickness setting below (all thickness settings adjust inward only).",
       "default": 1.0,
       "min": 0.01,
       "max": 2.0,
       "control": {
         "slider": true,
-        "arrows": true
+        "arrows": true,
+        "arrow-step": 0.1
       }
     },
-    "normal-thickness": {
+    "square-hitbox-thickness": {
       "type": "float",
       "name": "Square Thickness",
-      "description": "Square Outline thickness while the player is normal size. Used by every mode except Wave.",
+      "description": "Outline thickness of the square hitbox at normal size (Wave mode has its own separate setting below).",
       "default": 1,
       "min": 0.01,
       "max": 10.0,
       "control": {
         "slider": true,
-        "arrows": true
+        "arrows": true,
+        "arrow-step": 0.1
       }
     },
     "blue-hitbox-thickness": {
       "type": "float",
       "name": "Blue Thickness",
-      "description": "Outline thickness of the small blue collision hitbox.",
+      "description": "Outline thickness of the blue hitbox at normal size (Wave mode has its own separate setting below).",
       "default": 0.9,
       "min": 0.01,
       "max": 10.0,
       "control": {
         "slider": true,
-        "arrows": true
+        "arrows": true,
+        "arrow-step": 0.1
       }
     },
     "circle-hitbox-thickness": {
       "type": "float",
       "name": "Circle Thickness",
-      "description": "Outline thickness of the circular hitbox guide. Used by every mode except Wave.",
-      "default": 0.45,
-      "min": 0.01,
-      "max": 10.0,
-      "control": {
-        "slider": true,
-        "arrows": true
-      }
-    },
-    "player-rotation-thickness": {
-      "type": "float",
-      "name": "Rotation Thickness",
-      "description": "Outline thickness for the rotated player trail while normal size. Used by every mode except Wave.",
-      "default": 1.0,
-      "min": 0.01,
-      "max": 10.0,
-      "control": {
-        "slider": true,
-        "arrows": true
-      }
-    },
-    "mini-thickness": {
-      "type": "float",
-      "name": "Mini Thickness",
-      "description": "Same as Trail Thickness, but used while Mini Mode is on instead. Also not used by Wave - see Wave Mini Thickness below.",
-      "default": 0.9,
-      "min": 0.01,
-      "max": 10.0,
-      "control": {
-        "slider": true,
-        "arrows": true
-      }
-    },
-    "mini-blue-hitbox-thickness": {
-      "type": "float",
-      "name": "Mini Blue Thickness",
-      "description": "Outline thickness of the small blue collision hitbox while mini.",
+      "description": "Outline thickness of the circle hitbox at normal size (Wave mode has its own separate setting below).",
       "default": 0.75,
       "min": 0.01,
       "max": 10.0,
       "control": {
         "slider": true,
-        "arrows": true
+        "arrows": true,
+        "arrow-step": 0.1
+      }
+    },
+    "player-rotation-thickness": {
+      "type": "float",
+      "name": "Rotation Thickness",
+      "description": "Outline thickness of the rotation hitbox at normal size (Wave mode has its own separate setting below).",
+      "default": 1.0,
+      "min": 0.01,
+      "max": 10.0,
+      "control": {
+        "slider": true,
+        "arrows": true,
+        "arrow-step": 0.1
+      }
+    },
+    "mini-square-hitbox-thickness": {
+      "type": "float",
+      "name": "Mini Square Thickness",
+      "description": "Outline thickness of the square hitbox at mini size (Wave mode has its own separate setting below).",
+      "default": 0.9,
+      "min": 0.01,
+      "max": 10.0,
+      "control": {
+        "slider": true,
+        "arrows": true,
+        "arrow-step": 0.1
+      }
+    },
+    "mini-blue-hitbox-thickness": {
+      "type": "float",
+      "name": "Mini Blue Thickness",
+      "description": "Outline thickness of the blue hitbox at mini size (Wave mode has its own separate setting below).",
+      "default": 0.85,
+      "min": 0.01,
+      "max": 10.0,
+      "control": {
+        "slider": true,
+        "arrows": true,
+        "arrow-step": 0.1
       }
     },
     "mini-circle-hitbox-thickness": {
       "type": "float",
       "name": "Mini Circle Thickness",
-      "description": "Same as Circle Thickness, but used while Mini Mode is on instead. Also not used by Wave.",
-      "default": 0.38,
+      "description": "Outline thickness of the circle hitbox at mini size (Wave mode has its own separate setting below).",
+      "default": 0.75,
       "min": 0.01,
       "max": 10.0,
       "control": {
         "slider": true,
-        "arrows": true
+        "arrows": true,
+        "arrow-step": 0.1
       }
     },
     "player-rotation-mini-thickness": {
       "type": "float",
       "name": "Mini Rotation Thickness",
-      "description": "Same as Rotation Thickness, but used while Mini Mode is on instead.",
+      "description": "Outline thickness of the rotation hitbox at mini size (Wave mode has its own separate setting below).",
       "default": 0.8,
       "min": 0.01,
       "max": 10.0,
       "control": {
         "slider": true,
-        "arrows": true
+        "arrows": true,
+        "arrow-step": 0.1
       }
     },
-    "wave-thickness": {
+    "wave-square-hitbox-thickness": {
       "type": "float",
-      "name": "Wave Thickness",
-      "description": "Outline thickness while in Wave mode, at normal size - separate from Trail Thickness since Wave's hitbox is roughly 1/3 the size of the other modes.",
+      "name": "Wave Square Thickness",
+      "description": "Outline thickness of the square hitbox at normal size in wave mode.",
       "default": 0.85,
       "min": 0.01,
       "max": 10.0,
       "control": {
         "slider": true,
-        "arrows": true
+        "arrows": true,
+        "arrow-step": 0.1
       }
     },
     "wave-blue-hitbox-thickness": {
       "type": "float",
       "name": "Wave Blue Thickness",
-      "description": "Outline thickness of the small blue collision hitbox in Wave mode.",
+      "description": "Outline thickness of the blue hitbox at normal size in wave mode.",
       "default": 0.7,
       "min": 0.01,
       "max": 10.0,
       "control": {
         "slider": true,
-        "arrows": true
+        "arrows": true,
+        "arrow-step": 0.1
       }
     },
     "wave-circle-hitbox-thickness": {
       "type": "float",
       "name": "Wave Circle Thickness",
-      "description": "Outline thickness of the circular hitbox guide while in Wave mode, at normal size.",
-      "default": 0.36,
+      "description": "Outline thickness of the circle hitbox at normal size in wave mode.",
+      "default": 0.75,
       "min": 0.01,
       "max": 10.0,
       "control": {
         "slider": true,
-        "arrows": true
+        "arrows": true,
+        "arrow-step": 0.1
       }
     },
     "player-rotation-wave-thickness": {
       "type": "float",
       "name": "Wave Rotation Thickness",
-      "description": "Outline thickness for the rotated player trail while in Wave mode, at normal size.",
+      "description": "Outline thickness of the rotation hitbox at normal size in wave mode.",
       "default": 0.85,
       "min": 0.01,
       "max": 10.0,
       "control": {
         "slider": true,
-        "arrows": true
+        "arrows": true,
+        "arrow-step": 0.1
       }
     },
-    "wave-mini-thickness": {
+    "wave-mini-square-hitbox-thickness": {
       "type": "float",
-      "name": "Wave Mini Thickness",
-      "description": "Same as Wave Thickness, but used while Mini Mode is on instead.",
+      "name": "Wave Mini Square Thickness",
+      "description": "Outline thickness of the square hitbox at mini size in wave mode.",
       "default": 0.8,
       "min": 0.01,
       "max": 10.0,
       "control": {
         "slider": true,
-        "arrows": true
+        "arrows": true,
+        "arrow-step": 0.1
       }
     },
     "wave-mini-blue-hitbox-thickness": {
       "type": "float",
       "name": "Wave Mini Blue Thickness",
-      "description": "Outline thickness of the small blue collision hitbox in Wave mode while mini.",
+      "description": "Outline thickness of the blue hitbox at mini size in wave mode.",
       "default": 0.6,
       "min": 0.01,
       "max": 10.0,
       "control": {
         "slider": true,
-        "arrows": true
+        "arrows": true,
+        "arrow-step": 0.1
       }
     },
     "wave-mini-circle-hitbox-thickness": {
       "type": "float",
       "name": "Wave Mini Circle Thickness",
-      "description": "Same as Wave Circle Thickness, but used while Mini Mode is on instead.",
-      "default": 0.34,
+      "description": "Outline thickness of the circle hitbox at mini size in wave mode.",
+      "default": 0.75,
       "min": 0.01,
       "max": 10.0,
       "control": {
         "slider": true,
-        "arrows": true
+        "arrows": true,
+        "arrow-step": 0.1
       }
     },
     "player-rotation-wave-mini-thickness": {
       "type": "float",
       "name": "Wave Mini Rotation Thickness",
-      "description": "Same as Wave Rotation Thickness, but used while Mini Mode is on instead.",
+      "description": "Outline thickness of the rotation hitbox at mini size in wave mode.",
       "default": 0.8,
       "min": 0.01,
       "max": 10.0,
       "control": {
         "slider": true,
-        "arrows": true
-      }
-    },
-    "inset-category": {
-      "name": "Inset",
-      "type": "title"
-    },
-    "standard-inset": {
-      "name": "Standard Outline Inset",
-      "description": "How far inward (or outward if negative) the outer line of the hitbox outline is drawn from the actual collision boundary. Applies to Cube, Ship, Ball, UFO, Robot, and Swing Copter, since they all share the same hitbox size. Spider and Wave have their own separate settings below since their hitboxes are noticeably smaller.",
-      "type": "float",
-      "default": 0.0,
-      "control": {
-        "input": true,
-        "arrows": true,
-        "arrow-step": 0.1
-      }
-    },
-    "standard-mini-inset": {
-      "name": "Standard Mini Outline Inset",
-      "description": "Same as Standard Outline Inset, but used while Mini Mode is on instead.",
-      "type": "float",
-      "default": 0.0,
-      "control": {
-        "input": true,
-        "arrows": true,
-        "arrow-step": 0.1
-      }
-    },
-    "spider-inset": {
-      "name": "Spider Outline Inset",
-      "description": "Same as Standard Outline Inset, but for Spider mode, whose hitbox is roughly 0.9x the size of the standard modes. Only used at normal size - see Spider Mini Outline Inset for Mini Mode.",
-      "type": "float",
-      "default": 0.0,
-      "control": {
-        "input": true,
-        "arrows": true,
-        "arrow-step": 0.1
-      }
-    },
-    "spider-mini-inset": {
-      "name": "Spider Mini Outline Inset",
-      "description": "Same as Spider Outline Inset, but used while Mini Mode is on instead.",
-      "type": "float",
-      "default": 0.0,
-      "control": {
-        "input": true,
-        "arrows": true,
-        "arrow-step": 0.1
-      }
-    },
-    "wave-inset": {
-      "name": "Wave Outline Inset",
-      "description": "Same as Standard Outline Inset, but for Wave mode, whose hitbox is roughly 1/3 (~0.33x) the size of the standard modes - usually needs a noticeably smaller value.",
-      "type": "float",
-      "default": 0.0,
-      "control": {
-        "input": true,
-        "arrows": true,
-        "arrow-step": 0.1
-      }
-    },
-    "wave-mini-inset": {
-      "name": "Wave Mini Outline Inset",
-      "description": "Same as Wave Outline Inset, but used while Mini Mode is on instead.",
-      "type": "float",
-      "default": 0.0,
-      "control": {
-        "input": true,
-        "arrows": true,
-        "arrow-step": 0.1
-      }
-    },
-    "standard-blue-inset": {
-      "name": "Standard Blue Hitbox Inset",
-      "description": "How far inward (or outward if negative) the outer line of the blue collision box outline is drawn. Applies to Cube, Ship, Ball, UFO, Robot, and Swing Copter, since they all share the same hitbox size. Spider and Wave have their own separate settings below. -0.75 is the actual blue hitbox detection boundary.",
-      "type": "float",
-      "default": -0.75,
-      "control": {
-        "input": true,
-        "arrows": true,
-        "arrow-step": 0.1
-      }
-    },
-    "standard-mini-blue-inset": {
-      "name": "Standard Mini Blue Hitbox Inset",
-      "description": "Same as Standard Blue Hitbox Inset, but used while Mini Mode is on instead. -0.75 is the actual blue hitbox detection boundary.",
-      "type": "float",
-      "default": -0.75,
-      "control": {
-        "input": true,
-        "arrows": true,
-        "arrow-step": 0.1
-      }
-    },
-    "spider-blue-inset": {
-      "name": "Spider Blue Hitbox Inset",
-      "description": "Same as Standard Blue Hitbox Inset, but for Spider mode (~0.9x hitbox size). -0.675 is the actual blue hitbox detection boundary.",
-      "type": "float",
-      "default": -0.675,
-      "control": {
-        "input": true,
-        "arrows": true,
-        "arrow-step": 0.1
-      }
-    },
-    "spider-mini-blue-inset": {
-      "name": "Spider Mini Blue Hitbox Inset",
-      "description": "Same as Spider Blue Hitbox Inset, but used while Mini Mode is on instead. -0.675 is the actual blue hitbox detection boundary.",
-      "type": "float",
-      "default": -0.675,
-      "control": {
-        "input": true,
-        "arrows": true,
-        "arrow-step": 0.1
-      }
-    },
-    "wave-blue-inset": {
-      "name": "Wave Blue Hitbox Inset",
-      "description": "Same as Standard Blue Hitbox Inset, but for Wave mode (~1/3, ~0.33x hitbox size). -0.25 is the actual blue hitbox detection boundary.",
-      "type": "float",
-      "default": -0.25,
-      "control": {
-        "input": true,
-        "arrows": true,
-        "arrow-step": 0.1
-      }
-    },
-    "wave-mini-blue-inset": {
-      "name": "Wave Mini Blue Hitbox Inset",
-      "description": "Same as Wave Blue Hitbox Inset, but used while Mini Mode is on instead. -0.25 is the actual blue hitbox detection boundary.",
-      "type": "float",
-      "default": -0.25,
-      "control": {
-        "input": true,
-        "arrows": true,
-        "arrow-step": 0.1
-      }
-    },
-    "circle-hitbox-inset": {
-      "type": "float",
-      "name": "Circle Hitbox Inset",
-      "description": "How far inward (or outward if negative) the circular hitbox guide's radius is drawn from the rect it's inscribed in. 0.00778 is required for the circle's corners to line up exactly with the square hitbox without overshooting past it.",
-      "default": 0.00778,
-      "control": {
-        "input": true,
         "arrows": true,
         "arrow-step": 0.1
       }
