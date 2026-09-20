@@ -9,6 +9,13 @@
   "version": "v1.0.0",
   "developer": "Evit",
   "description": "more options and better hitbox trail",
+  "tags": [
+    "gameplay",
+    "offline",
+    "enhancement",
+    "utility",
+    "customization"
+  ],
   "settings": {
     "open-settings": {
       "type": "keybind",
@@ -238,7 +245,7 @@
       "type": "float",
       "name": "Blue Thickness",
       "description": "Outline thickness of the blue hitbox at normal size (Wave mode has its own separate setting below).",
-      "default": 0.9,
+      "default": 1,
       "min": 0.01,
       "max": 10.0,
       "control": {
@@ -251,7 +258,7 @@
       "type": "float",
       "name": "Circle Thickness",
       "description": "Outline thickness of the circle hitbox at normal size (Wave mode has its own separate setting below).",
-      "default": 0.75,
+      "default": 1,
       "min": 0.01,
       "max": 10.0,
       "control": {
@@ -290,7 +297,7 @@
       "type": "float",
       "name": "Mini Blue Thickness",
       "description": "Outline thickness of the blue hitbox at mini size (Wave mode has its own separate setting below).",
-      "default": 0.85,
+      "default": 0.9,
       "min": 0.01,
       "max": 10.0,
       "control": {
@@ -303,7 +310,7 @@
       "type": "float",
       "name": "Mini Circle Thickness",
       "description": "Outline thickness of the circle hitbox at mini size (Wave mode has its own separate setting below).",
-      "default": 0.75,
+      "default": 0.9,
       "min": 0.01,
       "max": 10.0,
       "control": {
@@ -316,7 +323,7 @@
       "type": "float",
       "name": "Mini Rotation Thickness",
       "description": "Outline thickness of the rotation hitbox at mini size (Wave mode has its own separate setting below).",
-      "default": 0.8,
+      "default": 0.9,
       "min": 0.01,
       "max": 10.0,
       "control": {
@@ -342,7 +349,7 @@
       "type": "float",
       "name": "Wave Blue Thickness",
       "description": "Outline thickness of the blue hitbox at normal size in wave mode.",
-      "default": 0.7,
+      "default": 0.85,
       "min": 0.01,
       "max": 10.0,
       "control": {
@@ -355,7 +362,7 @@
       "type": "float",
       "name": "Wave Circle Thickness",
       "description": "Outline thickness of the circle hitbox at normal size in wave mode.",
-      "default": 0.75,
+      "default": 0.85,
       "min": 0.01,
       "max": 10.0,
       "control": {
@@ -394,7 +401,7 @@
       "type": "float",
       "name": "Wave Mini Blue Thickness",
       "description": "Outline thickness of the blue hitbox at mini size in wave mode.",
-      "default": 0.6,
+      "default": 0.8,
       "min": 0.01,
       "max": 10.0,
       "control": {
@@ -407,7 +414,7 @@
       "type": "float",
       "name": "Wave Mini Circle Thickness",
       "description": "Outline thickness of the circle hitbox at mini size in wave mode.",
-      "default": 0.75,
+      "default": 0.8,
       "min": 0.01,
       "max": 10.0,
       "control": {

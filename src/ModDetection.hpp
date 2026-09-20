@@ -1,7 +1,7 @@
 #pragma once
 
 namespace hitboxtrail::ModDetection {
-bool enabled();
-void refresh();
-bool changed();
+    bool enabled(bool includeMegaHack = true);
+    void refresh();
+    bool changed();
 }

@@ -105,6 +105,7 @@ namespace hitboxtrail
             m_states2.clear();
             m_wasDead = false;
             m_recordedDeathFrame = false;
+            m_megaHackIgnoreFrames = 1;
             m_lastHeldP1 = false;
             m_lastHeldP2 = false;
             m_flashClickP1 = TrailState::Click::None;
@@ -165,6 +166,13 @@ namespace hitboxtrail
             m_wasDead = false;
             m_recordedDeathFrame = false;
             clear();
+
+            if (m_megaHackIgnoreFrames > 0)
+            {
+                --m_megaHackIgnoreFrames;
+                if (m_megaHackIgnoreFrames == 0)
+                    ModDetection::refresh();
+            }
 
             auto showLiveTrail = Mod::get()->getSavedValue<bool>("always-show-hitbox-trail", false) || shouldShowWhileAlive(layer);
             auto sampleThisTick = consumeCaptureTick(captureSettings);
@@ -655,7 +663,8 @@ namespace hitboxtrail
 
         bool shouldShowWhileAlive(GJBaseGameLayer *layer)
         {
-            return layer->m_isDebugDrawEnabled || ModDetection::enabled();
+            auto includeMegaHack = m_megaHackIgnoreFrames <= 0;
+            return layer->m_isDebugDrawEnabled || ModDetection::enabled(includeMegaHack);
         }
 
         cocos2d::CCPoint rotatePointAround(cocos2d::CCPoint point, cocos2d::CCPoint centre,
@@ -812,6 +821,7 @@ namespace hitboxtrail
         std::vector<BatchItem> m_batchScratch;
         bool m_wasDead = false;
         bool m_recordedDeathFrame = false;
+        int m_megaHackIgnoreFrames = 0;
         bool m_gameplayXform = false;
         bool m_lastHeldP1 = false;
         bool m_lastHeldP2 = false;
@@ -824,13 +834,13 @@ namespace hitboxtrail
         float m_captureAccumulator = 0.f;
     };
 
-TrailNode* TrailNode::create()
-{
-    return TrailNodeImpl::createImpl();
-}
+    TrailNode *TrailNode::create()
+    {
+        return TrailNodeImpl::createImpl();
+    }
 
-void TrailNode::healThicknessSettings()
-{
-    TrailNodeImpl::healThicknessSettings();
-}
+    void TrailNode::healThicknessSettings()
+    {
+        TrailNodeImpl::healThicknessSettings();
+    }
 }
