@@ -4,7 +4,7 @@ Better Hitbox Trail adds an in-game settings popup for a more customizable hitbo
 
 ## Usage
 
-Open the in-game settings with the configured keybind(default **F7**) for quick tweaks. Per-hitbox and per-game-mode opacity, color, and thickness are configured separately in the mod's Geode settings page.
+Open the in-game settings with the configured keybind(default **H**) for quick tweaks. Per-hitbox and per-game-mode opacity, color, and thickness are configured separately in the mod's Geode settings page.
 
 ## Features
 

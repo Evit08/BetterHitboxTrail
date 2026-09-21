@@ -20,7 +20,7 @@
     "open-settings": {
       "type": "keybind",
       "name": "Open In-Game Settings",
-      "default": "F7",
+      "default": "H",
       "category": "gameplay"
     },
     "trail-length": {
