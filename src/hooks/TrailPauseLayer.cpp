@@ -30,5 +30,3 @@ class $modify(TrailPauseLayer, PauseLayer)
             }
     }
 };
-
-namespace hitboxtrail { void registerTrailPauseLayer() {} }

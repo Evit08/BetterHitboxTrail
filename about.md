@@ -4,7 +4,7 @@ Better Hitbox Trail adds an in-game settings popup for a more customizable hitbo
 
 ## Usage
 
-Open the in-game settings with the configured keybind(default **H**) for quick tweaks. Per-hitbox and per-game-mode opacity, color, and thickness are configured separately in the mod's Geode settings page.
+Press H to open the menu. You can customize opacity, color, and thickness for each hitbox and game mode in the Geode settings page.
 
 ## Features
 
@@ -34,7 +34,7 @@ Please turn off any built-in **Hitbox Trail** feature in other mod menus to prev
 
 If you also use MegaHack, turn off **Player** under MegaHack's Show Hitboxes sub-settings.
 
-Eclipse and QOLMod both show the player hitbox whenever their Show Hitboxes setting is enabled, and there's no way to turn off just that part (Eclipse has a "Hide Player" setting, but it doesn't seem to actually work). Because of this, their player hitboxes will overlap with Better Hitbox Trail.
+Eclipse and QOLMod both show the player hitbox whenever their Show Hitboxes setting is enabled, and there's no way to turn off just that part.
 
 ## Known Issues
 

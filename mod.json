@@ -53,6 +53,12 @@
       "description": "Draws hitbox outlines grouped by layer type across the whole trail instead of the default per-position overlap.",
       "default": false
     },
+    "hitbox-between-frames": {
+      "type": "bool",
+      "name": "Hitbox Between Frames",
+      "description": "When using CBF or CBS, this also records a hitbox position at the exact sub-tick moment a click/release occurs. Turn off to only record hitbox positions on regular game ticks, since sub-tick hitboxes aren't actual collision points.",
+      "default": true
+    },
     "color-category": {
       "name": "Color",
       "type": "title"

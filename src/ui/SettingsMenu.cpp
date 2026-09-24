@@ -103,7 +103,6 @@ void registerSettingsMenu()
 
         checkbox("Color Clicks", "color-clicks", true);
         checkbox("Color when Held", "color-when-held", true);
-        checkbox("Darken with Age", "darken-by-age", false);
         checkbox("Fade with Age", "fade-with-age", false);
         ImGui::Separator();
 

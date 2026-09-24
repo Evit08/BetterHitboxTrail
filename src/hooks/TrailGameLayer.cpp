@@ -21,8 +21,11 @@ class $modify(TrailGameLayer, GJBaseGameLayer)
     }
     void handleButton(bool down, int button, bool isPlayer1) {
         GJBaseGameLayer::handleButton(down, button, isPlayer1);
-        if (m_fields->trail && button == static_cast<int>(PlayerButton::Jump))
+        if (m_fields->trail && button == static_cast<int>(PlayerButton::Jump)
+            && Mod::get()->getSettingValue<bool>("hitbox-between-frames")) {
             m_fields->trail->captureButtonEdge(isPlayer1, m_player1, m_player2);
+            if (m_gameState.m_isDualMode) m_fields->trail->captureButtonEdge(!isPlayer1, m_player1, m_player2);
+        }
     }
     float getModifiedDelta(float dt) {
         auto modified = GJBaseGameLayer::getModifiedDelta(dt);
@@ -69,5 +72,4 @@ TrailNode* getTrail(GJBaseGameLayer* layer) {
     if (!layer) return nullptr;
     return base_cast<TrailGameLayer*>(layer)->m_fields->trail;
 }
-void registerTrailGameLayer() {}
 }

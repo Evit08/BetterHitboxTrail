@@ -12,33 +12,15 @@ namespace hitboxtrail::ModDetection
 {
     namespace
     {
-        bool probeBufferLayout()
+        struct DrawNodeProbe : cocos2d::CCDrawNode
         {
-            auto probe = cocos2d::CCDrawNode::create();
-            if (!probe)
-                return false;
-            probe->retain();
-
-            auto before = probe->m_nBufferCount;
-
-            cocos2d::CCPoint verts[4] = {
-                {0.f, 0.f}, {10.f, 0.f}, {10.f, 10.f}, {0.f, 10.f}};
-            cocos2d::ccColor4F fill{1.f, 1.f, 1.f, 1.f};
-            probe->drawPolygon(verts, 4, fill, 0.f, fill);
-            auto afterDraw = probe->m_nBufferCount;
-
-            probe->clear();
-            auto afterClear = probe->m_nBufferCount;
-
-            probe->release();
-            return before == 0 && afterDraw > before && afterClear == 0;
-        }
-
-        bool bufferLayoutIsSane()
-        {
-            static bool sane = probeBufferLayout();
-            return sane;
-        }
+            static int vertexCount(cocos2d::CCDrawNode *node)
+            {
+                if (!node)
+                    return 0;
+                return static_cast<int>(static_cast<DrawNodeProbe *>(node)->m_nBufferCount);
+            }
+        };
 
         size_t tick = 30;
         bool qolCached = false;
@@ -61,8 +43,6 @@ namespace hitboxtrail::ModDetection
 
         bool mhkShow()
         {
-            if (!bufferLayoutIsSane())
-                return false;
             auto layer = GJBaseGameLayer::get();
             if (!layer || !layer->m_debugDrawNode)
                 return false;
@@ -70,8 +50,7 @@ namespace hitboxtrail::ModDetection
             if (!node || !node->isVisible())
                 return false;
             auto drawNode = typeinfo_cast<cocos2d::CCDrawNode *>(node);
-            auto count = drawNode ? drawNode->m_nBufferCount : 0;
-            return count > 0;
+            return drawNode && DrawNodeProbe::vertexCount(drawNode) > 0;
         }
 
         void syncFile(std::filesystem::path const &path, std::filesystem::file_time_type &lastWrite,
@@ -79,7 +58,13 @@ namespace hitboxtrail::ModDetection
         {
             std::error_code error;
             auto writeTime = std::filesystem::last_write_time(path, error);
-            if (error || (known && writeTime == lastWrite))
+            if (error)
+            {
+                value = false;
+                known = false;
+                return;
+            }
+            if (known && writeTime == lastWrite)
                 return;
             auto contents = utils::file::readString(path).unwrapOr("");
             value = readBool(contents, key);

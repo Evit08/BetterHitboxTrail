@@ -8,6 +8,7 @@
 #include <algorithm>
 #include <cmath>
 #include <cstdlib>
+#include <numbers>
 
 using namespace geode::prelude;
 
@@ -324,7 +325,7 @@ namespace hitboxtrail
         struct RenderSettings
         {
             bool squareEnabled, blueEnabled, circleEnabled, rotationEnabled, onlyCube, onlyPlayer, forceSingle;
-            bool colorClicks, colorWhenHeld, darkenWithAge, fadeWithAge;
+            bool colorClicks, colorWhenHeld, fadeWithAge;
             bool blueColorClicks, circleColorClicks, rotationColorClicks;
             bool fillEnabled;
             bool batchLayerOverlap, onlyClickRelease;
@@ -359,7 +360,6 @@ namespace hitboxtrail
                 .onlyPlayer = mod->getSavedValue<bool>("only-player-enabled", false),
                 .colorClicks = mod->getSavedValue<bool>("color-clicks", true),
                 .colorWhenHeld = mod->getSavedValue<bool>("color-when-held", true),
-                .darkenWithAge = mod->getSavedValue<bool>("darken-by-age", false),
                 .fadeWithAge = mod->getSavedValue<bool>("fade-with-age", false),
                 .blueColorClicks = mod->getSettingValue<bool>("blue-hitbox-color-clicks"),
                 .circleColorClicks = mod->getSettingValue<bool>("circle-hitbox-color-clicks"),
@@ -487,7 +487,7 @@ namespace hitboxtrail
             auto isMini = state.vehicleSize < 0.99f;
             auto rect = state.rect;
             auto thickness = s.masterThickness * s.mainThickness[thicknessModeIndex(state.mode)][isMini];
-            auto color = trailColor(state, age, s.mainColor, s.colorClicks, true, s);
+            auto color = trailColor(state, s.mainColor, s.colorClicks, s);
             auto outlineAlpha = s.opacity * s.squareOpacity * ageOpacity(age, s);
             auto fill = color;
             fill.a = s.fillEnabled ? s.fillOpacity * ageOpacity(age, s) : 0.f;
@@ -502,8 +502,8 @@ namespace hitboxtrail
             auto isMini = state.vehicleSize < 0.99f;
             auto rect = insetRect(state.miniRect, s.blueInset[insetModeIndex(state.mode)]);
             auto thickness = s.masterThickness * s.blueThickness[thicknessModeIndex(state.mode)][isMini];
-            auto blue = trailColor(state, age, s.blueColor,
-                                   s.colorClicks && s.blueColorClicks, true, s);
+            auto blue = trailColor(state, s.blueColor,
+                                   s.colorClicks && s.blueColorClicks, s);
             auto outlineAlpha = s.opacity * s.blueOpacity * ageOpacity(age, s);
             auto fill = blue;
             fill.a = s.fillEnabled ? s.fillOpacity * ageOpacity(age, s) : 0.f;
@@ -516,8 +516,8 @@ namespace hitboxtrail
             if (!s.circleEnabled || s.onlyCube)
                 return;
             auto isMini = state.vehicleSize < 0.99f;
-            auto circleColor = trailColor(state, age, s.circleColor,
-                                          s.colorClicks && s.circleColorClicks, true, s);
+            auto circleColor = trailColor(state, s.circleColor,
+                                          s.colorClicks && s.circleColorClicks, s);
             auto circleRect = state.rect;
             auto circleCentre = cocos2d::CCPointMake(circleRect.getMidX(), circleRect.getMidY());
             auto circleRadius = std::min(circleRect.size.width, circleRect.size.height) / 2.f;
@@ -536,8 +536,8 @@ namespace hitboxtrail
                 return;
             auto isMini = state.vehicleSize < 0.99f;
             auto thickness = s.masterThickness * s.rotationThickness[thicknessModeIndex(state.mode)][isMini];
-            auto rotationColor = trailColor(state, age, s.rotationColor,
-                                            s.colorClicks && s.rotationColorClicks, true, s);
+            auto rotationColor = trailColor(state, s.rotationColor,
+                                            s.colorClicks && s.rotationColorClicks, s);
             auto outlineAlpha = s.opacity * s.rotationOpacity * ageOpacity(age, s);
             auto fill = rotationColor;
             fill.a = s.fillEnabled ? s.fillOpacity * ageOpacity(age, s) : 0.f;
@@ -545,10 +545,9 @@ namespace hitboxtrail
             drawHitboxRect(state.rect, thickness, fill, rotationColor, state.rotation);
         }
 
-        static cocos2d::ccColor4F trailColor(TrailState const &state, float age,
-                                             cocos2d::ccColor4F color, bool colorClicks,
-                                             bool applyDarken, RenderSettings const &s)
+        static cocos2d::ccColor4F trailColor(TrailState const &state, cocos2d::ccColor4F baseColor, bool colorClicks, RenderSettings const &s)
         {
+            auto color = baseColor;
             if (colorClicks)
             {
                 switch (state.click)
@@ -566,12 +565,6 @@ namespace hitboxtrail
                 default:
                     break;
                 }
-            }
-            if (applyDarken && s.darkenWithAge)
-            {
-                color.r *= 0.25f + age * 0.75f;
-                color.g *= 0.25f + age * 0.75f;
-                color.b *= 0.25f + age * 0.75f;
             }
             return color;
         }
@@ -700,7 +693,7 @@ namespace hitboxtrail
             float cosine = 1.f, sine = 0.f;
             if (rotated)
             {
-                auto radians = -rotation * 0.01745329251994329577f;
+                auto radians = -rotation * (std::numbers::pi_v<float> / 180.f);
                 cosine = std::cos(radians);
                 sine = std::sin(radians);
                 for (auto &point : verts)
@@ -747,7 +740,7 @@ namespace hitboxtrail
             thickness = std::clamp(thickness, 0.f, radius);
             auto edge = outline.a > 0.f ? outline : fill;
             segments = std::max(segments, 3);
-            constexpr float kTau = 6.28318530717958647692f;
+            constexpr float kTau = 2.f * std::numbers::pi_v<float>;
             if (outline.a <= 0.f)
             {
                 for (int i = 0; i < segments; ++i)
@@ -797,9 +790,13 @@ namespace hitboxtrail
             constexpr unsigned int kVertexCount = 3;
             if (m_nBufferCount + kVertexCount > m_uBufferCapacity)
             {
-                m_uBufferCapacity += std::max(m_uBufferCapacity, kVertexCount);
-                m_pBuffer = static_cast<cocos2d::ccV2F_C4B_T2F *>(
-                    std::realloc(m_pBuffer, m_uBufferCapacity * sizeof(cocos2d::ccV2F_C4B_T2F)));
+                auto newCapacity = m_uBufferCapacity + std::max(m_uBufferCapacity, kVertexCount);
+                auto newBuffer = static_cast<cocos2d::ccV2F_C4B_T2F *>(
+                    std::realloc(m_pBuffer, newCapacity * sizeof(cocos2d::ccV2F_C4B_T2F)));
+                if (!newBuffer)
+                    return;
+                m_pBuffer = newBuffer;
+                m_uBufferCapacity = newCapacity;
             }
 
             auto vertexColor = cocos2d::ccc4BFromccc4F(color);

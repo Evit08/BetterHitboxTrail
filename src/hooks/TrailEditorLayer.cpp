@@ -12,5 +12,3 @@ class $modify(TrailEditorLayer, LevelEditorLayer)
         if (auto trail = getTrail(this)) trail->resetTrails();
     }
 };
-
-namespace hitboxtrail { void registerTrailEditorLayer() {} }
