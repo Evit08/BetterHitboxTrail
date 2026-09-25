@@ -8,23 +8,29 @@ using namespace hitboxtrail;
 
 class $modify(TrailPauseLayer, PauseLayer)
 {
-    void customSetup() {
+    void customSetup()
+    {
         PauseLayer::customSetup();
         refreshTrail();
         schedule(schedule_selector(TrailPauseLayer::refreshTrailTick), 0.1f);
     }
-    void onExit() {
+    void onExit()
+    {
         unschedule(schedule_selector(TrailPauseLayer::refreshTrailTick));
         PauseLayer::onExit();
     }
-    void refreshTrailTick(float) {
+    void refreshTrailTick(float)
+    {
         if (auto layer = GJBaseGameLayer::get())
             if (auto trail = getTrail(layer))
-                if (ModDetection::changed()) trail->refreshDrawing(layer);
+                if (ModDetection::changed())
+                    trail->refreshDrawing(layer);
     }
-    void refreshTrail() {
+    void refreshTrail()
+    {
         if (auto layer = GJBaseGameLayer::get())
-            if (auto trail = getTrail(layer)) {
+            if (auto trail = getTrail(layer))
+            {
                 ModDetection::refresh();
                 trail->refreshDrawing(layer);
             }

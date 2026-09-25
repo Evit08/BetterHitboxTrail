@@ -1,5 +1,6 @@
 #pragma once
 
-namespace hitboxtrail {
-void registerSettingsMenu();
+namespace hitboxtrail
+{
+    void registerSettingsMenu();
 }

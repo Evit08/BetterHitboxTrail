@@ -106,7 +106,8 @@ namespace hitboxtrail
             m_states2.clear();
             m_wasDead = false;
             m_recordedDeathFrame = false;
-            m_megaHackIgnoreFrames = 1;
+            m_megaHackIgnoreFrames = 1; // If you die and pause, a hitbox trail is visible for a second upon restarting.
+            // this only happens in megahack. It was resolved by adding a 1frame vertex delay upon respawn.
             m_lastHeldP1 = false;
             m_lastHeldP2 = false;
             m_flashClickP1 = TrailState::Click::None;
@@ -132,6 +133,7 @@ namespace hitboxtrail
             m_captureAccumulator += m_lastTickDt;
             if (m_captureAccumulator + 0.00001f < targetInterval)
                 return false;
+            // Keep the leftover time so irregular frame durations do not drift the capture rate.
             m_captureAccumulator = std::fmod(m_captureAccumulator, targetInterval);
             return true;
         }
@@ -149,6 +151,7 @@ namespace hitboxtrail
             auto p2Dead = layer->m_player2 && layer->m_player2->m_isDead;
             if (p1Dead || p2Dead)
             {
+                // Save the final position once, then keep that frozen trail visible after death.
                 if (!m_recordedDeathFrame)
                 {
                     capturePlayer(layer->m_player1, m_states, captureSettings, false, true);
@@ -221,6 +224,7 @@ namespace hitboxtrail
                 states.pop_front();
         }
 
+        // Adapted from thesillydoggo.qolmod, used with permission from the developer.
         void capturePlayer(PlayerObject *player, std::deque<TrailState> &states, CaptureSettings const &settings,
                            bool isPlayer2 = false, bool allowDead = false,
                            bool sampleThisTick = true)
@@ -240,6 +244,7 @@ namespace hitboxtrail
 
             if (settings.onlyClickRelease && settings.forceSingle)
             {
+                // Keep a click visible long enough for the single-state mode to render it.
                 auto &flashClick = isPlayer2 ? m_flashClickP2 : m_flashClickP1;
                 auto &flashTicks = isPlayer2 ? m_flashTicksP2 : m_flashTicksP1;
                 if (changed)
@@ -422,6 +427,8 @@ namespace hitboxtrail
 
             if (settings.forceSingle)
             {
+                // Enable Only Player or Only Cube alongside Only Click and Release
+                // displaying the hitbox state only at the moment of the click or release
                 auto window = static_cast<size_t>(kFlashTicks);
                 auto begin = states.size() > window ? states.size() - window : size_t{0};
                 for (size_t idx = states.size(); idx-- > begin;)
@@ -545,6 +552,7 @@ namespace hitboxtrail
             drawHitboxRect(state.rect, thickness, fill, rotationColor, state.rotation);
         }
 
+        // Adapted from thesillydoggo.qolmod, used with permission from the developer.
         static cocos2d::ccColor4F trailColor(TrailState const &state, cocos2d::ccColor4F baseColor, bool colorClicks, RenderSettings const &s)
         {
             auto color = baseColor;
@@ -631,7 +639,7 @@ namespace hitboxtrail
             return "square-hitbox-thickness";
         }
 
-        static constexpr float modeBlueInsetValue(GameMode mode)
+        static constexpr float modeBlueInsetValue(GameMode mode) // blue hitbox collision detection was exactly at this actual value.
         {
             switch (mode)
             {
@@ -822,7 +830,7 @@ namespace hitboxtrail
         bool m_gameplayXform = false;
         bool m_lastHeldP1 = false;
         bool m_lastHeldP2 = false;
-        static constexpr int kFlashTicks = 2;
+        static constexpr int kFlashTicks = 2; // 1 is not displayed
         TrailState::Click m_flashClickP1 = TrailState::Click::None;
         TrailState::Click m_flashClickP2 = TrailState::Click::None;
         int m_flashTicksP1 = 0;

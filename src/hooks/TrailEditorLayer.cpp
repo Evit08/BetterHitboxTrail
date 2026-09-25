@@ -7,8 +7,11 @@ using namespace hitboxtrail;
 
 class $modify(TrailEditorLayer, LevelEditorLayer)
 {
-    void onPlaytest() {
+    // Adapted from thesillydoggo.qolmod, used with permission from the developer.
+    void onPlaytest()
+    {
         LevelEditorLayer::onPlaytest();
-        if (auto trail = getTrail(this)) trail->resetTrails();
+        if (auto trail = getTrail(this))
+            trail->resetTrails();
     }
 };

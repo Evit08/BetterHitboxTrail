@@ -26,6 +26,8 @@ Press H to open the menu. You can customize opacity, color, and thickness for ea
 
 All popup settings take effect immediately, even while paused.
 
+Shows hitboxes for actual sub-tick click timings under CBF/CBS. Can be disabled in Geode settings.
+
 Automatically displays hitbox trails when **Show Hitbox** is enabled in other mod menus (QOLMod, MegaHack, Eclipse).
 
 ## Notes
@@ -42,4 +44,4 @@ Eclipse and QOLMod both show the player hitbox whenever their Show Hitboxes sett
 
 ## Credits
 
-Some of this code is based on QOLMod.
+Some of this mod is adapted from QOLMod by thesillydoggo, used with permission.

@@ -13,6 +13,9 @@ namespace hitboxtrail::ModDetection
     namespace
     {
         struct DrawNodeProbe : cocos2d::CCDrawNode
+        // megahacks hitbox node has no public api, so vertexcount is only work
+        // so even if MH Show Hitboxes is enabled may automatically disable itself if MH has no hitboxes of its own to display on screen.
+
         {
             static int vertexCount(cocos2d::CCDrawNode *node)
             {
@@ -75,7 +78,7 @@ namespace hitboxtrail::ModDetection
 
     bool enabled(bool includeMegaHack)
     {
-        megaHackCached = mhkShow();
+        megaHackCached = mhkShow(); // 240tps to show hitboxes on noclip death delay
 
         if (++tick >= 30)
         {
@@ -83,7 +86,7 @@ namespace hitboxtrail::ModDetection
             qolCached = false;
             if (auto qolmod = Loader::get()->getLoadedMod("thesillydoggo.qolmod"))
                 qolCached = qolmod->getSavedValue<bool>("show-hitboxes_enabled", false);
-            auto eclipseLoaded = Loader::get()->getLoadedMod("eclipse.eclipse-menu") != nullptr;
+            auto eclipseLoaded = Loader::get()->getLoadedMod("eclipse.eclipse-menu") != nullptr; // trail activates when the eclipse menu is closed
             if (eclipseLoaded)
             {
                 auto modsDir = Mod::get()->getSaveDir().parent_path();

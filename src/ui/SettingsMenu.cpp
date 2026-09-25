@@ -8,27 +8,32 @@
 
 using namespace geode::prelude;
 
-namespace hitboxtrail {
-namespace {
-bool s_settingsOpen = false;
-
-void refreshTrail() {
-    if (auto layer = GJBaseGameLayer::get())
-        if (auto trail = getTrail(layer)) {
-            trail->invalidateRenderSettings();
-            trail->refreshDrawing(layer);
-        }
-}
-}
-
-void registerSettingsMenu()
+namespace hitboxtrail
 {
-    static auto* s_listener = listenForAllSettingChanges([](std::string_view key, std::shared_ptr<SettingV3>) {
-        if (key == "open-settings") return;
-        refreshTrail();
-    }, Mod::get());
+    namespace
+    {
+        bool s_settingsOpen = false;
 
-    ImGuiCocos::get().setup([] {}).draw([] {
+        void refreshTrail()
+        {
+            if (auto layer = GJBaseGameLayer::get())
+                if (auto trail = getTrail(layer))
+                {
+                    trail->invalidateRenderSettings();
+                    trail->refreshDrawing(layer);
+                }
+        }
+    }
+
+    void registerSettingsMenu()
+    {
+        static auto *s_listener = listenForAllSettingChanges([](std::string_view key, std::shared_ptr<SettingV3>)
+                                                             {
+        if (key == "open-settings") return;
+        refreshTrail(); }, Mod::get());
+
+        ImGuiCocos::get().setup([] {}).draw([]
+                                            {
         static bool s_wasOpen = false;
         bool opened = s_settingsOpen && !s_wasOpen;
         if (s_settingsOpen != s_wasOpen) {
@@ -115,15 +120,14 @@ void registerSettingsMenu()
         }
         if (changed) refreshTrail();
         ImGui::PopItemWidth();
-        ImGui::End();
-    });
+        ImGui::End(); });
 
-    static auto s_keybindListener = listenForKeybindSettingPresses("open-settings", [](Keybind const&, bool down, bool repeat, double) -> bool {
+        static auto s_keybindListener = listenForKeybindSettingPresses("open-settings", [](Keybind const &, bool down, bool repeat, double) -> bool
+                                                                       {
         if (down && !repeat) {
             s_settingsOpen = !s_settingsOpen;
             return true;
         }
-        return false;
-    });
-}
+        return false; });
+    }
 }
