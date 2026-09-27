@@ -31,7 +31,8 @@ class $modify(TrailGameLayer, GJBaseGameLayer)
     void handleButton(bool down, int button, bool isPlayer1)
     {
         GJBaseGameLayer::handleButton(down, button, isPlayer1);
-        if (m_fields->trail && button == static_cast<int>(PlayerButton::Jump) && Mod::get()->getSettingValue<bool>("hitbox-between-frames"))
+        if (m_fields->trail && button == static_cast<int>(PlayerButton::Jump)
+            && Mod::get()->getSettingValue<bool>("hitbox-between-frames"))
         {
             m_fields->trail->captureButtonEdge(isPlayer1, m_player1, m_player2);
             if (m_gameState.m_isDualMode)

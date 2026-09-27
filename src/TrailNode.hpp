@@ -30,6 +30,7 @@ namespace hitboxtrail
         } click = Click::None;
         GameMode mode = GameMode::Cube;
         float vehicleSize = 1.f;
+        bool betweenFrame = false;
     };
 
     class TrailNode : public cocos2d::CCDrawNode

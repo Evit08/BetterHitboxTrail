@@ -24,6 +24,7 @@ namespace hitboxtrail
             bool onlyPlayer;
             bool onlyCube;
             bool forceSingle;
+            bool betweenFramesActive;
             size_t length;
             double captureRate;
         };
@@ -37,6 +38,7 @@ namespace hitboxtrail
             s.onlyPlayer = mod->getSavedValue<bool>("only-player-enabled", false);
             s.onlyCube = mod->getSavedValue<bool>("cube-hitbox-enabled", false);
             s.forceSingle = s.onlyPlayer || s.onlyCube;
+            s.betweenFramesActive = mod->getSettingValue<bool>("hitbox-between-frames");
             s.length = static_cast<size_t>(mod->getSettingValue<int64_t>("trail-length"));
             s.captureRate = mod->getSettingValue<double>("trail-capture-rate");
             return s;
@@ -110,6 +112,8 @@ namespace hitboxtrail
             // this only happens in megahack. It was resolved by adding a 1frame vertex delay upon respawn.
             m_lastHeldP1 = false;
             m_lastHeldP2 = false;
+            m_lastHeldEdgeP1 = false;
+            m_lastHeldEdgeP2 = false;
             m_flashClickP1 = TrailState::Click::None;
             m_flashClickP2 = TrailState::Click::None;
             m_flashTicksP1 = 0;
@@ -227,12 +231,16 @@ namespace hitboxtrail
         // Adapted from thesillydoggo.qolmod, used with permission from the developer.
         void capturePlayer(PlayerObject *player, std::deque<TrailState> &states, CaptureSettings const &settings,
                            bool isPlayer2 = false, bool allowDead = false,
-                           bool sampleThisTick = true)
+                           bool sampleThisTick = true, bool betweenFrame = false)
         {
             if (!player || (player->m_isDead && !allowDead))
                 return;
 
-            auto &lastHeld = isPlayer2 ? m_lastHeldP2 : m_lastHeldP1;
+            auto &lastHeld = settings.betweenFramesActive
+                ? (isPlayer2 ? m_lastHeldP2 : m_lastHeldP1)
+                : (betweenFrame
+                    ? (isPlayer2 ? m_lastHeldEdgeP2 : m_lastHeldEdgeP1)
+                    : (isPlayer2 ? m_lastHeldP2 : m_lastHeldP1));
             bool held = player->m_holdingButtons[static_cast<int>(PlayerButton::Jump)];
             bool changed = held != lastHeld;
             TrailState::Click click = TrailState::Click::None;
@@ -271,7 +279,8 @@ namespace hitboxtrail
                               player->getRotation(),
                               click,
                               currentGameMode(player),
-                              player->m_vehicleSize});
+                              player->m_vehicleSize,
+                              betweenFrame});
             trimToMax(states, settings);
         }
 
@@ -281,9 +290,9 @@ namespace hitboxtrail
             if (!settings.trailEnabled)
                 return;
             if (isPlayer1)
-                capturePlayer(player1, m_states, settings, false);
+                capturePlayer(player1, m_states, settings, false, false, true, true);
             else
-                capturePlayer(player2, m_states2, settings, true);
+                capturePlayer(player2, m_states2, settings, true, false, true, true);
         }
 
     protected:
@@ -334,6 +343,7 @@ namespace hitboxtrail
             bool blueColorClicks, circleColorClicks, rotationColorClicks;
             bool fillEnabled;
             bool batchLayerOverlap, onlyClickRelease;
+            bool showBetweenFrames;
             float opacity, masterThickness, squareOpacity, blueOpacity, circleOpacity, rotationOpacity;
             float fillOpacity;
             cocos2d::ccColor4F mainColor, blueColor, circleColor, rotationColor;
@@ -372,6 +382,8 @@ namespace hitboxtrail
                 .fillEnabled = mod->getSavedValue<bool>("fill-hitbox", false),
                 .batchLayerOverlap = mod->getSettingValue<bool>("batch-layer-overlap"),
                 .onlyClickRelease = mod->getSavedValue<bool>("only-click-release-enabled", false),
+                .showBetweenFrames = mod->getSettingValue<bool>("hitbox-between-frames")
+                    && mod->getSavedValue<bool>("color-clicks", true),
                 .opacity = static_cast<float>(mod->getSettingValue<double>("opacity")),
                 .masterThickness = std::clamp(static_cast<float>(mod->getSettingValue<double>("thickness")), 0.01f, 2.f),
                 .squareOpacity = static_cast<float>(mod->getSettingValue<double>("square-hitbox-opacity")),
@@ -420,8 +432,11 @@ namespace hitboxtrail
         void drawTrailStates(std::deque<TrailState> const &states, RenderSettings const &settings)
         {
             auto onlyClickRelease = settings.onlyClickRelease;
+            auto showBetweenFrames = settings.showBetweenFrames;
             auto skip = [&](TrailState const &state)
             {
+                if (state.betweenFrame && !showBetweenFrames)
+                    return true;
                 return onlyClickRelease && state.click != TrailState::Click::Press && state.click != TrailState::Click::Release;
             };
 
@@ -566,14 +581,12 @@ namespace hitboxtrail
                 case TrailState::Click::Release:
                     color = s.releaseColor;
                     break;
-                case TrailState::Click::Hold:
-                    if (s.colorWhenHeld)
-                        color = s.holdColor;
-                    break;
                 default:
                     break;
                 }
             }
+            if (state.click == TrailState::Click::Hold && s.colorWhenHeld)
+                color = s.holdColor;
             return color;
         }
 
@@ -830,6 +843,8 @@ namespace hitboxtrail
         bool m_gameplayXform = false;
         bool m_lastHeldP1 = false;
         bool m_lastHeldP2 = false;
+        bool m_lastHeldEdgeP1 = false;
+        bool m_lastHeldEdgeP2 = false;
         static constexpr int kFlashTicks = 2; // 1 is not displayed
         TrailState::Click m_flashClickP1 = TrailState::Click::None;
         TrailState::Click m_flashClickP2 = TrailState::Click::None;
