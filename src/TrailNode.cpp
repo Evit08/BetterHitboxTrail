@@ -25,6 +25,8 @@ namespace hitboxtrail
             bool onlyCube;
             bool forceSingle;
             bool betweenFramesActive;
+            bool alwaysShow;
+            bool showOnDeath;
             size_t length;
             double captureRate;
         };
@@ -32,13 +34,15 @@ namespace hitboxtrail
         static CaptureSettings makeCaptureSettings()
         {
             auto mod = Mod::get();
-            CaptureSettings s;
+            CaptureSettings s{};
             s.trailEnabled = mod->getSavedValue<bool>("hitbox-trail-enabled", true);
             s.onlyClickRelease = mod->getSavedValue<bool>("only-click-release-enabled", false);
             s.onlyPlayer = mod->getSavedValue<bool>("only-player-enabled", false);
             s.onlyCube = mod->getSavedValue<bool>("cube-hitbox-enabled", false);
             s.forceSingle = s.onlyPlayer || s.onlyCube;
             s.betweenFramesActive = mod->getSettingValue<bool>("hitbox-between-frames");
+            s.alwaysShow = mod->getSavedValue<bool>("always-show-hitbox-trail", false);
+            s.showOnDeath = mod->getSavedValue<bool>("hitbox-trail-on-death", true);
             s.length = static_cast<size_t>(mod->getSettingValue<int64_t>("trail-length"));
             s.captureRate = mod->getSettingValue<double>("trail-capture-rate");
             return s;
@@ -65,7 +69,6 @@ namespace hitboxtrail
                 if (clamped != value)
                     mod->setSettingValue<double>(key, clamped);
             };
-            heal("thickness", 0.01, 2.0);
             for (auto mode : {GameMode::Cube, GameMode::Wave})
             {
                 for (auto isMini : {false, true})
@@ -144,7 +147,7 @@ namespace hitboxtrail
 
         void capture(GJBaseGameLayer *layer) override
         {
-            auto captureSettings = makeCaptureSettings();
+            auto captureSettings = cachedCaptureSettings();
             if (!captureSettings.trailEnabled)
             {
                 clear();
@@ -162,7 +165,7 @@ namespace hitboxtrail
                     if (layer->m_player2 && layer->m_player2->isRunning())
                         capturePlayer(layer->m_player2, m_states2, captureSettings, true, true);
                     m_recordedDeathFrame = true;
-                    if (Mod::get()->getSavedValue<bool>("hitbox-trail-on-death", true))
+                    if (captureSettings.showOnDeath)
                         drawTrail(layer, captureSettings.trailEnabled);
                     else
                         clear();
@@ -182,7 +185,7 @@ namespace hitboxtrail
                     ModDetection::refresh();
             }
 
-            auto showLiveTrail = Mod::get()->getSavedValue<bool>("always-show-hitbox-trail", false) || shouldShowWhileAlive(layer);
+            auto showLiveTrail = captureSettings.alwaysShow || shouldShowWhileAlive(layer);
             auto sampleThisTick = consumeCaptureTick(captureSettings);
             capturePlayer(layer->m_player1, m_states, captureSettings, false, false, sampleThisTick);
             if (layer->m_player2 && layer->m_player2->isRunning())
@@ -194,7 +197,7 @@ namespace hitboxtrail
 
         void refreshDrawing(GJBaseGameLayer *layer) override
         {
-            auto captureSettings = makeCaptureSettings();
+            auto captureSettings = cachedCaptureSettings();
             if (!captureSettings.trailEnabled)
             {
                 clear();
@@ -204,13 +207,13 @@ namespace hitboxtrail
             trimToMax(m_states2, captureSettings);
             if (m_wasDead)
             {
-                if (Mod::get()->getSavedValue<bool>("hitbox-trail-on-death", true))
+                if (captureSettings.showOnDeath)
                     drawTrail(layer, captureSettings.trailEnabled);
                 else
                     clear();
                 return;
             }
-            auto showLiveTrail = Mod::get()->getSavedValue<bool>("always-show-hitbox-trail", false) || (layer && shouldShowWhileAlive(layer));
+            auto showLiveTrail = captureSettings.alwaysShow || (layer && shouldShowWhileAlive(layer));
             if (showLiveTrail)
                 drawTrail(layer, captureSettings.trailEnabled);
             else
@@ -220,6 +223,14 @@ namespace hitboxtrail
         void invalidateRenderSettings() override
         {
             m_cachedSettings.reset();
+            m_cachedCaptureSettings.reset();
+        }
+
+        CaptureSettings cachedCaptureSettings()
+        {
+            if (!m_cachedCaptureSettings)
+                m_cachedCaptureSettings = makeCaptureSettings();
+            return *m_cachedCaptureSettings;
         }
 
         void trimToMax(std::deque<TrailState> &states, CaptureSettings const &settings)
@@ -237,10 +248,10 @@ namespace hitboxtrail
                 return;
 
             auto &lastHeld = settings.betweenFramesActive
-                ? (isPlayer2 ? m_lastHeldP2 : m_lastHeldP1)
-                : (betweenFrame
-                    ? (isPlayer2 ? m_lastHeldEdgeP2 : m_lastHeldEdgeP1)
-                    : (isPlayer2 ? m_lastHeldP2 : m_lastHeldP1));
+                                 ? (isPlayer2 ? m_lastHeldP2 : m_lastHeldP1)
+                                 : (betweenFrame
+                                        ? (isPlayer2 ? m_lastHeldEdgeP2 : m_lastHeldEdgeP1)
+                                        : (isPlayer2 ? m_lastHeldP2 : m_lastHeldP1));
             bool held = player->m_holdingButtons[static_cast<int>(PlayerButton::Jump)];
             bool changed = held != lastHeld;
             TrailState::Click click = TrailState::Click::None;
@@ -286,7 +297,7 @@ namespace hitboxtrail
 
         void captureButtonEdge(bool isPlayer1, PlayerObject *player1, PlayerObject *player2) override
         {
-            auto settings = makeCaptureSettings();
+            auto settings = cachedCaptureSettings();
             if (!settings.trailEnabled)
                 return;
             if (isPlayer1)
@@ -340,7 +351,7 @@ namespace hitboxtrail
         {
             bool squareEnabled, blueEnabled, circleEnabled, rotationEnabled, onlyCube, onlyPlayer, forceSingle;
             bool colorClicks, colorWhenHeld, fadeWithAge;
-            bool blueColorClicks, circleColorClicks, rotationColorClicks;
+            bool blueColorClicks;
             bool fillEnabled;
             bool batchLayerOverlap, onlyClickRelease;
             bool showBetweenFrames;
@@ -377,15 +388,12 @@ namespace hitboxtrail
                 .colorWhenHeld = mod->getSavedValue<bool>("color-when-held", true),
                 .fadeWithAge = mod->getSavedValue<bool>("fade-with-age", false),
                 .blueColorClicks = mod->getSettingValue<bool>("blue-hitbox-color-clicks"),
-                .circleColorClicks = mod->getSettingValue<bool>("circle-hitbox-color-clicks"),
-                .rotationColorClicks = mod->getSettingValue<bool>("rotation-color-clicks"),
                 .fillEnabled = mod->getSavedValue<bool>("fill-hitbox", false),
                 .batchLayerOverlap = mod->getSettingValue<bool>("batch-layer-overlap"),
                 .onlyClickRelease = mod->getSavedValue<bool>("only-click-release-enabled", false),
-                .showBetweenFrames = mod->getSettingValue<bool>("hitbox-between-frames")
-                    && mod->getSavedValue<bool>("color-clicks", true),
-                .opacity = static_cast<float>(mod->getSettingValue<double>("opacity")),
-                .masterThickness = std::clamp(static_cast<float>(mod->getSettingValue<double>("thickness")), 0.01f, 2.f),
+                .showBetweenFrames = mod->getSettingValue<bool>("hitbox-between-frames") && (mod->getSavedValue<bool>("color-clicks", true) || mod->getSavedValue<bool>("only-click-release-enabled", false)),
+                .opacity = std::clamp(static_cast<float>(mod->getSavedValue<double>("opacity", 1.0)), 0.f, 1.f),
+                .masterThickness = std::clamp(static_cast<float>(mod->getSavedValue<double>("thickness", 1.0)), 0.01f, 2.f),
                 .squareOpacity = static_cast<float>(mod->getSettingValue<double>("square-hitbox-opacity")),
                 .blueOpacity = static_cast<float>(mod->getSettingValue<double>("blue-hitbox-opacity")),
                 .circleOpacity = static_cast<float>(mod->getSettingValue<double>("circle-hitbox-opacity")),
@@ -525,7 +533,7 @@ namespace hitboxtrail
             auto rect = insetRect(state.miniRect, s.blueInset[insetModeIndex(state.mode)]);
             auto thickness = s.masterThickness * s.blueThickness[thicknessModeIndex(state.mode)][isMini];
             auto blue = trailColor(state, s.blueColor,
-                                   s.colorClicks && s.blueColorClicks, s);
+                                   s.colorClicks && s.blueColorClicks, s, s.blueColorClicks);
             auto outlineAlpha = s.opacity * s.blueOpacity * ageOpacity(age, s);
             auto fill = blue;
             fill.a = s.fillEnabled ? s.fillOpacity * ageOpacity(age, s) : 0.f;
@@ -539,7 +547,7 @@ namespace hitboxtrail
                 return;
             auto isMini = state.vehicleSize < 0.99f;
             auto circleColor = trailColor(state, s.circleColor,
-                                          s.colorClicks && s.circleColorClicks, s);
+                                          s.colorClicks, s);
             auto circleRect = state.rect;
             auto circleCentre = cocos2d::CCPointMake(circleRect.getMidX(), circleRect.getMidY());
             auto circleRadius = std::min(circleRect.size.width, circleRect.size.height) / 2.f;
@@ -559,7 +567,7 @@ namespace hitboxtrail
             auto isMini = state.vehicleSize < 0.99f;
             auto thickness = s.masterThickness * s.rotationThickness[thicknessModeIndex(state.mode)][isMini];
             auto rotationColor = trailColor(state, s.rotationColor,
-                                            s.colorClicks && s.rotationColorClicks, s);
+                                            s.colorClicks, s);
             auto outlineAlpha = s.opacity * s.rotationOpacity * ageOpacity(age, s);
             auto fill = rotationColor;
             fill.a = s.fillEnabled ? s.fillOpacity * ageOpacity(age, s) : 0.f;
@@ -568,7 +576,7 @@ namespace hitboxtrail
         }
 
         // Adapted from thesillydoggo.qolmod, used with permission from the developer.
-        static cocos2d::ccColor4F trailColor(TrailState const &state, cocos2d::ccColor4F baseColor, bool colorClicks, RenderSettings const &s)
+        static cocos2d::ccColor4F trailColor(TrailState const &state, cocos2d::ccColor4F baseColor, bool colorClicks, RenderSettings const &s, bool hitboxColors = true)
         {
             auto color = baseColor;
             if (colorClicks)
@@ -585,7 +593,7 @@ namespace hitboxtrail
                     break;
                 }
             }
-            if (state.click == TrailState::Click::Hold && s.colorWhenHeld)
+            if (state.click == TrailState::Click::Hold && hitboxColors && s.colorWhenHeld)
                 color = s.holdColor;
             return color;
         }
@@ -836,6 +844,7 @@ namespace hitboxtrail
         cocos2d::CCNode *m_world1 = nullptr;
         cocos2d::CCNode *m_world2 = nullptr;
         std::optional<RenderSettings> m_cachedSettings;
+        std::optional<CaptureSettings> m_cachedCaptureSettings;
         std::vector<BatchItem> m_batchScratch;
         bool m_wasDead = false;
         bool m_recordedDeathFrame = false;

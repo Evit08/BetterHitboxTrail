@@ -9,6 +9,9 @@
   "version": "v1.0.0",
   "developer": "Evit",
   "description": "more options and better hitbox trail",
+  "links": {
+    "source": "https://github.com/Evit08/BetterHitboxTrail"
+  },
   "tags": [
     "gameplay",
     "enhancement",
@@ -65,20 +68,8 @@
     "blue-hitbox-color-clicks": {
       "type": "bool",
       "name": "Blue Hitbox Color Clicks",
-      "description": "Applies the Click and Release colors to the blue hitbox when clicked. (Follows the 'Color Clicks' and 'Color when Held' popup settings.)",
+      "description": "Applies the Click, Release and hold colors to the blue hitbox when clicked.",
       "default": false
-    },
-    "circle-hitbox-color-clicks": {
-      "type": "bool",
-      "name": "Circle Hitbox Color Clicks",
-      "description": "Applies the Click and Release colors to the circle hitbox when clicked. (Follows the 'Color Clicks' and 'Color when Held' popup settings.)",
-      "default": true
-    },
-    "rotation-color-clicks": {
-      "type": "bool",
-      "name": "Rotation Color Clicks",
-      "description": "Applies the Click and Release colors to the rotation hitbox when clicked. (Follows the 'Color Clicks' and 'Color when Held' popup settings.)",
-      "default": true
     },
     "click-color": {
       "type": "color",
@@ -151,23 +142,10 @@
       "name": "Opacity",
       "type": "title"
     },
-    "opacity": {
-      "type": "float",
-      "name": "Opacity",
-      "description": "Master opacity multiplier, shown as the single Opacity control in the in-game settings popup. Multiplied with every individual opacity setting below.",
-      "default": 1.0,
-      "min": 0.0,
-      "max": 1.0,
-      "control": {
-        "slider": true,
-        "arrows": true,
-        "arrow-step": 0.1
-      }
-    },
     "square-hitbox-opacity": {
       "type": "float",
       "name": "Square Opacity",
-      "description": "Opacity of the square hitbox outline, multiplied with the main opacity setting.",
+      "description": "Opacity of the square hitbox outline.",
       "default": 1.0,
       "min": 0.0,
       "max": 1.0,
@@ -180,7 +158,7 @@
     "blue-hitbox-opacity": {
       "type": "float",
       "name": "Blue Opacity",
-      "description": "Opacity of the internal blue hitbox, multiplied with the main opacity setting.",
+      "description": "Opacity of the internal blue hitbox.",
       "default": 1.0,
       "min": 0.0,
       "max": 1.0,
@@ -193,7 +171,7 @@
     "circle-hitbox-opacity": {
       "type": "float",
       "name": "Circle Opacity",
-      "description": "Opacity of the circle hitbox, multiplied with the main opacity setting.",
+      "description": "Opacity of the circle hitbox.",
       "default": 1.0,
       "min": 0.0,
       "max": 1.0,
@@ -206,7 +184,7 @@
     "player-rotation-opacity": {
       "type": "float",
       "name": "Rotation Hitbox Opacity",
-      "description": "Opacity of the rotation hitbox outline, multiplied with the main opacity setting.",
+      "description": "Opacity of the rotation hitbox outline.",
       "default": 1.0,
       "min": 0.0,
       "max": 1.0,
@@ -219,19 +197,6 @@
     "thickness-category": {
       "name": "Thickness",
       "type": "title"
-    },
-    "thickness": {
-      "type": "float",
-      "name": "Thickness",
-      "description": "Master thickness multiplier, shown as the single Thickness control in the in-game settings popup. Multiplied with every individual thickness setting below (all thickness settings adjust inward only).",
-      "default": 1.0,
-      "min": 0.01,
-      "max": 2.0,
-      "control": {
-        "slider": true,
-        "arrows": true,
-        "arrow-step": 0.1
-      }
     },
     "square-hitbox-thickness": {
       "type": "float",

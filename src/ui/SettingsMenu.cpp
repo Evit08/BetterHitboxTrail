@@ -94,13 +94,15 @@ namespace hitboxtrail
         if (ImGui::InputInt("Length", &length, 1, 10)) {
             mod->setSettingValue<int64_t>("trail-length", static_cast<int64_t>(std::clamp(length, 1, 1024)));
         }
-        auto opacity = static_cast<float>(mod->getSettingValue<double>("opacity")) * 100.f;
+        auto opacity = static_cast<float>(mod->getSavedValue<double>("opacity", 1.0)) * 100.f;
         if (ImGui::InputFloat("Opacity", &opacity, 1.f, 10.f, "%.0f%%")) {
-            mod->setSettingValue<double>("opacity", static_cast<double>(std::clamp(opacity, 0.f, 100.f)) / 100.0);
+            mod->setSavedValue<double>("opacity", static_cast<double>(std::clamp(opacity, 0.f, 100.f)) / 100.0);
+            changed = true;
         }
-        auto thickness = static_cast<float>(mod->getSettingValue<double>("thickness")) * 100.f;
+        auto thickness = static_cast<float>(mod->getSavedValue<double>("thickness", 1.0)) * 100.f;
         if (ImGui::InputFloat("Thickness", &thickness, 1.f, 10.f, "%.0f%%")) {
-            mod->setSettingValue<double>("thickness", static_cast<double>(std::clamp(thickness, 1.f, 200.f)) / 100.0);
+            mod->setSavedValue<double>("thickness", static_cast<double>(std::clamp(thickness, 1.f, 200.f)) / 100.0);
+            changed = true;
         }
         ImGui::SameLine();
         ImGui::TextDisabled("min1%%/max200%%");
