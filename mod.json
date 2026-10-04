@@ -1,0 +1,358 @@
+{
+  "geode": "5.9.0",
+  "gd": {
+    "win": "2.2081",
+    "mac": "2.2081"
+  },
+  "id": "evit.hitbox-trail",
+  "name": "Better Hitbox Trail",
+  "version": "v1.0.0",
+  "developer": "Evit",
+  "description": "This mod adds customizable hitbox trail settings and a mod menu.",
+  "links": {
+    "source": "https://github.com/Evit08/BetterHitboxTrail"
+  },
+  "tags": [
+    "gameplay",
+    "enhancement",
+    "utility",
+    "customization"
+  ],
+  "settings": {
+    "open-settings": {
+      "type": "keybind",
+      "name": "Open Menu",
+      "default": "H",
+      "category": "gameplay"
+    },
+    "trail-capture-rate": {
+      "type": "string",
+      "name": "Trail Capture Rate",
+      "description": "Number of hitbox positions recorded per second. Only divisors of 240 are allowed so spacing stays even.",
+      "default": "240",
+      "one-of": [
+        "240",
+        "120",
+        "80",
+        "60",
+        "48",
+        "40",
+        "30",
+        "24",
+        "20",
+        "16",
+        "15",
+        "12",
+        "10",
+        "8",
+        "6",
+        "5",
+        "4",
+        "3",
+        "2",
+        "1"
+      ]
+    },
+    "hitbox-between-frames": {
+      "type": "bool",
+      "name": "Hitbox Between Frames",
+      "description": "When using CBF or CBS, this also records a hitbox position at the exact sub-tick moment a click/release occurs. Turn off to only record hitbox positions on regular game ticks, since sub-tick hitboxes aren't actual collision points. (except if you die in a frame with CBF applied)",
+      "default": true
+    },
+    "batch-layer-overlap": {
+      "type": "bool",
+      "name": "Batch Layer Overlap",
+      "description": "Draws hitbox outlines grouped by layer type across the whole trail instead of the default per-position overlap.",
+      "default": false
+    },
+    "color-category": {
+      "name": "Color",
+      "type": "title"
+    },
+    "blue-hitbox-color-clicks": {
+      "type": "bool",
+      "name": "Blue Hitbox Color Clicks",
+      "description": "Applies the Click, Release and hold colors to the blue hitbox when clicked.",
+      "default": false
+    },
+    "click-color": {
+      "type": "color",
+      "name": "Click Color",
+      "default": [
+        0,
+        255,
+        0
+      ]
+    },
+    "release-color": {
+      "type": "color",
+      "name": "Release Color",
+      "default": [
+        0,
+        255,
+        255
+      ]
+    },
+    "hold-color": {
+      "type": "color",
+      "name": "Hold Color",
+      "default": [
+        0,
+        208,
+        0
+      ]
+    },
+    "square-hitbox-color": {
+      "type": "color",
+      "name": "Square Hitbox Color",
+      "description": "Color of the main square hitbox outline.",
+      "default": [
+        255,
+        0,
+        0
+      ]
+    },
+    "blue-hitbox-color": {
+      "type": "color",
+      "name": "Blue Hitbox Color",
+      "description": "Color of the internal blue hitbox outline.",
+      "default": [
+        0,
+        0,
+        255
+      ]
+    },
+    "circle-hitbox-color": {
+      "type": "color",
+      "name": "Circle Hitbox Color",
+      "description": "Color of the circle hitbox outline.",
+      "default": [
+        178,
+        0,
+        0
+      ]
+    },
+    "player-rotation-color": {
+      "type": "color",
+      "name": "Rotation Hitbox Color",
+      "description": "Color of the rotation hitbox outline.",
+      "default": [
+        178,
+        0,
+        0
+      ]
+    },
+    "thickness-category": {
+      "name": "Thickness",
+      "type": "title"
+    },
+    "square-hitbox-thickness": {
+      "type": "float",
+      "name": "Square Thickness",
+      "description": "Outline thickness of the square hitbox at normal size (Wave mode has its own separate setting below).",
+      "default": 1,
+      "min": 0.01,
+      "max": 10.0,
+      "control": {
+        "slider": true,
+        "arrows": true,
+        "arrow-step": 0.1
+      }
+    },
+    "blue-hitbox-thickness": {
+      "type": "float",
+      "name": "Blue Thickness",
+      "description": "Outline thickness of the blue hitbox at normal size (Wave mode has its own separate setting below).",
+      "default": 1,
+      "min": 0.01,
+      "max": 10.0,
+      "control": {
+        "slider": true,
+        "arrows": true,
+        "arrow-step": 0.1
+      }
+    },
+    "circle-hitbox-thickness": {
+      "type": "float",
+      "name": "Circle Thickness",
+      "description": "Outline thickness of the circle hitbox at normal size (Wave mode has its own separate setting below).",
+      "default": 1,
+      "min": 0.01,
+      "max": 10.0,
+      "control": {
+        "slider": true,
+        "arrows": true,
+        "arrow-step": 0.1
+      }
+    },
+    "player-rotation-thickness": {
+      "type": "float",
+      "name": "Rotation Thickness",
+      "description": "Outline thickness of the rotation hitbox at normal size (Wave mode has its own separate setting below).",
+      "default": 1.0,
+      "min": 0.01,
+      "max": 10.0,
+      "control": {
+        "slider": true,
+        "arrows": true,
+        "arrow-step": 0.1
+      }
+    },
+    "mini-square-hitbox-thickness": {
+      "type": "float",
+      "name": "Mini Square Thickness",
+      "description": "Outline thickness of the square hitbox at mini size (Wave mode has its own separate setting below).",
+      "default": 0.9,
+      "min": 0.01,
+      "max": 10.0,
+      "control": {
+        "slider": true,
+        "arrows": true,
+        "arrow-step": 0.1
+      }
+    },
+    "mini-blue-hitbox-thickness": {
+      "type": "float",
+      "name": "Mini Blue Thickness",
+      "description": "Outline thickness of the blue hitbox at mini size (Wave mode has its own separate setting below).",
+      "default": 0.9,
+      "min": 0.01,
+      "max": 10.0,
+      "control": {
+        "slider": true,
+        "arrows": true,
+        "arrow-step": 0.1
+      }
+    },
+    "mini-circle-hitbox-thickness": {
+      "type": "float",
+      "name": "Mini Circle Thickness",
+      "description": "Outline thickness of the circle hitbox at mini size (Wave mode has its own separate setting below).",
+      "default": 0.9,
+      "min": 0.01,
+      "max": 10.0,
+      "control": {
+        "slider": true,
+        "arrows": true,
+        "arrow-step": 0.1
+      }
+    },
+    "player-rotation-mini-thickness": {
+      "type": "float",
+      "name": "Mini Rotation Thickness",
+      "description": "Outline thickness of the rotation hitbox at mini size (Wave mode has its own separate setting below).",
+      "default": 0.9,
+      "min": 0.01,
+      "max": 10.0,
+      "control": {
+        "slider": true,
+        "arrows": true,
+        "arrow-step": 0.1
+      }
+    },
+    "wave-square-hitbox-thickness": {
+      "type": "float",
+      "name": "Wave Square Thickness",
+      "description": "Outline thickness of the square hitbox at normal size in wave mode.",
+      "default": 0.85,
+      "min": 0.01,
+      "max": 10.0,
+      "control": {
+        "slider": true,
+        "arrows": true,
+        "arrow-step": 0.1
+      }
+    },
+    "wave-blue-hitbox-thickness": {
+      "type": "float",
+      "name": "Wave Blue Thickness",
+      "description": "Outline thickness of the blue hitbox at normal size in wave mode.",
+      "default": 0.85,
+      "min": 0.01,
+      "max": 10.0,
+      "control": {
+        "slider": true,
+        "arrows": true,
+        "arrow-step": 0.1
+      }
+    },
+    "wave-circle-hitbox-thickness": {
+      "type": "float",
+      "name": "Wave Circle Thickness",
+      "description": "Outline thickness of the circle hitbox at normal size in wave mode.",
+      "default": 0.85,
+      "min": 0.01,
+      "max": 10.0,
+      "control": {
+        "slider": true,
+        "arrows": true,
+        "arrow-step": 0.1
+      }
+    },
+    "player-rotation-wave-thickness": {
+      "type": "float",
+      "name": "Wave Rotation Thickness",
+      "description": "Outline thickness of the rotation hitbox at normal size in wave mode.",
+      "default": 0.85,
+      "min": 0.01,
+      "max": 10.0,
+      "control": {
+        "slider": true,
+        "arrows": true,
+        "arrow-step": 0.1
+      }
+    },
+    "wave-mini-square-hitbox-thickness": {
+      "type": "float",
+      "name": "Wave Mini Square Thickness",
+      "description": "Outline thickness of the square hitbox at mini size in wave mode.",
+      "default": 0.8,
+      "min": 0.01,
+      "max": 10.0,
+      "control": {
+        "slider": true,
+        "arrows": true,
+        "arrow-step": 0.1
+      }
+    },
+    "wave-mini-blue-hitbox-thickness": {
+      "type": "float",
+      "name": "Wave Mini Blue Thickness",
+      "description": "Outline thickness of the blue hitbox at mini size in wave mode.",
+      "default": 0.8,
+      "min": 0.01,
+      "max": 10.0,
+      "control": {
+        "slider": true,
+        "arrows": true,
+        "arrow-step": 0.1
+      }
+    },
+    "wave-mini-circle-hitbox-thickness": {
+      "type": "float",
+      "name": "Wave Mini Circle Thickness",
+      "description": "Outline thickness of the circle hitbox at mini size in wave mode.",
+      "default": 0.8,
+      "min": 0.01,
+      "max": 10.0,
+      "control": {
+        "slider": true,
+        "arrows": true,
+        "arrow-step": 0.1
+      }
+    },
+    "player-rotation-wave-mini-thickness": {
+      "type": "float",
+      "name": "Wave Mini Rotation Thickness",
+      "description": "Outline thickness of the rotation hitbox at mini size in wave mode.",
+      "default": 0.8,
+      "min": 0.01,
+      "max": 10.0,
+      "control": {
+        "slider": true,
+        "arrows": true,
+        "arrow-step": 0.1
+      }
+    }
+  }
+}
