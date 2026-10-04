@@ -4,7 +4,7 @@
     "win": "2.2081",
     "mac": "2.2081"
   },
-  "id": "evit.hitbox-trail",
+  "id": "evit.better-hitbox-trail",
   "name": "Better Hitbox Trail",
   "version": "v1.0.0",
   "developer": "Evit",
@@ -132,7 +132,7 @@
         0
       ]
     },
-    "player-rotation-color": {
+    "rotation-hitbox-color": {
       "type": "color",
       "name": "Rotation Hitbox Color",
       "description": "Color of the rotation hitbox outline.",
@@ -185,7 +185,7 @@
         "arrow-step": 0.1
       }
     },
-    "player-rotation-thickness": {
+    "rotation-hitbox-thickness": {
       "type": "float",
       "name": "Rotation Thickness",
       "description": "Outline thickness of the rotation hitbox at normal size (Wave mode has its own separate setting below).",
@@ -237,7 +237,7 @@
         "arrow-step": 0.1
       }
     },
-    "player-rotation-mini-thickness": {
+    "rotation-hitbox-mini-thickness": {
       "type": "float",
       "name": "Mini Rotation Thickness",
       "description": "Outline thickness of the rotation hitbox at mini size (Wave mode has its own separate setting below).",
@@ -289,7 +289,7 @@
         "arrow-step": 0.1
       }
     },
-    "player-rotation-wave-thickness": {
+    "rotation-hitbox-wave-thickness": {
       "type": "float",
       "name": "Wave Rotation Thickness",
       "description": "Outline thickness of the rotation hitbox at normal size in wave mode.",
@@ -341,7 +341,7 @@
         "arrow-step": 0.1
       }
     },
-    "player-rotation-wave-mini-thickness": {
+    "rotation-hitbox-wave-mini-thickness": {
       "type": "float",
       "name": "Wave Mini Rotation Thickness",
       "description": "Outline thickness of the rotation hitbox at mini size in wave mode.",

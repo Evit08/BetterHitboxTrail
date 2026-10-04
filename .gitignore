@@ -1,2 +1,13 @@
+# Build
 build*/
 *.geode
+
+# clangd / editor
+.cache/
+compile_commands.json
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db

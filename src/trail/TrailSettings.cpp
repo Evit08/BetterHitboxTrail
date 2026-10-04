@@ -61,8 +61,8 @@ namespace hitboxtrail::trailsettings
                            : (isMini ? "mini-circle-hitbox-thickness" : "circle-hitbox-thickness");
             case ThickKind::Rotation:
                 return isWave
-                           ? (isMini ? "player-rotation-wave-mini-thickness" : "player-rotation-wave-thickness")
-                           : (isMini ? "player-rotation-mini-thickness" : "player-rotation-thickness");
+                           ? (isMini ? "rotation-hitbox-wave-mini-thickness" : "rotation-hitbox-wave-thickness")
+                           : (isMini ? "rotation-hitbox-mini-thickness" : "rotation-hitbox-thickness");
             case ThickKind::Blue:
                 return isWave
                            ? (isMini ? "wave-mini-blue-hitbox-thickness" : "wave-blue-hitbox-thickness")
@@ -104,7 +104,7 @@ namespace hitboxtrail::trailsettings
                 .squareOn = mod->getSavedValue<bool>("square-hitbox-enabled", true),
                 .blueOn = mod->getSavedValue<bool>("blue-hitbox-enabled", true),
                 .circleOn = mod->getSavedValue<bool>("circle-hitbox-enabled", true),
-                .rotOn = mod->getSavedValue<bool>("player-rotation", true),
+                .rotOn = mod->getSavedValue<bool>("rotation-hitbox-enabled", true),
                 .onlyCube = shared.onlyCube,
                 .forceSingle = shared.forceSingle,
                 .colorClicks = mod->getSavedValue<bool>("color-clicks", true),
@@ -122,7 +122,7 @@ namespace hitboxtrail::trailsettings
                 .mainCol = toColor4F(mod->getSettingValue<cocos2d::ccColor3B>("square-hitbox-color")),
                 .blueCol = toColor4F(mod->getSettingValue<cocos2d::ccColor3B>("blue-hitbox-color")),
                 .circleCol = toColor4F(mod->getSettingValue<cocos2d::ccColor3B>("circle-hitbox-color")),
-                .rotCol = toColor4F(mod->getSettingValue<cocos2d::ccColor3B>("player-rotation-color")),
+                .rotCol = toColor4F(mod->getSettingValue<cocos2d::ccColor3B>("rotation-hitbox-color")),
                 .pressCol = toColor4F(mod->getSettingValue<cocos2d::ccColor3B>("click-color")),
                 .releaseCol = toColor4F(mod->getSettingValue<cocos2d::ccColor3B>("release-color")),
                 .holdCol = toColor4F(mod->getSettingValue<cocos2d::ccColor3B>("hold-color")),

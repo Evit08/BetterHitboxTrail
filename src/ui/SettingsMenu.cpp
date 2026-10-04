@@ -87,7 +87,7 @@ namespace hitboxtrail
                 checkbox("Square Hitbox", "square-hitbox-enabled", true);
                 checkbox("Blue Hitbox", "blue-hitbox-enabled", true);
                 checkbox("Circle Hitbox", "circle-hitbox-enabled", true);
-                checkbox("Rotation Hitbox", "player-rotation", true);
+                checkbox("Rotation Hitbox", "rotation-hitbox-enabled", true);
                 ImGui::Separator();
 
                 bool noLimit = mod->getSavedValue<bool>("trail-no-limit", false);
