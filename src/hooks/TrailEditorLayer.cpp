@@ -5,9 +5,15 @@
 using namespace geode::prelude;
 using namespace hitboxtrail;
 
+
+//Adapted from thesillydoggo.qolmod
 class $modify(TrailEditorLayer, LevelEditorLayer)
 {
-    // Adapted from thesillydoggo.qolmod, used with permission from the developer.
+    void updateEditor(float dt)
+    {
+        LevelEditorLayer::updateEditor(dt);
+        restoreTrail(this);
+    }
     void onPlaytest()
     {
         LevelEditorLayer::onPlaytest();

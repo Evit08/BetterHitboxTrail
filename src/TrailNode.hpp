@@ -20,6 +20,7 @@ namespace hitboxtrail
         void refreshDrawing(GJBaseGameLayer *layer);
         void invalidateRenderSettings();
         void captureButtonEdge(bool isPlayer1, PlayerObject *player1, PlayerObject *player2);
+        void copyFrom(TrailNode *other) { m_capture = other->m_capture; setAttached(true); drawTrail(nullptr); }
 
     private:
         static std::optional<cocos2d::CCRect> visibleRect(GJBaseGameLayer *layer);
@@ -36,5 +37,8 @@ namespace hitboxtrail
         int m_megaHackIgnoreFrames = 0;
     };
 
+    inline geode::Ref<TrailNode> s_carry;
+
     TrailNode *getTrail(GJBaseGameLayer *layer);
+    void restoreTrail(GJBaseGameLayer *layer);
 }

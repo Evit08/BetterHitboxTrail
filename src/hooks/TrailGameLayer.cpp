@@ -13,7 +13,6 @@ class $modify(TrailGameLayer, GJBaseGameLayer)
         bool reachedTickEnd = false;
     };
 
-    // Adapted from thesillydoggo.qolmod, used with permission from the developer.
     bool init()
     {
         if (!GJBaseGameLayer::init())
@@ -66,7 +65,7 @@ class $modify(TrailGameLayer, GJBaseGameLayer)
             m_fields->trail->capture(this);
         }
     }
-    // Adapted from thesillydoggo.qolmod, used with permission from the developer.
+    // Adapted from thesillydoggo.qolmod
     void resetLevelVariables()
     {
         GJBaseGameLayer::resetLevelVariables();
@@ -74,7 +73,6 @@ class $modify(TrailGameLayer, GJBaseGameLayer)
             m_fields->trail->resetTrails();
     }
 
-private:
     void attachTrail()
     {
         if (!m_fields->trail || !m_debugDrawNode)
@@ -92,6 +90,18 @@ private:
 
 namespace hitboxtrail
 {
+    void restoreTrail(GJBaseGameLayer *layer)
+    {
+        if (!s_carry)
+            return;
+        auto self = base_cast<TrailGameLayer *>(layer);
+        if (!self->m_fields->trail)
+            return;
+        self->attachTrail();
+        self->m_fields->trail->copyFrom(s_carry.data());
+        s_carry = nullptr;
+    }
+
     TrailNode *getTrail(GJBaseGameLayer *layer)
     {
         if (!layer)

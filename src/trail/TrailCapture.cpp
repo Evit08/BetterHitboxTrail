@@ -31,7 +31,7 @@ namespace hitboxtrail::trailcapture
         return true;
     }
 
-    // Adapted from thesillydoggo.qolmod, used with permission from the developer.
+    // Adapted from thesillydoggo.qolmod
     void TrailCapture::record(PlayerObject *player, PlayerTrail &trail,
                               trailsettings::CaptureSettings const &settings,
                               SampleOptions const &options)

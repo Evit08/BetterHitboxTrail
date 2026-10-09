@@ -103,7 +103,7 @@ namespace hitboxtrail::trailrenderer
                 }
                 return true;
             };
-            // Adapted from thesillydoggo.qolmod, used with permission from the developer.
+            // Adapted from thesillydoggo.qolmod
             auto offscreen = [&](TrailState const &state)
             {
                 if (!visible)

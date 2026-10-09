@@ -14,6 +14,12 @@ class $modify(TrailPauseLayer, PauseLayer)
         refreshTrail();
         schedule(schedule_selector(TrailPauseLayer::refreshTrailTick), 0.1f);
     }
+    void onEdit(CCObject *sender)
+    {
+        if (auto layer = GJBaseGameLayer::get())
+            s_carry = getTrail(layer);
+        PauseLayer::onEdit(sender);
+    }
     void onExit()
     {
         unschedule(schedule_selector(TrailPauseLayer::refreshTrailTick));

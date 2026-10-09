@@ -146,7 +146,7 @@ namespace hitboxtrail
         m_capture.captureEdge(isPlayer1, player1, player2, settings);
     }
 
-    // Adapted from thesillydoggo.qolmod, used with permission from the developer.
+    // Adapted from thesillydoggo.qolmod
     std::optional<cocos2d::CCRect> TrailNode::visibleRect(GJBaseGameLayer *layer)
     {
         if (typeinfo_cast<LevelEditorLayer *>(layer))
