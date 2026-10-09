@@ -1,6 +1,7 @@
 #pragma once
 
 #include <Geode/Geode.hpp>
+#include <cstddef>
 
 namespace hitboxtrail
 {
@@ -15,6 +16,17 @@ namespace hitboxtrail
         Spider,
         Swing
     };
+
+    // Hitbox layers drawn for every trail state. Default draw order is the declaration
+    // order: later layers are drawn on top of earlier ones.
+    enum class HitboxLayer
+    {
+        Rotation,
+        Circle,
+        Main,
+        Blue
+    };
+    inline constexpr size_t kHitboxLayerCount = 4;
 
     struct TrailState
     {

@@ -41,6 +41,9 @@ namespace hitboxtrail::trailsettings
 
     using ThickTable = std::array<std::array<float, 2>, kThickProfiles.size()>; // [profile][isMini]
 
+    inline constexpr std::array<HitboxLayer, kHitboxLayerCount> kDefaultLayerOrder{
+        HitboxLayer::Rotation, HitboxLayer::Circle, HitboxLayer::Main, HitboxLayer::Blue};
+
     struct CaptureSettings
     {
         bool trailEnabled;
@@ -67,6 +70,8 @@ namespace hitboxtrail::trailsettings
         cocos2d::ccColor4F mainCol, blueCol, circleCol, rotCol;
         cocos2d::ccColor4F pressCol, releaseCol, holdCol;
         ThickTable mainThick, blueThick, circleThick, rotThick;
+        // Bottom to top. Later entries are drawn over earlier ones.
+        std::array<HitboxLayer, kHitboxLayerCount> layerOrder = kDefaultLayerOrder;
     };
 
     class TrailSettings
@@ -82,4 +87,9 @@ namespace hitboxtrail::trailsettings
     };
 
     void healThicknessSettings();
+
+    // Layer draw order, bottom to top. Stored with the other in-game popup options.
+    std::array<HitboxLayer, kHitboxLayerCount> loadLayerOrder();
+    void saveLayerOrder(std::array<HitboxLayer, kHitboxLayerCount> const &order);
+    char const *layerLabel(HitboxLayer layer);
 }

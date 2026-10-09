@@ -112,7 +112,7 @@ namespace hitboxtrail::trailsettings
                 .fadeWithAge = mod->getSavedValue<bool>("fade-with-age", false),
                 .blueClicks = mod->getSettingValue<bool>("blue-hitbox-color-clicks"),
                 .fillOn = mod->getSavedValue<bool>("fill-hitbox", false),
-                .batchLayers = mod->getSettingValue<bool>("batch-layer-overlap"),
+                .batchLayers = mod->getSavedValue<bool>("batch-layer-overlap", false),
                 .onlyClickRelease = shared.onlyClickRelease,
                 .showBetweenFrames = betweenVisible(),
                 .clickOnTop = mod->getSavedValue<bool>("click-release-on-top", false),
@@ -137,8 +137,98 @@ namespace hitboxtrail::trailsettings
                     s.circleThick[index][mini] = loadThick(ThickKind::Circle, profile, isMini);
                     s.rotThick[index][mini] = loadThick(ThickKind::Rotation, profile, isMini);
                 }
+            s.layerOrder = loadLayerOrder();
             return s;
         }
+    }
+
+    namespace
+    {
+        constexpr char const *kLayerOrderKey = "layer-order";
+
+        char const *layerKey(HitboxLayer layer)
+        {
+            switch (layer)
+            {
+            case HitboxLayer::Rotation:
+                return "rotation";
+            case HitboxLayer::Circle:
+                return "circle";
+            case HitboxLayer::Main:
+                return "main";
+            case HitboxLayer::Blue:
+                return "blue";
+            }
+            return "main";
+        }
+
+        std::string layerOrderText(std::array<HitboxLayer, kHitboxLayerCount> const &order)
+        {
+            std::string text;
+            for (size_t i = 0; i < order.size(); ++i)
+            {
+                if (i > 0)
+                    text += ',';
+                text += layerKey(order[i]);
+            }
+            return text;
+        }
+    }
+
+    char const *layerLabel(HitboxLayer layer)
+    {
+        switch (layer)
+        {
+        case HitboxLayer::Rotation:
+            return "Rotation Hitbox";
+        case HitboxLayer::Circle:
+            return "Circle Hitbox";
+        case HitboxLayer::Main:
+            return "Square Hitbox";
+        case HitboxLayer::Blue:
+            return "Blue Hitbox";
+        }
+        return "";
+    }
+
+    // Stored as a comma separated list, bottom to top (e.g. "rotation,circle,main,blue").
+    // Unknown or duplicate names are ignored and missing layers are appended in default order,
+    // so a damaged value can never lose a layer.
+    std::array<HitboxLayer, kHitboxLayerCount> loadLayerOrder()
+    {
+        auto saved = Mod::get()->getSavedValue<std::string>(kLayerOrderKey, layerOrderText(kDefaultLayerOrder));
+
+        std::array<HitboxLayer, kHitboxLayerCount> order{};
+        std::array<bool, kHitboxLayerCount> used{};
+        size_t count = 0;
+        size_t start = 0;
+        while (start <= saved.size() && count < kHitboxLayerCount)
+        {
+            auto end = saved.find(',', start);
+            if (end == std::string::npos)
+                end = saved.size();
+            auto token = saved.substr(start, end - start);
+            for (auto layer : kDefaultLayerOrder)
+            {
+                auto index = static_cast<size_t>(layer);
+                if (!used[index] && token == layerKey(layer))
+                {
+                    used[index] = true;
+                    order[count++] = layer;
+                    break;
+                }
+            }
+            start = end + 1;
+        }
+        for (auto layer : kDefaultLayerOrder)
+            if (!used[static_cast<size_t>(layer)])
+                order[count++] = layer;
+        return order;
+    }
+
+    void saveLayerOrder(std::array<HitboxLayer, kHitboxLayerCount> const &order)
+    {
+        Mod::get()->setSavedValue<std::string>(kLayerOrderKey, layerOrderText(order));
     }
 
     CaptureSettings const &TrailSettings::cachedCaptureSettings()

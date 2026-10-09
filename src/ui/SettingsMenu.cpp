@@ -3,8 +3,11 @@
 #include <Geode/Geode.hpp>
 #include <imgui-cocos.hpp>
 #include <algorithm>
+#include <array>
+#include <cmath>
 
 #include "../TrailNode.hpp"
+#include "../trail/TrailSettings.hpp"
 
 using namespace geode::prelude;
 
@@ -84,10 +87,69 @@ namespace hitboxtrail
                 checkbox("Only Click and Release", "only-click-release-enabled", false);
                 ImGui::Separator();
 
-                checkbox("Square Hitbox", "square-hitbox-enabled", true);
-                checkbox("Blue Hitbox", "blue-hitbox-enabled", true);
-                checkbox("Circle Hitbox", "circle-hitbox-enabled", true);
-                checkbox("Rotation Hitbox", "rotation-hitbox-enabled", true);
+                // The rows are listed in layer order: the top row is drawn on top of the others.
+                // Dragging a row moves the whole row (toggle included) up or down in the list.
+                auto order = trailsettings::loadLayerOrder();
+                constexpr int kLast = static_cast<int>(kHitboxLayerCount) - 1;
+                int moveFrom = -1;
+                int moveTo = -1;
+                auto enabledKeyOf = [](HitboxLayer layer) -> char const* {
+                    switch (layer) {
+                    case HitboxLayer::Main: return "square-hitbox-enabled";
+                    case HitboxLayer::Blue: return "blue-hitbox-enabled";
+                    case HitboxLayer::Circle: return "circle-hitbox-enabled";
+                    case HitboxLayer::Rotation: return "rotation-hitbox-enabled";
+                    }
+                    return "";
+                };
+                // A plain click toggles the hitbox; pressing and dragging the row reorders it.
+                static bool s_rowDragged = false;
+                auto rowStartY = ImGui::GetCursorScreenPos().y;
+                auto rowStep = ImGui::GetFrameHeightWithSpacing();
+                for (int pos = kLast; pos >= 0; --pos) {
+                    auto label = trailsettings::layerLabel(order[pos]);
+                    auto enabledKey = enabledKeyOf(order[pos]);
+                    ImGui::PushID(enabledKey);
+                    bool value = mod->getSavedValue<bool>(enabledKey, true);
+                    bool pressed = ImGui::Checkbox(label, &value);
+                    bool active = ImGui::IsItemActive();
+                    if (active && ImGui::IsMouseDragging(0, 5.f))
+                        s_rowDragged = true;
+                    if (active && s_rowDragged) {
+                        // The row follows the mouse: find which list slot the cursor is in.
+                        auto slot = static_cast<int>(std::floor((ImGui::GetMousePos().y - rowStartY) / rowStep));
+                        slot = std::clamp(slot, 0, kLast);
+                        int target = kLast - slot; // top slot = top layer
+                        if (target != pos) {
+                            moveFrom = pos;
+                            moveTo = target;
+                        }
+                    }
+                    // Releasing after a drag must not flip the checkbox.
+                    if (pressed && !s_rowDragged) {
+                        mod->setSavedValue<bool>(enabledKey, value);
+                        changed = true;
+                    }
+                    ImGui::PopID();
+                }
+                if (!ImGui::IsMouseDown(0)) s_rowDragged = false;
+                if (moveFrom >= 0) {
+                    auto moved = order[moveFrom];
+                    if (moveTo > moveFrom)
+                        for (int i = moveFrom; i < moveTo; ++i) order[i] = order[i + 1];
+                    else
+                        for (int i = moveFrom; i > moveTo; --i) order[i] = order[i - 1];
+                    order[moveTo] = moved;
+                    trailsettings::saveLayerOrder(order);
+                    changed = true;
+                }
+                if (ImGui::SmallButton("Reset")) {
+                    trailsettings::saveLayerOrder(trailsettings::kDefaultLayerOrder);
+                    changed = true;
+                }
+                ImGui::SameLine();
+                ImGui::TextDisabled("Drag a row to reorder");
+                checkbox("Batch Layer Overlap", "batch-layer-overlap", false);
                 ImGui::Separator();
 
                 bool noLimit = mod->getSavedValue<bool>("trail-no-limit", false);

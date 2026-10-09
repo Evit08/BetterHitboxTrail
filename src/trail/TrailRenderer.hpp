@@ -37,13 +37,7 @@ namespace hitboxtrail::trailrenderer
         }
 
     private:
-        enum class Layer
-        {
-            Rotation,
-            Circle,
-            Main,
-            Blue
-        };
+        using Layer = HitboxLayer;
 
         struct LayerColors
         {
@@ -55,13 +49,6 @@ namespace hitboxtrail::trailrenderer
         {
             TrailState const *state;
             float age;
-        };
-
-        inline static constexpr std::array kLayerOrder{
-            Layer::Rotation,
-            Layer::Circle,
-            Layer::Main,
-            Layer::Blue,
         };
 
         static cocos2d::ccColor4F trailColor(TrailState const &state, cocos2d::ccColor4F base,
@@ -152,7 +139,7 @@ namespace hitboxtrail::trailrenderer
                         continue;
                     m_batch.push_back({&state, ageFor(idx)});
                 }
-                for (auto layer : kLayerOrder)
+                for (auto layer : settings.layerOrder)
                     for (auto const &item : m_batch)
                         drawLayer(layer, *item.state, item.age, settings, emit);
             }
@@ -172,7 +159,7 @@ namespace hitboxtrail::trailrenderer
         static void drawAll(TrailState const &state, float age,
                             trailsettings::RenderSettings const &settings, Emit &&emit)
         {
-            for (auto layer : kLayerOrder)
+            for (auto layer : settings.layerOrder)
                 drawLayer(layer, state, age, settings, emit);
         }
 
