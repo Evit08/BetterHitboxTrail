@@ -41,7 +41,3 @@ Eclipse and QOLMod both show the player hitbox whenever their Show Hitboxes sett
 ## Known Issues
 
 - Even if MegaHack's Show Hitboxes is enabled, Better Hitbox Trail may automatically disable itself if MegaHack has no hitboxes of its own to display on screen.
-
-## Credits
-
-Some of this mod is adapted from QOLMod by thesillydoggo, used with permission.
