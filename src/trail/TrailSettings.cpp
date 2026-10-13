@@ -2,6 +2,7 @@
 
 #include <algorithm>
 #include <limits>
+#include <string_view>
 
 using namespace geode::prelude;
 
@@ -119,13 +120,13 @@ namespace hitboxtrail::trailsettings
                 .opacity = std::clamp(static_cast<float>(mod->getSavedValue<double>("opacity", 1.0)), 0.f, 1.f),
                 .masterThick = std::clamp(static_cast<float>(mod->getSavedValue<double>("thickness", 1.0)), 0.01f, 2.f),
                 .fillAlpha = static_cast<float>(mod->getSavedValue<double>("fill-opacity", 0.25)),
-                .mainCol = toColor4F(mod->getSettingValue<cocos2d::ccColor3B>("square-hitbox-color")),
-                .blueCol = toColor4F(mod->getSettingValue<cocos2d::ccColor3B>("blue-hitbox-color")),
-                .circleCol = toColor4F(mod->getSettingValue<cocos2d::ccColor3B>("circle-hitbox-color")),
-                .rotCol = toColor4F(mod->getSettingValue<cocos2d::ccColor3B>("rotation-hitbox-color")),
-                .pressCol = toColor4F(mod->getSettingValue<cocos2d::ccColor3B>("click-color")),
-                .releaseCol = toColor4F(mod->getSettingValue<cocos2d::ccColor3B>("release-color")),
-                .holdCol = toColor4F(mod->getSettingValue<cocos2d::ccColor3B>("hold-color")),
+                .mainCol = toColor4F(loadColor("square-hitbox-color")),
+                .blueCol = toColor4F(loadColor("blue-hitbox-color")),
+                .circleCol = toColor4F(loadColor("circle-hitbox-color")),
+                .rotCol = toColor4F(loadColor("rotation-hitbox-color")),
+                .pressCol = toColor4F(loadColor("click-color")),
+                .releaseCol = toColor4F(loadColor("release-color")),
+                .holdCol = toColor4F(loadColor("hold-color")),
             };
             for (auto profile : kThickProfiles)
                 for (size_t mini = 0; mini < 2; ++mini)
@@ -229,6 +230,47 @@ namespace hitboxtrail::trailsettings
     void saveLayerOrder(std::array<HitboxLayer, kHitboxLayerCount> const &order)
     {
         Mod::get()->setSavedValue<std::string>(kLayerOrderKey, layerOrderText(order));
+    }
+
+    namespace
+    {
+        constexpr std::array kColorKeys{
+            "click-color", "release-color", "hold-color",
+            "square-hitbox-color", "blue-hitbox-color",
+            "circle-hitbox-color", "rotation-hitbox-color"};
+
+        cocos2d::ccColor3B defaultColor(std::string_view name)
+        {
+            if (name == "click-color")
+                return {0, 255, 0};
+            if (name == "release-color")
+                return {0, 255, 255};
+            if (name == "hold-color")
+                return {0, 208, 0};
+            if (name == "square-hitbox-color")
+                return {255, 0, 0};
+            if (name == "blue-hitbox-color")
+                return {0, 0, 255};
+            if (name == "circle-hitbox-color" || name == "rotation-hitbox-color")
+                return {178, 0, 0};
+            return {255, 255, 255};
+        }
+    }
+
+    cocos2d::ccColor3B loadColor(char const *key)
+    {
+        return Mod::get()->getSavedValue<cocos2d::ccColor3B>(key, defaultColor(key));
+    }
+
+    void saveColor(char const *key, cocos2d::ccColor3B color)
+    {
+        Mod::get()->setSavedValue<cocos2d::ccColor3B>(key, color);
+    }
+
+    void resetColors()
+    {
+        for (auto key : kColorKeys)
+            saveColor(key, defaultColor(key));
     }
 
     CaptureSettings const &TrailSettings::cachedCaptureSettings()

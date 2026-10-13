@@ -59,82 +59,11 @@
       "description": "When using CBF or CBS, this also records a hitbox position at the exact sub-tick moment a click/release occurs. Turn off to only record hitbox positions on regular game ticks, since sub-tick hitboxes aren't actual collision points. (except if you die in a frame with CBF applied)",
       "default": true
     },
-    "color-category": {
-      "name": "Color",
-      "type": "title"
-    },
     "blue-hitbox-color-clicks": {
       "type": "bool",
       "name": "Blue Hitbox Color Clicks",
       "description": "Applies the Click, Release and hold colors to the blue hitbox when clicked.",
       "default": false
-    },
-    "click-color": {
-      "type": "color",
-      "name": "Click Color",
-      "default": [
-        0,
-        255,
-        0
-      ]
-    },
-    "release-color": {
-      "type": "color",
-      "name": "Release Color",
-      "default": [
-        0,
-        255,
-        255
-      ]
-    },
-    "hold-color": {
-      "type": "color",
-      "name": "Hold Color",
-      "default": [
-        0,
-        208,
-        0
-      ]
-    },
-    "square-hitbox-color": {
-      "type": "color",
-      "name": "Square Hitbox Color",
-      "description": "Color of the main square hitbox outline.",
-      "default": [
-        255,
-        0,
-        0
-      ]
-    },
-    "blue-hitbox-color": {
-      "type": "color",
-      "name": "Blue Hitbox Color",
-      "description": "Color of the internal blue hitbox outline.",
-      "default": [
-        0,
-        0,
-        255
-      ]
-    },
-    "circle-hitbox-color": {
-      "type": "color",
-      "name": "Circle Hitbox Color",
-      "description": "Color of the circle hitbox outline.",
-      "default": [
-        178,
-        0,
-        0
-      ]
-    },
-    "rotation-hitbox-color": {
-      "type": "color",
-      "name": "Rotation Hitbox Color",
-      "description": "Color of the rotation hitbox outline.",
-      "default": [
-        178,
-        0,
-        0
-      ]
     },
     "thickness-category": {
       "name": "Thickness",

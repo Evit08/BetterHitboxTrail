@@ -92,4 +92,8 @@ namespace hitboxtrail::trailsettings
     std::array<HitboxLayer, kHitboxLayerCount> loadLayerOrder();
     void saveLayerOrder(std::array<HitboxLayer, kHitboxLayerCount> const &order);
     char const *layerLabel(HitboxLayer layer);
+
+    cocos2d::ccColor3B loadColor(char const *key);
+    void saveColor(char const *key, cocos2d::ccColor3B color);
+    void resetColors();
 }

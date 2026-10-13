@@ -67,6 +67,18 @@ namespace hitboxtrail
                     }
                 };
 
+                auto colorEdit = [&](char const* label, char const* key) {
+                    auto c = trailsettings::loadColor(key);
+                    float v[3] = {c.r / 255.f, c.g / 255.f, c.b / 255.f};
+                    if (ImGui::ColorEdit3(label, v, ImGuiColorEditFlags_NoInputs)) {
+                        trailsettings::saveColor(key, ccColor3B{
+                            static_cast<GLubyte>(std::lround(v[0] * 255.f)),
+                            static_cast<GLubyte>(std::lround(v[1] * 255.f)),
+                            static_cast<GLubyte>(std::lround(v[2] * 255.f))});
+                        changed = true;
+                    }
+                };
+
                 checkbox("Hitbox Trail", "hitbox-trail-enabled", true);
                 checkbox("Show on Death", "hitbox-trail-on-death", true);
                 checkbox("Always Show", "always-show-hitbox-trail", false);
@@ -102,6 +114,15 @@ namespace hitboxtrail
                     }
                     return "";
                 };
+                auto colorKeyOf = [](HitboxLayer layer) -> char const* {
+                    switch (layer) {
+                    case HitboxLayer::Main: return "square-hitbox-color";
+                    case HitboxLayer::Blue: return "blue-hitbox-color";
+                    case HitboxLayer::Circle: return "circle-hitbox-color";
+                    case HitboxLayer::Rotation: return "rotation-hitbox-color";
+                    }
+                    return "";
+                };
                 // A plain click toggles the hitbox; pressing and dragging the row reorders it.
                 static bool s_rowDragged = false;
                 auto rowStartY = ImGui::GetCursorScreenPos().y;
@@ -113,6 +134,8 @@ namespace hitboxtrail
                     bool value = mod->getSavedValue<bool>(enabledKey, true);
                     bool pressed = ImGui::Checkbox(label, &value);
                     bool active = ImGui::IsItemActive();
+                    ImGui::SameLine();
+                    colorEdit("##color", colorKeyOf(order[pos]));
                     if (active && ImGui::IsMouseDragging(0, 5.f))
                         s_rowDragged = true;
                     if (active && s_rowDragged) {
@@ -145,6 +168,7 @@ namespace hitboxtrail
                 }
                 if (ImGui::SmallButton("Reset")) {
                     trailsettings::saveLayerOrder(trailsettings::kDefaultLayerOrder);
+                    trailsettings::resetColors();
                     changed = true;
                 }
                 ImGui::SameLine();
@@ -178,8 +202,14 @@ namespace hitboxtrail
 
                 checkbox("Color Clicks", "color-clicks", true);
                 ImGui::SameLine();
+                colorEdit("##click", "click-color");
+                ImGui::SameLine();
+                colorEdit("##release", "release-color");
+                ImGui::SameLine();
                 checkbox("Draw on Top", "click-release-on-top", false);
                 checkbox("Color when Held", "color-when-held", true);
+                ImGui::SameLine();
+                colorEdit("##hold", "hold-color");
                 checkbox("Fade with Age", "fade-with-age", false);
                 ImGui::Separator();
 
