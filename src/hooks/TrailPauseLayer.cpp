@@ -24,7 +24,7 @@ class $modify(TrailPauseLayer, PauseLayer)
         auto winSize = CCDirector::get()->getWinSize();
         // 오른쪽 위 버튼들(숨기기 버튼 등)과 겹치지 않도록 그 아래쪽에 배치.
         // 위치가 마음에 안 들면 kTrailButtonOffsetY 값만 조절하면 됨 (클수록 더 아래로).
-        constexpr float kTrailButtonOffsetY = 108.f;
+        constexpr float kTrailButtonOffsetY = 132.f;
         menu->setPosition({winSize.width - 50.f, winSize.height - kTrailButtonOffsetY});
         addChild(menu);
 #endif

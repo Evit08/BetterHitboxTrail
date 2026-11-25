@@ -5,7 +5,6 @@
 #ifdef GEODE_IS_ANDROID
 
 #include <Geode/ui/ColorPickPopup.hpp>
-#include <Geode/ui/ScrollLayer.hpp>
 #include <algorithm>
 #include <cmath>
 #include <utility>
@@ -20,7 +19,14 @@ namespace hitboxtrail
     {
         constexpr float kPopupWidth = 360.f;
         constexpr float kPopupHeight = 260.f;
-        constexpr float kRowHeight = 28.f;
+        constexpr float kRowWidth = 300.f;
+        constexpr float kRowHeight = 26.f;
+        constexpr float kRowSpacing = 29.f;
+        constexpr float kFirstRowY = 72.f; // 팝업 중앙 기준, 첫 번째 행의 y 위치
+        constexpr float kNavY = -107.f;    // 팝업 중앙 기준, 페이지 이동 버튼의 y 위치
+        constexpr int kPageCount = 4;
+
+        constexpr char const *kPageNames[kPageCount] = {"General", "Layers", "Trail", "Colors"};
 
         struct NumberSetting
         {
@@ -58,6 +64,7 @@ namespace hitboxtrail
             return "";
         }
 
+        // 스크롤 대신 페이지 방식: 모든 행은 팝업 배경(m_bgSprite) 중앙을 기준으로 직접 배치한다.
         class SettingsPopup : public Popup
         {
         public:
@@ -74,39 +81,76 @@ namespace hitboxtrail
             }
 
         private:
-            ScrollLayer *m_scroll = nullptr;
+            CCNode *m_root = nullptr;     // 팝업 배경의 중앙에 놓이는 기준 노드
+            CCNode *m_pageRoot = nullptr; // 현재 페이지의 행들이 들어가는 노드
+            CCLabelBMFont *m_pageLabel = nullptr;
+            int m_page = 0;
+            int m_rowIndex = 0;
 
             bool setupPopup()
             {
                 if (!Popup::init(kPopupWidth, kPopupHeight))
                     return false;
                 setTitle("Better Hitbox Trail");
-                CCSize size{kPopupWidth - 40.f, kPopupHeight - 60.f};
-                m_scroll = ScrollLayer::create(size);
-                // m_mainLayer의 원점이 팝업 모서리가 아닐 수 있으므로, 좌표를 직접 계산하지 않고
-                // 팝업 중앙(Anchor::Center)을 기준으로 배치한다. (스크롤 레이어의 기준점은 좌하단)
-                m_mainLayer->addChildAtPosition(m_scroll, Anchor::Center,
-                                                {-size.width / 2.f, -size.height / 2.f - 10.f});
-                m_scroll->m_contentLayer->setLayout(ColumnLayout::create()
-                                                        ->setAxisReverse(true)
-                                                        ->setAxisAlignment(AxisAlignment::End)
-                                                        ->setAutoScale(false) // 줄 수가 많아도 행이 축소되지 않게 함
-                                                        ->setAutoGrowAxis(size.height)
-                                                        ->setGap(4.f));
+
+                // m_mainLayer의 원점/크기에 의존하지 않도록 배경 스프라이트의 중앙을 기준점으로 쓴다.
+                auto bgSize = m_bgSprite->getContentSize();
+                auto anchor = m_bgSprite->getAnchorPoint();
+                CCPoint center = m_bgSprite->getPosition() +
+                                 CCPoint{(0.5f - anchor.x) * bgSize.width, (0.5f - anchor.y) * bgSize.height};
+
+                m_root = CCNode::create();
+                m_root->setPosition(center);
+                m_mainLayer->addChild(m_root);
+
+                m_pageRoot = CCNode::create();
+                m_root->addChild(m_pageRoot);
+
+                // 페이지 이동 버튼 (좌 / 라벨 / 우)
+                auto nav = CCMenu::create();
+                nav->setPosition({0.f, 0.f});
+                m_root->addChild(nav);
+
+                auto left = CCMenuItemExt::createSpriteExtraWithFrameName("edit_leftBtn_001.png", 0.8f, [this](CCMenuItemSpriteExtra *)
+                                                                          { changePage(-1); });
+                left->setPosition({-90.f, kNavY});
+                nav->addChild(left);
+
+                auto right = CCMenuItemExt::createSpriteExtraWithFrameName("edit_rightBtn_001.png", 0.8f, [this](CCMenuItemSpriteExtra *)
+                                                                           { changePage(1); });
+                right->setPosition({90.f, kNavY});
+                nav->addChild(right);
+
+                m_pageLabel = CCLabelBMFont::create("", "bigFont.fnt");
+                m_pageLabel->setScale(0.45f);
+                m_pageLabel->setPosition({0.f, kNavY});
+                m_root->addChild(m_pageLabel);
+
                 populate();
-                m_scroll->moveToTop();
                 return true;
+            }
+
+            void changePage(int delta)
+            {
+                m_page = (m_page + delta + kPageCount) % kPageCount;
+                rebuildLater();
+            }
+
+            void updatePageLabel()
+            {
+                auto str = fmt::format("{} ({}/{})", kPageNames[m_page], m_page + 1, kPageCount);
+                m_pageLabel->setString(str.c_str());
             }
 
             void onRebuild(float)
             {
-                auto content = m_scroll->m_contentLayer;
-                auto y = content->getPositionY();
-                content->removeAllChildren();
+                m_pageRoot->removeAllChildren();
                 populate();
-                content->setPositionY(y);
+                // 팝업이 열린 뒤에 새로 만든 버튼도 터치를 받도록 우선순위를 맞춘다.
+                handleTouchPriority(this);
             }
 
+            // 버튼 콜백 안에서 곧바로 버튼을 지우면 위험하므로 다음 프레임에 다시 만든다.
             void rebuildLater()
             {
                 scheduleOnce(schedule_selector(SettingsPopup::onRebuild), 0.f);
@@ -116,19 +160,21 @@ namespace hitboxtrail
             {
                 auto row = CCMenu::create();
                 row->ignoreAnchorPointForPosition(false);
-                row->setContentSize({m_scroll->getContentWidth(), kRowHeight});
+                row->setContentSize({kRowWidth, kRowHeight});
                 row->setLayout(RowLayout::create()
                                    ->setAxisAlignment(AxisAlignment::Start)
                                    ->setAutoScale(false)
                                    ->setGap(8.f));
-                m_scroll->m_contentLayer->addChild(row);
+                row->setPosition({0.f, kFirstRowY - static_cast<float>(m_rowIndex) * kRowSpacing});
+                ++m_rowIndex;
+                m_pageRoot->addChild(row);
                 return row;
             }
 
             CCMenu *toggleRow(char const *label, char const *key, bool fallback, char const *clears = nullptr)
             {
                 auto row = newRow();
-                auto toggler = CCMenuItemExt::createTogglerWithStandardSprites(0.5f, [this, key, clears](CCMenuItemToggler *t)
+                auto toggler = CCMenuItemExt::createTogglerWithStandardSprites(0.6f, [this, key, clears](CCMenuItemToggler *t)
                                                                                {
                     auto on = !t->isToggled();
                     Mod::get()->setSavedValue<bool>(key, on);
@@ -141,7 +187,7 @@ namespace hitboxtrail
                 toggler->toggle(Mod::get()->getSavedValue<bool>(key, fallback));
                 row->addChild(toggler);
                 auto text = CCLabelBMFont::create(label, "bigFont.fnt");
-                text->setScale(0.4f);
+                text->setScale(0.5f);
                 row->addChild(text);
                 return row;
             }
@@ -181,7 +227,7 @@ namespace hitboxtrail
             {
                 auto row = newRow();
                 auto text = CCLabelBMFont::create("", "bigFont.fnt");
-                text->setScale(0.4f);
+                text->setScale(0.5f);
                 Ref<CCLabelBMFont> shown = text;
                 auto read = [s]
                 {
@@ -217,54 +263,70 @@ namespace hitboxtrail
 
             void populate()
             {
-                toggleRow("Hitbox Trail", "hitbox-trail-enabled", true);
-                toggleRow("Show on Death", "hitbox-trail-on-death", true);
-                toggleRow("Always Show", "always-show-hitbox-trail", false);
-                toggleRow("Only Player", "only-player-enabled", false, "cube-hitbox-enabled");
-                toggleRow("Only Cube", "cube-hitbox-enabled", false, "only-player-enabled");
-                toggleRow("Only Click and Release", "only-click-release-enabled", false);
+                m_rowIndex = 0;
+                updatePageLabel();
 
-                auto order = trailsettings::loadLayerOrder();
-                constexpr int kLast = static_cast<int>(kHitboxLayerCount) - 1;
-                for (int pos = kLast; pos >= 0; --pos)
+                switch (m_page)
                 {
-                    auto row = toggleRow(trailsettings::layerLabel(order[pos]), enabledKeyOf(order[pos]), true);
-                    addColor(row, colorKeyOf(order[pos]));
-                    addMove(row, "edit_upBtn_001.png", pos, pos + 1);
-                    addMove(row, "edit_downBtn_001.png", pos, pos - 1);
+                case 0: // General
+                    toggleRow("Hitbox Trail", "hitbox-trail-enabled", true);
+                    toggleRow("Show on Death", "hitbox-trail-on-death", true);
+                    toggleRow("Always Show", "always-show-hitbox-trail", false);
+                    toggleRow("Only Player", "only-player-enabled", false, "cube-hitbox-enabled");
+                    toggleRow("Only Cube", "cube-hitbox-enabled", false, "only-player-enabled");
+                    toggleRow("Only Click and Release", "only-click-release-enabled", false);
+                    break;
+
+                case 1: // Layers
+                {
+                    auto order = trailsettings::loadLayerOrder();
+                    constexpr int kLast = static_cast<int>(kHitboxLayerCount) - 1;
+                    for (int pos = kLast; pos >= 0; --pos)
+                    {
+                        auto row = toggleRow(trailsettings::layerLabel(order[pos]), enabledKeyOf(order[pos]), true);
+                        addColor(row, colorKeyOf(order[pos]));
+                        addMove(row, "edit_upBtn_001.png", pos, pos + 1);
+                        addMove(row, "edit_downBtn_001.png", pos, pos - 1);
+                    }
+
+                    auto reset = newRow();
+                    auto resetSprite = ButtonSprite::create("Reset");
+                    resetSprite->setScale(0.5f);
+                    reset->addChild(CCMenuItemExt::createSpriteExtra(resetSprite, [this](CCMenuItemSpriteExtra *)
+                                                                     {
+                        trailsettings::saveLayerOrder(trailsettings::kDefaultLayerOrder);
+                        trailsettings::resetColors();
+                        applySettings();
+                        rebuildLater(); }));
+
+                    toggleRow("Batch Layer Overlap", "batch-layer-overlap", false);
+                    break;
                 }
 
-                auto reset = newRow();
-                auto resetSprite = ButtonSprite::create("Reset");
-                resetSprite->setScale(0.5f);
-                reset->addChild(CCMenuItemExt::createSpriteExtra(resetSprite, [this](CCMenuItemSpriteExtra *)
-                                                                 {
-                    trailsettings::saveLayerOrder(trailsettings::kDefaultLayerOrder);
-                    trailsettings::resetColors();
-                    applySettings();
-                    rebuildLater(); }));
+                case 2: // Trail
+                    addNumber({"Length", "trail-length", 240, 1, 10, 1, 1024, true});
+                    toggleRow("Unlimited", "trail-no-limit", false);
+                    addNumber({"Opacity", "opacity", 1.0, 100, 5, 0, 100, false});
+                    addNumber({"Thickness", "thickness", 1.0, 100, 5, 1, 200, false});
+                    toggleRow("Fade with Age", "fade-with-age", false);
+                    break;
 
-                toggleRow("Batch Layer Overlap", "batch-layer-overlap", false);
-                addNumber({"Length", "trail-length", 240, 1, 10, 1, 1024, true});
-                toggleRow("Unlimited", "trail-no-limit", false);
-                addNumber({"Opacity", "opacity", 1.0, 100, 5, 0, 100, false});
-                addNumber({"Thickness", "thickness", 1.0, 100, 5, 1, 200, false});
+                default: // Colors
+                {
+                    auto clicks = toggleRow("Color Clicks", "color-clicks", true);
+                    addColor(clicks, "click-color");
+                    addColor(clicks, "release-color");
+                    toggleRow("Draw on Top", "click-release-on-top", false);
+                    auto held = toggleRow("Color when Held", "color-when-held", true);
+                    addColor(held, "hold-color");
+                    toggleRow("Fill Hitbox", "fill-hitbox", false);
+                    addNumber({"Fill Opacity", "fill-opacity", 0.25, 100, 5, 0, 100, false});
+                    break;
+                }
+                }
 
-                auto clicks = toggleRow("Color Clicks", "color-clicks", true);
-                addColor(clicks, "click-color");
-                addColor(clicks, "release-color");
-                toggleRow("Draw on Top", "click-release-on-top", false);
-                auto held = toggleRow("Color when Held", "color-when-held", true);
-                addColor(held, "hold-color");
-                toggleRow("Fade with Age", "fade-with-age", false);
-
-                toggleRow("Fill Hitbox", "fill-hitbox", false);
-                addNumber({"Fill Opacity", "fill-opacity", 0.25, 100, 5, 0, 100, false});
-
-                auto content = m_scroll->m_contentLayer;
-                for (auto child : CCArrayExt<CCNode *>(content->getChildren()))
+                for (auto child : CCArrayExt<CCNode *>(m_pageRoot->getChildren()))
                     child->updateLayout();
-                content->updateLayout();
             }
         };
     }
