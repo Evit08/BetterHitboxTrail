@@ -58,11 +58,35 @@ namespace hitboxtrail
 
                 auto mod = Mod::get();
                 bool changed = opened;
-                ImGui::SetNextWindowSize(ImVec2(340.f, 0.f), ImGuiCond_FirstUseEver);
+                // Reset sets this so the window goes back to its default size on the next frame.
+                static bool s_resetSize = false;
+                ImGui::SetNextWindowSize(ImVec2(340.f, 0.f), s_resetSize ? ImGuiCond_Always : ImGuiCond_FirstUseEver);
+                s_resetSize = false;
                 if (!ImGui::Begin("Better Hitbox Trail", &s_settingsOpen)) {
                     ImGui::End();
                     return;
                 }
+
+                // Reset button in the title bar, right next to the title text (the title itself is untouched).
+                {
+                    auto const& style = ImGui::GetStyle();
+                    auto pos = ImGui::GetWindowPos();
+                    auto cursor = ImGui::GetCursorScreenPos(); // content start, just below the title bar
+                    // The title bar is outside the content clip rect, so widen it for this button.
+                    ImGui::PushClipRect(pos, ImVec2(pos.x + ImGui::GetWindowWidth(), cursor.y), false);
+                    // The title text starts after the collapse arrow.
+                    ImGui::SetCursorScreenPos(ImVec2(pos.x + style.FramePadding.x + ImGui::GetFontSize() + style.ItemInnerSpacing.x +
+                                                         ImGui::CalcTextSize("Better Hitbox Trail").x + 12.f,
+                                                     pos.y + style.FramePadding.y));
+                    if (ImGui::SmallButton("Reset")) {
+                        trailsettings::resetAll();
+                        s_resetSize = true;
+                        changed = true;
+                    }
+                    ImGui::PopClipRect();
+                    ImGui::SetCursorScreenPos(cursor);
+                }
+
                 ImGui::PushItemWidth(110.f);
                 auto checkbox = [&](char const* label, char const* key, bool def) {
                     bool value = mod->getSavedValue<bool>(key, def);
@@ -171,12 +195,7 @@ namespace hitboxtrail
                     trailsettings::saveLayerOrder(order);
                     changed = true;
                 }
-                if (ImGui::SmallButton("Reset")) {
-                    trailsettings::resetAll();
-                    changed = true;
-                }
-                ImGui::SameLine();
-                ImGui::TextDisabled("Drag a row to reorder");
+                ImGui::TextDisabled("Drag to change which hitbox is on top");
                 checkbox("Batch Layer Overlap", "batch-layer-overlap", false);
                 ImGui::Separator();
 

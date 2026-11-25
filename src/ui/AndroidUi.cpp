@@ -24,7 +24,7 @@ namespace hitboxtrail
         constexpr float kRowSpacing = 29.f;
         constexpr float kFirstRowY = 72.f; // 팝업 중앙 기준, 첫 번째 행의 y 위치
         constexpr float kNavY = -107.f;    // 팝업 중앙 기준, 페이지 이동 버튼의 y 위치
-        constexpr float kResetButtonX = 120.f; // 팝업 중앙 기준, Reset 버튼의 x 위치
+        constexpr float kResetGap = 10.f; // 제목과 Reset 버튼 사이의 간격
         constexpr int kPageCount = 4;
 
         constexpr char const *kPageNames[kPageCount] = {"General", "Layers", "Trail", "Colors"};
@@ -121,6 +121,8 @@ namespace hitboxtrail
                                                                            { changePage(1); });
                 right->setPosition({90.f, kNavY});
                 nav->addChild(right);
+
+                addTitleResetButton(); // 제목 오른쪽의 Reset 버튼 (모든 페이지에서 보임)
 
                 m_pageLabel = CCLabelBMFont::create("", "bigFont.fnt");
                 m_pageLabel->setScale(0.45f);
@@ -262,15 +264,12 @@ namespace hitboxtrail
                                                                             { change(s.step); }));
             }
 
-            // 주어진 행과 같은 높이의 오른쪽 끝에 Reset 버튼을 놓는다. (모든 설정을 기본값으로 되돌림)
-            void addResetButton(CCMenu *row)
+            // 제목(Better Hitbox Trail) 바로 오른쪽에 Reset 버튼을 놓는다. 제목 위치는 그대로 둔다.
+            // 누르면 확인창이 뜨고, 확인하면 모든 설정을 기본값으로 되돌린다.
+            void addTitleResetButton()
             {
-                auto menu = CCMenu::create();
-                menu->setPosition({0.f, 0.f});
-                m_pageRoot->addChild(menu);
-
                 auto sprite = ButtonSprite::create("Reset");
-                sprite->setScale(0.5f);
+                sprite->setScale(0.45f);
                 auto button = CCMenuItemExt::createSpriteExtra(sprite, [this](CCMenuItemSpriteExtra *)
                                                                {
                     createQuickPopup("Reset", "Reset all settings to their default values?", "Cancel", "Reset",
@@ -282,8 +281,14 @@ namespace hitboxtrail
                                          applySettings();
                                          rebuildLater();
                                      }); });
-                button->setPosition({kResetButtonX, row->getPositionY()});
+
+                // 제목과 같은 부모 안에 두면 좌표 변환 없이 제목의 오른쪽 끝에 바로 붙일 수 있다.
+                button->setPosition(m_title->getPosition() +
+                                    CCPoint{(m_title->getScaledContentSize().width + sprite->getScaledContentSize().width) / 2.f + kResetGap, 0.f});
+                auto menu = CCMenu::create();
+                menu->setPosition({0.f, 0.f});
                 menu->addChild(button);
+                m_title->getParent()->addChild(menu);
             }
 
             void populate()
@@ -294,7 +299,7 @@ namespace hitboxtrail
                 switch (m_page)
                 {
                 case 0: // General
-                    addResetButton(toggleRow("Hitbox Trail", "hitbox-trail-enabled", true));
+                    toggleRow("Hitbox Trail", "hitbox-trail-enabled", true);
                     toggleRow("Show on Death", "hitbox-trail-on-death", true);
                     toggleRow("Always Show", "always-show-hitbox-trail", false);
                     toggleRow("Only Player", "only-player-enabled", false, "cube-hitbox-enabled");
