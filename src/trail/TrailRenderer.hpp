@@ -13,7 +13,8 @@ namespace hitboxtrail::trailrenderer
     {
         All,
         NonClick,
-        ClickOnly
+        ClickOnly,
+        Dots
     };
 
     class TrailRenderer
@@ -33,6 +34,11 @@ namespace hitboxtrail::trailrenderer
             {
                 drawStates(player1States, settings, DrawPass::ClickOnly, visible, emit);
                 drawStates(player2States, settings, DrawPass::ClickOnly, visible, emit);
+            }
+            if (settings.clickDot)
+            {
+                drawStates(player1States, settings, DrawPass::Dots, visible, emit);
+                drawStates(player2States, settings, DrawPass::Dots, visible, emit);
             }
         }
 
@@ -73,7 +79,7 @@ namespace hitboxtrail::trailrenderer
             };
             auto skipBase = [&](TrailState const &state)
             {
-                if (state.betweenFrame && !showBetweenFrames)
+                if (state.betweenFrame && !showBetweenFrames && pass != DrawPass::Dots)
                     return true;
                 return onlyClickRelease && !isClick(state);
             };
@@ -84,6 +90,7 @@ namespace hitboxtrail::trailrenderer
                 case DrawPass::NonClick:
                     return !isClick(state);
                 case DrawPass::ClickOnly:
+                case DrawPass::Dots:
                     return isClick(state);
                 case DrawPass::All:
                     break;
@@ -117,7 +124,7 @@ namespace hitboxtrail::trailrenderer
                     if (skipBase(state))
                         continue;
                     if (inPass(state))
-                        drawAll(state, 1.f, settings, emit);
+                        drawEntry(state, 1.f, settings, pass, emit);
                     break;
                 }
                 return;
@@ -129,7 +136,7 @@ namespace hitboxtrail::trailrenderer
                 return total > 1.f ? static_cast<float>(idx) / (total - 1.f) : 1.f;
             };
 
-            if (settings.batchLayers)
+            if (settings.batchLayers && pass != DrawPass::Dots)
             {
                 m_batch.clear();
                 for (size_t idx = 0; idx < states.size(); ++idx)
@@ -150,9 +157,38 @@ namespace hitboxtrail::trailrenderer
                     auto const &state = states[idx];
                     if (skip(state))
                         continue;
-                    drawAll(state, ageFor(idx), settings, emit);
+                    drawEntry(state, ageFor(idx), settings, pass, emit);
                 }
             }
+        }
+
+        template <class Emit>
+        static void drawEntry(TrailState const &state, float age,
+                              trailsettings::RenderSettings const &settings, DrawPass pass, Emit &&emit)
+        {
+            if (pass == DrawPass::Dots)
+                drawDot(state, settings, emit);
+            else
+                drawAll(state, age, settings, emit);
+        }
+
+        template <class Emit>
+        static void drawDot(TrailState const &state, trailsettings::RenderSettings const &settings, Emit &&emit)
+        {
+            auto hollow = state.click == TrailState::Click::Release;
+            auto const clear = cocos2d::ccColor4F{0.f, 0.f, 0.f, 0.f};
+            auto fill = hollow ? clear : settings.dotCol;
+            auto outline = hollow ? settings.dotCol : clear;
+            auto thickness = hollow ? kClickDotThickness : 0.f;
+            auto half = kClickDotSize / 2.f;
+            auto centre = cocos2d::CCPointMake(state.rect.getMidX(), state.rect.getMidY());
+            if (settings.dotCircle)
+            {
+                trailgeometry::appendCircle(emit, centre, half, thickness, fill, outline);
+                return;
+            }
+            cocos2d::CCRect rect(centre.x - half, centre.y - half, kClickDotSize, kClickDotSize);
+            trailgeometry::appendRect(emit, rect, thickness, fill, outline);
         }
 
         template <class Emit>
@@ -216,6 +252,9 @@ namespace hitboxtrail::trailrenderer
             }
             }
         }
+
+        static constexpr float kClickDotSize = 4.f;
+        static constexpr float kClickDotThickness = 0.5f;
 
         std::vector<BatchItem> m_batch;
     };

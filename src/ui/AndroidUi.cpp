@@ -195,6 +195,26 @@ namespace hitboxtrail
                 return row;
             }
 
+            void addDotShapes()
+            {
+                auto row = newRow();
+                auto add = [this, row](char const *label, bool circle)
+                {
+                    auto toggler = CCMenuItemExt::createTogglerWithStandardSprites(0.6f, [this, circle](CCMenuItemToggler *)
+                                                                                   {
+                        Mod::get()->setSavedValue<bool>("click-dot-circle", circle);
+                        applySettings();
+                        rebuildLater(); });
+                    toggler->toggle(Mod::get()->getSavedValue<bool>("click-dot-circle", false) == circle);
+                    row->addChild(toggler);
+                    auto text = CCLabelBMFont::create(label, "bigFont.fnt");
+                    text->setScale(0.5f);
+                    row->addChild(text);
+                };
+                add("Rect", false);
+                add("Circle", true);
+            }
+
             void addColor(CCMenu *row, char const *key)
             {
                 auto swatch = CCSprite::createWithSpriteFrameName("whiteSquare60_001.png");
@@ -341,6 +361,9 @@ namespace hitboxtrail
                     addColor(held, "hold-color");
                     toggleRow("Fill Hitbox", "fill-hitbox", false);
                     addNumber({"Fill Opacity", "fill-opacity", 0.25, 100, 5, 0, 100, false});
+                    auto dot = toggleRow("Click Dot", "click-dot", false);
+                    addColor(dot, "click-dot-color");
+                    addDotShapes();
                     break;
                 }
                 }

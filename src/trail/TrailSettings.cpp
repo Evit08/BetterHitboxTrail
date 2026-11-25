@@ -113,6 +113,8 @@ namespace hitboxtrail::trailsettings
                 .fadeWithAge = mod->getSavedValue<bool>("fade-with-age", false),
                 .blueClicks = mod->getSettingValue<bool>("blue-hitbox-color-clicks"),
                 .fillOn = mod->getSavedValue<bool>("fill-hitbox", false),
+                .clickDot = mod->getSavedValue<bool>("click-dot", false),
+                .dotCircle = mod->getSavedValue<bool>("click-dot-circle", false),
                 .batchLayers = mod->getSavedValue<bool>("batch-layer-overlap", false),
                 .onlyClickRelease = shared.onlyClickRelease,
                 .showBetweenFrames = betweenVisible(),
@@ -127,6 +129,7 @@ namespace hitboxtrail::trailsettings
                 .pressCol = toColor4F(loadColor("click-color")),
                 .releaseCol = toColor4F(loadColor("release-color")),
                 .holdCol = toColor4F(loadColor("hold-color")),
+                .dotCol = toColor4F(loadColor("click-dot-color")),
             };
             for (auto profile : kThickProfiles)
                 for (size_t mini = 0; mini < 2; ++mini)
@@ -237,12 +240,13 @@ namespace hitboxtrail::trailsettings
         constexpr std::array kColorKeys{
             "click-color", "release-color", "hold-color",
             "square-hitbox-color", "blue-hitbox-color",
-            "circle-hitbox-color", "rotation-hitbox-color"};
+            "circle-hitbox-color", "rotation-hitbox-color",
+            "click-dot-color"};
 
         cocos2d::ccColor3B defaultColor(std::string_view name)
         {
             if (name == "click-color")
-                return {0, 255, 0};
+                return {255, 255, 0};
             if (name == "release-color")
                 return {0, 255, 255};
             if (name == "hold-color")
@@ -302,6 +306,8 @@ namespace hitboxtrail::trailsettings
             {"color-when-held", true},
             {"fade-with-age", false},
             {"fill-hitbox", false},
+            {"click-dot", false},
+            {"click-dot-circle", false},
         };
         for (auto const &entry : kBools)
             mod->setSavedValue<bool>(entry.key, entry.value);

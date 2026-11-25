@@ -63,12 +63,13 @@ namespace hitboxtrail::trailsettings
         bool colorClicks, colorHeld, fadeWithAge;
         bool blueClicks;
         bool fillOn;
+        bool clickDot, dotCircle;
         bool batchLayers, onlyClickRelease;
         bool showBetweenFrames, clickOnTop;
         float opacity, masterThick;
         float fillAlpha;
         cocos2d::ccColor4F mainCol, blueCol, circleCol, rotCol;
-        cocos2d::ccColor4F pressCol, releaseCol, holdCol;
+        cocos2d::ccColor4F pressCol, releaseCol, holdCol, dotCol;
         ThickTable mainThick, blueThick, circleThick, rotThick;
         // Bottom to top. Later entries are drawn over earlier ones.
         std::array<HitboxLayer, kHitboxLayerCount> layerOrder = kDefaultLayerOrder;

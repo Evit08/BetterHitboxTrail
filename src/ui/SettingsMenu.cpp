@@ -78,13 +78,24 @@ namespace hitboxtrail
                     ImGui::SetCursorScreenPos(ImVec2(pos.x + style.FramePadding.x + ImGui::GetFontSize() + style.ItemInnerSpacing.x +
                                                          ImGui::CalcTextSize("Better Hitbox Trail").x + 12.f,
                                                      pos.y + style.FramePadding.y));
-                    if (ImGui::SmallButton("Reset")) {
+                    if (ImGui::SmallButton("Reset"))
+                        ImGui::OpenPopup("Reset Settings");
+                    ImGui::PopClipRect();
+                    ImGui::SetCursorScreenPos(cursor);
+                }
+
+                if (ImGui::BeginPopupModal("Reset Settings", nullptr, ImGuiWindowFlags_AlwaysAutoResize)) {
+                    ImGui::TextUnformatted("Reset all settings to their default values?");
+                    if (ImGui::Button("Reset")) {
                         trailsettings::resetAll();
                         s_resetSize = true;
                         changed = true;
+                        ImGui::CloseCurrentPopup();
                     }
-                    ImGui::PopClipRect();
-                    ImGui::SetCursorScreenPos(cursor);
+                    ImGui::SameLine();
+                    if (ImGui::Button("Cancel"))
+                        ImGui::CloseCurrentPopup();
+                    ImGui::EndPopup();
                 }
 
                 ImGui::PushItemWidth(110.f);
@@ -233,7 +244,23 @@ namespace hitboxtrail
                 checkbox("Color when Held", "color-when-held", true);
                 ImGui::SameLine();
                 colorEdit("##hold", "hold-color");
-                checkbox("Fade with Age", "fade-with-age", false);
+                checkbox("Click Dot", "click-dot", false);
+                ImGui::SameLine();
+                colorEdit("##dot", "click-dot-color");
+                ImGui::SameLine(0.f, 30.f);
+                ImGui::BeginDisabled(!mod->getSavedValue<bool>("click-dot", false));
+                bool dotCircle = mod->getSavedValue<bool>("click-dot-circle", false);
+                bool dotRect = !dotCircle;
+                if (ImGui::Checkbox("Rect", &dotRect)) {
+                    mod->setSavedValue<bool>("click-dot-circle", false);
+                    changed = true;
+                }
+                ImGui::SameLine();
+                if (ImGui::Checkbox("Circle", &dotCircle)) {
+                    mod->setSavedValue<bool>("click-dot-circle", true);
+                    changed = true;
+                }
+                ImGui::EndDisabled();
                 ImGui::Separator();
 
                 checkbox("Fill Hitbox", "fill-hitbox", false);
@@ -243,6 +270,7 @@ namespace hitboxtrail
                     mod->setSavedValue<double>("fill-opacity", static_cast<double>(std::clamp(fillOpacity, 0.f, 100.f)) / 100.0);
                     changed = true;
                 }
+                checkbox("Fade with Age", "fade-with-age", false);
                 if (changed) applySettings();
                 ImGui::PopItemWidth();
                 ImGui::End(); });

@@ -173,7 +173,7 @@ namespace hitboxtrail
     bool TrailNode::shouldShowWhileAlive(GJBaseGameLayer *layer)
     {
         auto includeMegaHack = m_megaHackIgnoreFrames <= 0;
-        return layer->m_isDebugDrawEnabled || ModDetection::enabled(includeMegaHack);
+        return ModDetection::enabled(includeMegaHack);
     }
 
     void TrailNode::drawFlatTriangle(cocos2d::CCPoint const &a, cocos2d::CCPoint const &b,
