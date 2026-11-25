@@ -17,17 +17,21 @@ namespace hitboxtrail
 {
     namespace
     {
-        constexpr float kPopupWidth = 360.f;
+        constexpr float kPopupWidth = 520.f;
         constexpr float kPopupHeight = 260.f;
-        constexpr float kRowWidth = 300.f;
+        constexpr float kRowWidth = 390.f;
         constexpr float kRowHeight = 26.f;
         constexpr float kRowSpacing = 29.f;
+        constexpr float kContentX = 50.f;
         constexpr float kFirstRowY = 72.f; // 팝업 중앙 기준, 첫 번째 행의 y 위치
-        constexpr float kNavY = -107.f;    // 팝업 중앙 기준, 페이지 이동 버튼의 y 위치
+        constexpr float kSidebarX = -205.f;
+        constexpr float kSidebarWidth = 90.f;
+        constexpr float kSidebarSpacing = 34.f;
         constexpr float kResetGap = 10.f; // 제목과 Reset 버튼 사이의 간격
-        constexpr int kPageCount = 4;
+        constexpr float kSwatchScale = 0.375f;
+        constexpr int kPageCount = 5;
 
-        constexpr char const *kPageNames[kPageCount] = {"General", "Layers", "Trail", "Colors"};
+        constexpr char const *kPageNames[kPageCount] = {"General", "Layers", "Trail", "Clicks", "Visual"};
 
         struct NumberSetting
         {
@@ -84,7 +88,6 @@ namespace hitboxtrail
         private:
             CCNode *m_root = nullptr;     // 팝업 배경의 중앙에 놓이는 기준 노드
             CCNode *m_pageRoot = nullptr; // 현재 페이지의 행들이 들어가는 노드
-            CCLabelBMFont *m_pageLabel = nullptr;
             int m_page = 0;
             int m_rowIndex = 0;
 
@@ -107,42 +110,34 @@ namespace hitboxtrail
                 m_pageRoot = CCNode::create();
                 m_root->addChild(m_pageRoot);
 
-                // 페이지 이동 버튼 (좌 / 라벨 / 우)
-                auto nav = CCMenu::create();
-                nav->setPosition({0.f, 0.f});
-                m_root->addChild(nav);
-
-                auto left = CCMenuItemExt::createSpriteExtraWithFrameName("edit_leftBtn_001.png", 0.8f, [this](CCMenuItemSpriteExtra *)
-                                                                          { changePage(-1); });
-                left->setPosition({-90.f, kNavY});
-                nav->addChild(left);
-
-                auto right = CCMenuItemExt::createSpriteExtraWithFrameName("edit_rightBtn_001.png", 0.8f, [this](CCMenuItemSpriteExtra *)
-                                                                           { changePage(1); });
-                right->setPosition({90.f, kNavY});
-                nav->addChild(right);
-
                 addTitleResetButton(); // 제목 오른쪽의 Reset 버튼 (모든 페이지에서 보임)
-
-                m_pageLabel = CCLabelBMFont::create("", "bigFont.fnt");
-                m_pageLabel->setScale(0.45f);
-                m_pageLabel->setPosition({0.f, kNavY});
-                m_root->addChild(m_pageLabel);
 
                 populate();
                 return true;
             }
 
-            void changePage(int delta)
+            void selectPage(int page)
             {
-                m_page = (m_page + delta + kPageCount) % kPageCount;
+                if (page == m_page)
+                    return;
+                m_page = page;
                 rebuildLater();
             }
 
-            void updatePageLabel()
+            void addSidebar()
             {
-                auto str = fmt::format("{} ({}/{})", kPageNames[m_page], m_page + 1, kPageCount);
-                m_pageLabel->setString(str.c_str());
+                auto menu = CCMenu::create();
+                menu->setPosition({0.f, 0.f});
+                m_pageRoot->addChild(menu);
+                for (int i = 0; i < kPageCount; ++i)
+                {
+                    auto sprite = ButtonSprite::create(kPageNames[i], static_cast<int>(kSidebarWidth), true, "bigFont.fnt",
+                                                       i == m_page ? "GJ_button_01.png" : "GJ_button_04.png", 28.f, 0.5f);
+                    auto button = CCMenuItemExt::createSpriteExtra(sprite, [this, i](CCMenuItemSpriteExtra *)
+                                                                   { selectPage(i); });
+                    button->setPosition({kSidebarX, kFirstRowY - static_cast<float>(i) * kSidebarSpacing});
+                    menu->addChild(button);
+                }
             }
 
             void onRebuild(float)
@@ -168,15 +163,14 @@ namespace hitboxtrail
                                    ->setAxisAlignment(AxisAlignment::Start)
                                    ->setAutoScale(false)
                                    ->setGap(8.f));
-                row->setPosition({0.f, kFirstRowY - static_cast<float>(m_rowIndex) * kRowSpacing});
+                row->setPosition({kContentX, kFirstRowY - static_cast<float>(m_rowIndex) * kRowSpacing});
                 ++m_rowIndex;
                 m_pageRoot->addChild(row);
                 return row;
             }
 
-            CCMenu *toggleRow(char const *label, char const *key, bool fallback, char const *clears = nullptr)
+            void addToggle(CCMenu *row, char const *label, char const *key, bool fallback, char const *clears = nullptr)
             {
-                auto row = newRow();
                 auto toggler = CCMenuItemExt::createTogglerWithStandardSprites(0.6f, [this, key, clears](CCMenuItemToggler *t)
                                                                                {
                     auto on = !t->isToggled();
@@ -192,6 +186,12 @@ namespace hitboxtrail
                 auto text = CCLabelBMFont::create(label, "bigFont.fnt");
                 text->setScale(0.5f);
                 row->addChild(text);
+            }
+
+            CCMenu *toggleRow(char const *label, char const *key, bool fallback, char const *clears = nullptr)
+            {
+                auto row = newRow();
+                addToggle(row, label, key, fallback, clears);
                 return row;
             }
 
@@ -218,7 +218,7 @@ namespace hitboxtrail
             void addColor(CCMenu *row, char const *key)
             {
                 auto swatch = CCSprite::createWithSpriteFrameName("whiteSquare60_001.png");
-                swatch->setScale(0.3f);
+                swatch->setScale(kSwatchScale);
                 swatch->setColor(trailsettings::loadColor(key));
                 Ref<CCSprite> target = swatch;
                 row->addChild(CCMenuItemExt::createSpriteExtra(swatch, [key, target](CCMenuItemSpriteExtra *)
@@ -314,7 +314,7 @@ namespace hitboxtrail
             void populate()
             {
                 m_rowIndex = 0;
-                updatePageLabel();
+                addSidebar();
 
                 switch (m_page)
                 {
@@ -351,21 +351,24 @@ namespace hitboxtrail
                     toggleRow("Fade with Age", "fade-with-age", false);
                     break;
 
-                default: // Colors
+                case 3: // Clicks
                 {
                     auto clicks = toggleRow("Color Clicks", "color-clicks", true);
                     addColor(clicks, "click-color");
                     addColor(clicks, "release-color");
-                    toggleRow("Draw on Top", "click-release-on-top", false);
+                    addToggle(clicks, "Draw on Top", "click-release-on-top", false);
                     auto held = toggleRow("Color when Held", "color-when-held", true);
                     addColor(held, "hold-color");
-                    toggleRow("Fill Hitbox", "fill-hitbox", false);
-                    addNumber({"Fill Opacity", "fill-opacity", 0.25, 100, 5, 0, 100, false});
                     auto dot = toggleRow("Click Dot", "click-dot", false);
                     addColor(dot, "click-dot-color");
                     addDotShapes();
                     break;
                 }
+
+                default: // Visual
+                    toggleRow("Fill Hitbox", "fill-hitbox", false);
+                    addNumber({"Fill Opacity", "fill-opacity", 0.25, 100, 5, 0, 100, false});
+                    break;
                 }
 
                 for (auto child : CCArrayExt<CCNode *>(m_pageRoot->getChildren()))
