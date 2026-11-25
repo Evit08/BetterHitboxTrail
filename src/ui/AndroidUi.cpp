@@ -26,21 +26,20 @@ namespace hitboxtrail
         constexpr float kContentX = 41.f;
         constexpr float kFirstRowY = 72.f; // 팝업 중앙 기준, 첫 번째 행의 y 위치
         constexpr float kSidebarX = -167.f;
-        constexpr float kSidebarFirstY = 96.f;
         constexpr float kSidebarWidth = 48.f;
         constexpr float kSidebarSpacing = 28.f;
         constexpr float kResetMargin = 6.f;
         constexpr float kResetScale = 0.54f;
         constexpr float kSwatchScale = 0.4f;
-        constexpr float kTabPanelY = 40.f;
+        constexpr float kTabPanelY = 16.f;
         constexpr float kTabPanelWidth = 70.f;
-        constexpr float kTabPanelHeight = 142.f;
+        constexpr float kTabPanelHeight = 152.f;
         constexpr float kContentPanelX = 38.f;
-        constexpr float kContentPanelY = 2.f;
+        constexpr float kContentPanelY = 0.f;
         constexpr float kContentPanelWidth = 328.f;
-        constexpr float kContentPanelHeight = 187.f;
-        constexpr ccColor3B kBackgroundColor{120, 120, 120};
-        constexpr ccColor3B kPanelColor{55, 55, 55};
+        constexpr float kContentPanelHeight = 184.f;
+        constexpr ccColor3B kBackgroundTint{83, 139, 255};
+        constexpr GLubyte kPanelOpacity = 120;
         constexpr int kPageCount = 5;
 
         constexpr char const *kPageNames[kPageCount] = {"General", "Layers", "Trail", "Clicks", "Visual"};
@@ -115,14 +114,13 @@ namespace hitboxtrail
                 CCPoint center = m_bgSprite->getPosition() +
                                  CCPoint{(0.5f - anchor.x) * bgSize.width, (0.5f - anchor.y) * bgSize.height};
 
-                m_bgSprite->setVisible(false);
-                addPanel(m_mainLayer, center, {kPopupWidth, kPopupHeight}, kBackgroundColor);
+                m_bgSprite->setColor(kBackgroundTint);
 
                 m_root = CCNode::create();
                 m_root->setPosition(center);
                 m_mainLayer->addChild(m_root);
-                addPanel(m_root, {kSidebarX, kTabPanelY}, {kTabPanelWidth, kTabPanelHeight}, kPanelColor);
-                addPanel(m_root, {kContentPanelX, kContentPanelY}, {kContentPanelWidth, kContentPanelHeight}, kPanelColor);
+                addPanel(m_root, {kSidebarX, kTabPanelY}, {kTabPanelWidth, kTabPanelHeight});
+                addPanel(m_root, {kContentPanelX, kContentPanelY}, {kContentPanelWidth, kContentPanelHeight});
 
                 m_pageRoot = CCNode::create();
                 m_root->addChild(m_pageRoot);
@@ -133,12 +131,13 @@ namespace hitboxtrail
                 return true;
             }
 
-            void addPanel(CCNode *parent, CCPoint center, CCSize size, ccColor3B color)
+            void addPanel(CCNode *parent, CCPoint center, CCSize size)
             {
                 using Background = std::remove_pointer_t<decltype(m_bgSprite)>;
-                auto panel = Background::create("square02b_001.png");
+                auto panel = Background::create("GJ_square01.png");
                 panel->setContentSize(size);
-                panel->setColor(color);
+                panel->setColor(ccBLACK);
+                panel->setOpacity(kPanelOpacity);
                 panel->setPosition(center);
                 parent->addChild(panel, -1);
             }
@@ -162,7 +161,7 @@ namespace hitboxtrail
                                                        i == m_page ? "GJ_button_01.png" : "GJ_button_04.png", 24.f, 0.4f);
                     auto button = CCMenuItemExt::createSpriteExtra(sprite, [this, i](CCMenuItemSpriteExtra *)
                                                                    { selectPage(i); });
-                    button->setPosition({kSidebarX, kSidebarFirstY - static_cast<float>(i) * kSidebarSpacing});
+                    button->setPosition({kSidebarX, kFirstRowY - static_cast<float>(i) * kSidebarSpacing});
                     menu->addChild(button);
                 }
             }
