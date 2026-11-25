@@ -2,6 +2,7 @@
 
 #include "../ModDetection.hpp"
 #include "../TrailNode.hpp"
+#include "../ui/SettingsMenu.hpp"
 
 using namespace geode::prelude;
 using namespace hitboxtrail;
@@ -13,6 +14,17 @@ class $modify(TrailPauseLayer, PauseLayer)
         PauseLayer::customSetup();
         refreshTrail();
         schedule(schedule_selector(TrailPauseLayer::refreshTrailTick), 0.1f);
+#ifdef GEODE_IS_ANDROID
+        auto sprite = ButtonSprite::create("Trail");
+        sprite->setScale(0.6f);
+        auto button = CCMenuItemExt::createSpriteExtra(sprite, [](CCMenuItemSpriteExtra *)
+                                                       { showTrailSettings(); });
+        auto menu = CCMenu::create();
+        menu->addChild(button);
+        auto winSize = CCDirector::get()->getWinSize();
+        menu->setPosition({winSize.width - 50.f, winSize.height - 30.f});
+        addChild(menu);
+#endif
     }
     void onEdit(CCObject *sender)
     {

@@ -1,12 +1,13 @@
 {
-  "geode": "5.9.0",
+  "geode": "6.0.0",
   "gd": {
-    "win": "2.2081",
-    "mac": "2.2081"
+    "win": "2.2091",
+    "mac": "2.2091",
+    "android": "2.2091"
   },
   "id": "evit.better-hitbox-trail",
   "name": "Better Hitbox Trail",
-  "version": "v1.0.2",
+  "version": "v1.0.3",
   "developer": "Evit",
   "description": "This mod adds customizable hitbox trail settings and a mod menu.",
   "links": {
@@ -56,7 +57,7 @@
     "hitbox-between-frames": {
       "type": "bool",
       "name": "Hitbox Between Frames",
-      "description": "When using CBF or CBS, this also records a hitbox position at the exact sub-tick moment a click/release occurs. Turn off to only record hitbox positions on regular game ticks, since sub-tick hitboxes aren't actual collision points. (except if you die in a frame with CBF applied)",
+      "description": "When using CBF or CBS, this also records a hitbox position at the exact sub-tick moment a click/release occurs. Turn off to only record hitbox positions on regular game ticks, since sub-tick hitboxes aren't actual collision points.",
       "default": true
     },
     "blue-hitbox-color-clicks": {

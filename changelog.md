@@ -1,3 +1,9 @@
+## v1.0.3
+
+- Ported to 2.2091
+
+- Now compatible with mobile
+
 ## v1.0.2
 
 - Moved Color Settings to the settings popup.

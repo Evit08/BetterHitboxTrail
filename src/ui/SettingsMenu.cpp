@@ -1,7 +1,9 @@
 #include "SettingsMenu.hpp"
 
 #include <Geode/Geode.hpp>
+#ifndef GEODE_IS_ANDROID
 #include <imgui-cocos.hpp>
+#endif
 #include <algorithm>
 #include <array>
 #include <cmath>
@@ -13,28 +15,31 @@ using namespace geode::prelude;
 
 namespace hitboxtrail
 {
+    void applySettings()
+    {
+        if (auto layer = GJBaseGameLayer::get())
+            if (auto trail = getTrail(layer))
+            {
+                trail->invalidateRenderSettings();
+                trail->refreshDrawing(layer);
+            }
+    }
+
+#ifndef GEODE_IS_ANDROID
     namespace
     {
         bool s_settingsOpen = false;
-
-        void refreshTrail()
-        {
-            if (auto layer = GJBaseGameLayer::get())
-                if (auto trail = getTrail(layer))
-                {
-                    trail->invalidateRenderSettings();
-                    trail->refreshDrawing(layer);
-                }
-        }
     }
+#endif
 
     void registerSettingsMenu()
     {
         listenForAllSettingChanges([](std::string_view key, std::shared_ptr<SettingV3>)
                                    {
             if (key == "open-settings") return;
-            refreshTrail(); }, Mod::get());
+            applySettings(); }, Mod::get());
 
+#ifndef GEODE_IS_ANDROID
         ImGuiCocos::get().setup([] {}).draw([]
                                             {
                 static bool s_wasOpen = false;
@@ -220,7 +225,7 @@ namespace hitboxtrail
                     mod->setSavedValue<double>("fill-opacity", static_cast<double>(std::clamp(fillOpacity, 0.f, 100.f)) / 100.0);
                     changed = true;
                 }
-                if (changed) refreshTrail();
+                if (changed) applySettings();
                 ImGui::PopItemWidth();
                 ImGui::End(); });
 
@@ -231,5 +236,6 @@ namespace hitboxtrail
                     return true;
                 }
                 return false; });
+#endif
     }
 }
