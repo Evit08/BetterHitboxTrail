@@ -83,13 +83,14 @@ namespace hitboxtrail
                 setTitle("Better Hitbox Trail");
                 CCSize size{kPopupWidth - 40.f, kPopupHeight - 60.f};
                 m_scroll = ScrollLayer::create(size);
-                auto mainSize = m_mainLayer->getContentSize();
-                m_scroll->setPosition({mainSize.width / 2.f - size.width / 2.f,
-                                       mainSize.height / 2.f - size.height / 2.f - 10.f});
-                m_mainLayer->addChild(m_scroll);
+                // m_mainLayer의 원점이 팝업 모서리가 아닐 수 있으므로, 좌표를 직접 계산하지 않고
+                // 팝업 중앙(Anchor::Center)을 기준으로 배치한다. (스크롤 레이어의 기준점은 좌하단)
+                m_mainLayer->addChildAtPosition(m_scroll, Anchor::Center,
+                                                {-size.width / 2.f, -size.height / 2.f - 10.f});
                 m_scroll->m_contentLayer->setLayout(ColumnLayout::create()
                                                         ->setAxisReverse(true)
                                                         ->setAxisAlignment(AxisAlignment::End)
+                                                        ->setAutoScale(false) // 줄 수가 많아도 행이 축소되지 않게 함
                                                         ->setAutoGrowAxis(size.height)
                                                         ->setGap(4.f));
                 populate();
