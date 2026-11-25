@@ -5,6 +5,7 @@
 #ifdef GEODE_IS_ANDROID
 
 #include <Geode/ui/ColorPickPopup.hpp>
+#include <Geode/ui/TextInput.hpp>
 #include <algorithm>
 #include <cmath>
 #include <type_traits>
@@ -18,14 +19,14 @@ namespace hitboxtrail
 {
     namespace
     {
-        constexpr float kPopupWidth = 312.f;
+        constexpr float kPopupWidth = 374.f;
         constexpr float kPopupHeight = 260.f;
-        constexpr float kRowWidth = 216.f;
+        constexpr float kRowWidth = 270.f;
         constexpr float kRowHeight = 26.f;
         constexpr float kRowSpacing = 29.f;
-        constexpr float kContentX = 42.f;
+        constexpr float kContentX = 38.f;
         constexpr float kFirstRowY = 72.f; // 팝업 중앙 기준, 첫 번째 행의 y 위치
-        constexpr float kSidebarX = -115.f;
+        constexpr float kSidebarX = -146.f;
         constexpr float kSidebarWidth = 48.f;
         constexpr float kSidebarSpacing = 28.f;
         constexpr float kResetMargin = 6.f;
@@ -36,7 +37,7 @@ namespace hitboxtrail
         constexpr float kTabPanelHeight = 152.f;
         constexpr float kContentPanelX = 38.f;
         constexpr float kContentPanelY = 0.f;
-        constexpr float kContentPanelWidth = 224.f;
+        constexpr float kContentPanelWidth = 286.f;
         constexpr float kContentPanelHeight = 184.f;
         constexpr ccColor3B kBackgroundTint{83, 139, 255};
         constexpr GLubyte kPanelOpacity = 120;
@@ -281,9 +282,15 @@ namespace hitboxtrail
             void addNumber(NumberSetting const &s)
             {
                 auto row = newRow();
-                auto text = CCLabelBMFont::create("", "bigFont.fnt");
+                auto text = CCLabelBMFont::create(fmt::format("{}:", s.label).c_str(), "bigFont.fnt");
                 text->setScale(0.5f);
-                Ref<CCLabelBMFont> shown = text;
+
+                auto input = TextInput::create(70.f, "", "bigFont.fnt");
+                input->setScale(0.6f);
+                input->setCommonFilter(CommonFilter::Uint);
+                input->setMaxCharCount(s.isInt ? 4 : 3);
+                Ref<TextInput> shown = input;
+
                 auto read = [s]
                 {
                     auto mod = Mod::get();
@@ -292,26 +299,41 @@ namespace hitboxtrail
                                       : mod->getSavedValue<double>(s.key, s.fallback);
                     return std::round(stored * s.scale);
                 };
-                auto show = [s, shown, read, row]
+                auto show = [shown, read]
                 {
-                    auto str = fmt::format("{}: {}{}", s.label, static_cast<int>(read()), s.isInt ? "" : "%");
-                    shown->setString(str.c_str());
-                    row->updateLayout();
+                    shown->setString(std::to_string(static_cast<int>(read())), false);
                 };
-                auto change = [s, read, show](double delta)
+                auto store = [s](double value)
                 {
-                    auto next = std::clamp(read() + delta, s.lo, s.hi);
+                    auto next = std::clamp(value, s.lo, s.hi);
                     if (s.isInt)
                         Mod::get()->setSavedValue<int64_t>(s.key, static_cast<int64_t>(next));
                     else
                         Mod::get()->setSavedValue<double>(s.key, next / s.scale);
-                    show();
                     applySettings();
                 };
+                auto change = [store, read, show](double delta)
+                {
+                    store(read() + delta);
+                    show();
+                };
+                input->setCallback([store](std::string const &typed)
+                                   {
+                    auto value = utils::numFromString<int>(typed);
+                    if (value.isOk())
+                        store(value.unwrap()); });
                 show();
+
                 row->addChild(CCMenuItemExt::createSpriteExtraWithFrameName("edit_leftBtn_001.png", 0.6f, [change, s](CCMenuItemSpriteExtra *)
                                                                             { change(-s.step); }));
                 row->addChild(text);
+                row->addChild(input);
+                if (!s.isInt)
+                {
+                    auto percent = CCLabelBMFont::create("%", "bigFont.fnt");
+                    percent->setScale(0.5f);
+                    row->addChild(percent);
+                }
                 row->addChild(CCMenuItemExt::createSpriteExtraWithFrameName("edit_rightBtn_001.png", 0.6f, [change, s](CCMenuItemSpriteExtra *)
                                                                             { change(s.step); }));
             }
