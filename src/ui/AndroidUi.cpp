@@ -18,14 +18,14 @@ namespace hitboxtrail
 {
     namespace
     {
-        constexpr float kPopupWidth = 416.f;
+        constexpr float kPopupWidth = 312.f;
         constexpr float kPopupHeight = 260.f;
-        constexpr float kRowWidth = 318.f;
+        constexpr float kRowWidth = 216.f;
         constexpr float kRowHeight = 26.f;
         constexpr float kRowSpacing = 29.f;
-        constexpr float kContentX = 41.f;
+        constexpr float kContentX = 42.f;
         constexpr float kFirstRowY = 72.f; // 팝업 중앙 기준, 첫 번째 행의 y 위치
-        constexpr float kSidebarX = -167.f;
+        constexpr float kSidebarX = -115.f;
         constexpr float kSidebarWidth = 48.f;
         constexpr float kSidebarSpacing = 28.f;
         constexpr float kResetMargin = 6.f;
@@ -36,7 +36,7 @@ namespace hitboxtrail
         constexpr float kTabPanelHeight = 152.f;
         constexpr float kContentPanelX = 38.f;
         constexpr float kContentPanelY = 0.f;
-        constexpr float kContentPanelWidth = 328.f;
+        constexpr float kContentPanelWidth = 224.f;
         constexpr float kContentPanelHeight = 184.f;
         constexpr ccColor3B kBackgroundTint{83, 139, 255};
         constexpr GLubyte kPanelOpacity = 120;
@@ -115,6 +115,7 @@ namespace hitboxtrail
                                  CCPoint{(0.5f - anchor.x) * bgSize.width, (0.5f - anchor.y) * bgSize.height};
 
                 m_bgSprite->setColor(kBackgroundTint);
+                addOutline();
 
                 m_root = CCNode::create();
                 m_root->setPosition(center);
@@ -129,6 +130,16 @@ namespace hitboxtrail
 
                 populate();
                 return true;
+            }
+
+            void addOutline()
+            {
+                using Background = std::remove_pointer_t<decltype(m_bgSprite)>;
+                auto size = m_bgSprite->getContentSize();
+                auto outline = Background::create("GJ_square07.png");
+                outline->setContentSize(size);
+                outline->setPosition({size.width / 2.f, size.height / 2.f});
+                m_bgSprite->addChild(outline);
             }
 
             void addPanel(CCNode *parent, CCPoint center, CCSize size)
@@ -367,7 +378,6 @@ namespace hitboxtrail
                     toggleRow("Unlimited", "trail-no-limit", false);
                     addNumber({"Opacity", "opacity", 1.0, 100, 5, 0, 100, false});
                     addNumber({"Thickness", "thickness", 1.0, 100, 5, 1, 200, false});
-                    toggleRow("Fade with Age", "fade-with-age", false);
                     break;
 
                 case 3: // Clicks
@@ -387,6 +397,7 @@ namespace hitboxtrail
                 default: // Visual
                     toggleRow("Fill Hitbox", "fill-hitbox", false);
                     addNumber({"Fill Opacity", "fill-opacity", 0.25, 100, 5, 0, 100, false});
+                    toggleRow("Fade with Age", "fade-with-age", false);
                     break;
                 }
 
