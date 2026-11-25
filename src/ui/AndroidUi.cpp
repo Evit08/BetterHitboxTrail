@@ -17,18 +17,20 @@ namespace hitboxtrail
 {
     namespace
     {
-        constexpr float kPopupWidth = 520.f;
+        constexpr float kPopupWidth = 416.f;
         constexpr float kPopupHeight = 260.f;
-        constexpr float kRowWidth = 390.f;
+        constexpr float kRowWidth = 318.f;
         constexpr float kRowHeight = 26.f;
         constexpr float kRowSpacing = 29.f;
-        constexpr float kContentX = 50.f;
+        constexpr float kContentX = 41.f;
         constexpr float kFirstRowY = 72.f; // 팝업 중앙 기준, 첫 번째 행의 y 위치
-        constexpr float kSidebarX = -205.f;
-        constexpr float kSidebarWidth = 90.f;
-        constexpr float kSidebarSpacing = 34.f;
-        constexpr float kResetGap = 10.f; // 제목과 Reset 버튼 사이의 간격
-        constexpr float kSwatchScale = 0.375f;
+        constexpr float kSidebarX = -158.f;
+        constexpr float kSidebarFirstY = 96.f;
+        constexpr float kSidebarWidth = 64.f;
+        constexpr float kSidebarSpacing = 28.f;
+        constexpr float kResetMargin = 6.f;
+        constexpr float kResetScale = 0.54f;
+        constexpr float kSwatchScale = 0.4f;
         constexpr int kPageCount = 5;
 
         constexpr char const *kPageNames[kPageCount] = {"General", "Layers", "Trail", "Clicks", "Visual"};
@@ -132,10 +134,10 @@ namespace hitboxtrail
                 for (int i = 0; i < kPageCount; ++i)
                 {
                     auto sprite = ButtonSprite::create(kPageNames[i], static_cast<int>(kSidebarWidth), true, "bigFont.fnt",
-                                                       i == m_page ? "GJ_button_01.png" : "GJ_button_04.png", 28.f, 0.5f);
+                                                       i == m_page ? "GJ_button_01.png" : "GJ_button_04.png", 24.f, 0.4f);
                     auto button = CCMenuItemExt::createSpriteExtra(sprite, [this, i](CCMenuItemSpriteExtra *)
                                                                    { selectPage(i); });
-                    button->setPosition({kSidebarX, kFirstRowY - static_cast<float>(i) * kSidebarSpacing});
+                    button->setPosition({kSidebarX, kSidebarFirstY - static_cast<float>(i) * kSidebarSpacing});
                     menu->addChild(button);
                 }
             }
@@ -284,12 +286,11 @@ namespace hitboxtrail
                                                                             { change(s.step); }));
             }
 
-            // 제목(Better Hitbox Trail) 바로 오른쪽에 Reset 버튼을 놓는다. 제목 위치는 그대로 둔다.
             // 누르면 확인창이 뜨고, 확인하면 모든 설정을 기본값으로 되돌린다.
             void addTitleResetButton()
             {
                 auto sprite = ButtonSprite::create("Reset");
-                sprite->setScale(0.45f);
+                sprite->setScale(kResetScale);
                 auto button = CCMenuItemExt::createSpriteExtra(sprite, [this](CCMenuItemSpriteExtra *)
                                                                {
                     createQuickPopup("Reset", "Reset all settings to their default values?", "Cancel", "Reset",
@@ -302,9 +303,8 @@ namespace hitboxtrail
                                          rebuildLater();
                                      }); });
 
-                // 제목과 같은 부모 안에 두면 좌표 변환 없이 제목의 오른쪽 끝에 바로 붙일 수 있다.
-                button->setPosition(m_title->getPosition() +
-                                    CCPoint{(m_title->getScaledContentSize().width + sprite->getScaledContentSize().width) / 2.f + kResetGap, 0.f});
+                button->setPosition({m_title->getPositionX() + (kPopupWidth - sprite->getScaledContentSize().width) / 2.f - kResetMargin,
+                                     m_title->getPositionY()});
                 auto menu = CCMenu::create();
                 menu->setPosition({0.f, 0.f});
                 menu->addChild(button);

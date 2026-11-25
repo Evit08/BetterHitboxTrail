@@ -112,7 +112,7 @@ namespace hitboxtrail::trailrenderer
                 return skipBase(state) || !inPass(state) || offscreen(state);
             };
 
-            if (settings.forceSingle)
+            if (settings.forceSingle && (settings.onlyClickRelease || pass != DrawPass::Dots))
             {
                 // Enable Only Player or Only Cube alongside Only Click and Release
                 // displaying the hitbox state only at the moment of the click or release
