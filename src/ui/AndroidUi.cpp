@@ -24,6 +24,7 @@ namespace hitboxtrail
         constexpr float kRowSpacing = 29.f;
         constexpr float kFirstRowY = 72.f; // 팝업 중앙 기준, 첫 번째 행의 y 위치
         constexpr float kNavY = -107.f;    // 팝업 중앙 기준, 페이지 이동 버튼의 y 위치
+        constexpr float kResetButtonX = 120.f; // 팝업 중앙 기준, Reset 버튼의 x 위치
         constexpr int kPageCount = 4;
 
         constexpr char const *kPageNames[kPageCount] = {"General", "Layers", "Trail", "Colors"};
@@ -261,6 +262,30 @@ namespace hitboxtrail
                                                                             { change(s.step); }));
             }
 
+            // 주어진 행과 같은 높이의 오른쪽 끝에 Reset 버튼을 놓는다. (모든 설정을 기본값으로 되돌림)
+            void addResetButton(CCMenu *row)
+            {
+                auto menu = CCMenu::create();
+                menu->setPosition({0.f, 0.f});
+                m_pageRoot->addChild(menu);
+
+                auto sprite = ButtonSprite::create("Reset");
+                sprite->setScale(0.5f);
+                auto button = CCMenuItemExt::createSpriteExtra(sprite, [this](CCMenuItemSpriteExtra *)
+                                                               {
+                    createQuickPopup("Reset", "Reset all settings to their default values?", "Cancel", "Reset",
+                                     [this](FLAlertLayer *, bool confirmed)
+                                     {
+                                         if (!confirmed)
+                                             return;
+                                         trailsettings::resetAll();
+                                         applySettings();
+                                         rebuildLater();
+                                     }); });
+                button->setPosition({kResetButtonX, row->getPositionY()});
+                menu->addChild(button);
+            }
+
             void populate()
             {
                 m_rowIndex = 0;
@@ -269,7 +294,7 @@ namespace hitboxtrail
                 switch (m_page)
                 {
                 case 0: // General
-                    toggleRow("Hitbox Trail", "hitbox-trail-enabled", true);
+                    addResetButton(toggleRow("Hitbox Trail", "hitbox-trail-enabled", true));
                     toggleRow("Show on Death", "hitbox-trail-on-death", true);
                     toggleRow("Always Show", "always-show-hitbox-trail", false);
                     toggleRow("Only Player", "only-player-enabled", false, "cube-hitbox-enabled");
@@ -288,16 +313,6 @@ namespace hitboxtrail
                         addMove(row, "edit_upBtn_001.png", pos, pos + 1);
                         addMove(row, "edit_downBtn_001.png", pos, pos - 1);
                     }
-
-                    auto reset = newRow();
-                    auto resetSprite = ButtonSprite::create("Reset");
-                    resetSprite->setScale(0.5f);
-                    reset->addChild(CCMenuItemExt::createSpriteExtra(resetSprite, [this](CCMenuItemSpriteExtra *)
-                                                                     {
-                        trailsettings::saveLayerOrder(trailsettings::kDefaultLayerOrder);
-                        trailsettings::resetColors();
-                        applySettings();
-                        rebuildLater(); }));
 
                     toggleRow("Batch Layer Overlap", "batch-layer-overlap", false);
                     break;

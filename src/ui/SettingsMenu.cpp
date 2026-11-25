@@ -172,8 +172,7 @@ namespace hitboxtrail
                     changed = true;
                 }
                 if (ImGui::SmallButton("Reset")) {
-                    trailsettings::saveLayerOrder(trailsettings::kDefaultLayerOrder);
-                    trailsettings::resetColors();
+                    trailsettings::resetAll();
                     changed = true;
                 }
                 ImGui::SameLine();

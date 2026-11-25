@@ -273,6 +273,48 @@ namespace hitboxtrail::trailsettings
             saveColor(key, defaultColor(key));
     }
 
+    // Puts every value saved by the in-game menus back to its default.
+    // The defaults here must match the fallbacks used when the values are read.
+    void resetAll()
+    {
+        auto mod = Mod::get();
+
+        struct BoolDefault
+        {
+            char const *key;
+            bool value;
+        };
+        static constexpr BoolDefault kBools[] = {
+            {"hitbox-trail-enabled", true},
+            {"hitbox-trail-on-death", true},
+            {"always-show-hitbox-trail", false},
+            {"only-player-enabled", false},
+            {"cube-hitbox-enabled", false},
+            {"only-click-release-enabled", false},
+            {"square-hitbox-enabled", true},
+            {"blue-hitbox-enabled", true},
+            {"circle-hitbox-enabled", true},
+            {"rotation-hitbox-enabled", true},
+            {"batch-layer-overlap", false},
+            {"trail-no-limit", false},
+            {"color-clicks", true},
+            {"click-release-on-top", false},
+            {"color-when-held", true},
+            {"fade-with-age", false},
+            {"fill-hitbox", false},
+        };
+        for (auto const &entry : kBools)
+            mod->setSavedValue<bool>(entry.key, entry.value);
+
+        mod->setSavedValue<int64_t>("trail-length", 240);
+        mod->setSavedValue<double>("opacity", 1.0);
+        mod->setSavedValue<double>("thickness", 1.0);
+        mod->setSavedValue<double>("fill-opacity", 0.25);
+
+        saveLayerOrder(kDefaultLayerOrder);
+        resetColors();
+    }
+
     CaptureSettings const &TrailSettings::cachedCaptureSettings()
     {
         if (!m_capCache)

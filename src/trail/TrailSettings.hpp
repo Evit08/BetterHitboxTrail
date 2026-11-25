@@ -96,4 +96,6 @@ namespace hitboxtrail::trailsettings
     cocos2d::ccColor3B loadColor(char const *key);
     void saveColor(char const *key, cocos2d::ccColor3B color);
     void resetColors();
+    // Resets every setting saved by the in-game menus (toggles, numbers, colors, layer order).
+    void resetAll();
 }
