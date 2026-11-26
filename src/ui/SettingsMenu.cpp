@@ -1,7 +1,7 @@
 #include "SettingsMenu.hpp"
 
 #include <Geode/Geode.hpp>
-#ifndef GEODE_IS_ANDROID
+#ifndef GEODE_IS_MOBILE
 #include <Geode/modify/CCKeyboardDispatcher.hpp>
 #include <imgui-cocos.hpp>
 #include <misc/freetype/imgui_freetype.h>
@@ -27,7 +27,7 @@ namespace hitboxtrail
             }
     }
 
-#ifndef GEODE_IS_ANDROID
+#ifndef GEODE_IS_MOBILE
     namespace
     {
         bool s_settingsOpen = false;
@@ -81,7 +81,7 @@ namespace hitboxtrail
     }
 #endif
 
-#ifndef GEODE_IS_ANDROID
+#ifndef GEODE_IS_MOBILE
     void beginOpenKeyCapture(std::function<void(cocos2d::enumKeyCodes)> done)
     {
         s_keyCapture = std::move(done);
@@ -95,7 +95,7 @@ namespace hitboxtrail
 
     void registerSettingsMenu()
     {
-#ifndef GEODE_IS_ANDROID
+#ifndef GEODE_IS_MOBILE
         ImGuiCocos::get().setup([] { loadMenuFonts(); }).draw([]
                                             {
                 static bool s_wasOpen = false;
@@ -357,7 +357,7 @@ namespace hitboxtrail
     }
 }
 
-#ifndef GEODE_IS_ANDROID
+#ifndef GEODE_IS_MOBILE
 class $modify(OpenKeyDispatcher, CCKeyboardDispatcher)
 {
     bool dispatchKeyboardMSG(enumKeyCodes key, bool down, bool repeat, double timestamp)

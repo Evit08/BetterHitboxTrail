@@ -14,7 +14,8 @@
   "gd": {
     "win": "2.2091",
     "mac": "2.2091",
-    "android": "2.2091"
+    "android": "2.2091",
+    "ios": "2.2091"
   },
   "id": "evit.better-hitbox-trail",
   "name": "Better Hitbox Trail",
@@ -35,7 +36,8 @@
       "type": "bool",
       "name": "Hide Pause Menu Button",
       "description": "Hides the Better Hitbox Trail button in the pause menu.",
-      "default": false
+      "default": false,
+      "platforms": ["win", "mac"]
     }
   }
 }

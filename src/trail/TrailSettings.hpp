@@ -77,6 +77,7 @@ namespace hitboxtrail::trailsettings
         bool forceSingle;
         bool showBetweenFrames;
         bool alwaysShow;
+        bool modDetection;
         bool showOnDeath;
         bool noLimit;
         size_t length;

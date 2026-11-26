@@ -51,7 +51,7 @@ namespace hitboxtrail
         constexpr ccColor3B kBackgroundTint{87, 135, 255};
         constexpr ccColor4B kBackgroundOverlay{52, 45, 255, 18};
         constexpr GLubyte kPanelOpacity = 90;
-#ifdef GEODE_IS_ANDROID
+#ifdef GEODE_IS_MOBILE
         constexpr int kPageCount = 6;
 #else
         constexpr int kPageCount = 7;
@@ -77,7 +77,7 @@ namespace hitboxtrail
             node->setScale(width * baseScale > maxWidth ? maxWidth / width : baseScale);
         }
 
-#ifndef GEODE_IS_ANDROID
+#ifndef GEODE_IS_MOBILE
         std::string keyName(enumKeyCodes key)
         {
             auto name = CCKeyboardDispatcher::get()->keyToString(key);
@@ -140,7 +140,7 @@ namespace hitboxtrail
 
             ~SettingsPopup()
             {
-#ifndef GEODE_IS_ANDROID
+#ifndef GEODE_IS_MOBILE
                 cancelOpenKeyCapture();
 #endif
             }
@@ -229,7 +229,7 @@ namespace hitboxtrail
 
             void onRebuild(float)
             {
-#ifndef GEODE_IS_ANDROID
+#ifndef GEODE_IS_MOBILE
                 cancelOpenKeyCapture();
 #endif
                 m_pageRoot->removeAllChildren();
@@ -323,7 +323,7 @@ namespace hitboxtrail
                                                                             { step(1); }));
             }
 
-#ifndef GEODE_IS_ANDROID
+#ifndef GEODE_IS_MOBILE
             void addOpenKey()
             {
                 auto row = newRow();
@@ -524,6 +524,29 @@ namespace hitboxtrail
                 m_title->getParent()->addChild(menu);
             }
 
+            ScrollLayer *beginScroll(int rows)
+            {
+                auto height = static_cast<float>(rows) * kRowSpacing + 8.f;
+                auto scroll = ScrollLayer::create(CCSize{kContentPanelWidth, kContentPanelHeight}, true, true);
+                scroll->ignoreAnchorPointForPosition(false);
+                scroll->setAnchorPoint({0.f, 0.f});
+                scroll->setPosition({kContentPanelX - kContentPanelWidth / 2.f, kContentPanelY - kContentPanelHeight / 2.f});
+                scroll->m_contentLayer->setContentSize({kContentPanelWidth, height});
+                m_pageRoot->addChild(scroll);
+                m_rowParent = scroll->m_contentLayer;
+                m_rowX = kContentPanelWidth / 2.f;
+                m_rowY = height - 4.f - kRowHeight / 2.f;
+                return scroll;
+            }
+
+            void endScroll(ScrollLayer *scroll)
+            {
+                scroll->scrollToTop();
+                auto bar = Scrollbar::create(scroll, Scrollbar::Style::GDScrollbar);
+                bar->setPosition({kContentPanelX + kContentPanelWidth / 2.f - 6.f, kContentPanelY});
+                m_pageRoot->addChild(bar);
+            }
+
             void populate()
             {
                 m_rowIndex = 0;
@@ -536,13 +559,19 @@ namespace hitboxtrail
                 switch (m_page)
                 {
                 case 0: // General
+                {
+                    auto scroll = beginScroll(7);
                     toggleRow("Hitbox Trail", "hitbox-trail-enabled", true);
                     toggleRow("Show on Death", "hitbox-trail-on-death", true);
                     toggleRow("Always Show", "always-show-hitbox-trail", false);
+                    toggleRow("Mod Detection", "mod-detection", true, nullptr, false,
+                              "Automatically turns on the hitbox trail when Show Hitboxes is enabled in MegaHack, QOLMod, or Eclipse.");
                     toggleRow("Only Player", "only-player-enabled", false, "cube-hitbox-enabled");
                     toggleRow("Only Cube", "cube-hitbox-enabled", false, "only-player-enabled");
                     toggleRow("Only Click and Release", "only-click-release-enabled", false);
+                    endScroll(scroll);
                     break;
+                }
 
                 case 1: // Layers
                 {
@@ -595,30 +624,19 @@ namespace hitboxtrail
 
                 case 5: // Thickness
                 {
-                    auto height = static_cast<float>(trailsettings::kThicknessEntries.size()) * kRowSpacing + 8.f;
-                    auto scroll = ScrollLayer::create(CCSize{kContentPanelWidth, kContentPanelHeight}, true, true);
-                    scroll->ignoreAnchorPointForPosition(false);
-                    scroll->setAnchorPoint({0.f, 0.f});
-                    scroll->setPosition({kContentPanelX - kContentPanelWidth / 2.f, kContentPanelY - kContentPanelHeight / 2.f});
-                    scroll->m_contentLayer->setContentSize({kContentPanelWidth, height});
-                    m_pageRoot->addChild(scroll);
-                    m_rowParent = scroll->m_contentLayer;
-                    m_rowX = kContentPanelWidth / 2.f;
-                    m_rowY = height - 4.f - kRowHeight / 2.f;
+                    auto scroll = beginScroll(static_cast<int>(trailsettings::kThicknessEntries.size()));
                     for (auto const &entry : trailsettings::kThicknessEntries)
                         addNumber({entry.label, entry.key, entry.fallback, 100, 10, 1, 1000, false});
-                    scroll->scrollToTop();
-                    auto bar = Scrollbar::create(scroll, Scrollbar::Style::GDScrollbar);
-                    bar->setPosition({kContentPanelX + kContentPanelWidth / 2.f - 6.f, kContentPanelY});
-                    m_pageRoot->addChild(bar);
+                    endScroll(scroll);
                     break;
                 }
 
-#ifndef GEODE_IS_ANDROID
+#ifndef GEODE_IS_MOBILE
                 default: // Menu
                     addOpenKey();
                     addChoice("Menu Font", "menu-font", "Ubuntu Mono", {"DejaVu Sans Mono", "Ubuntu Mono", "Hack", "Liberation Mono"});
-                    toggleRow("Hide Pause Menu Button", "hide-pause-menu-button", false, nullptr, true);
+                    toggleRow("Hide Pause Menu Button", "hide-pause-menu-button", false, nullptr, true,
+                              "You can turn this back on in the Geode mod settings.");
                     break;
 #endif
                 }

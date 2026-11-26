@@ -71,6 +71,7 @@ namespace hitboxtrail::trailsettings
             s.forceSingle = shared.forceSingle;
             s.showBetweenFrames = mod->getSavedValue<bool>("hitbox-between-frames", true);
             s.alwaysShow = mod->getSavedValue<bool>("always-show-hitbox-trail", false);
+            s.modDetection = mod->getSavedValue<bool>("mod-detection", true);
             s.showOnDeath = mod->getSavedValue<bool>("hitbox-trail-on-death", true);
             s.noLimit = mod->getSavedValue<bool>("trail-no-limit", false);
             s.length = s.noLimit
@@ -275,6 +276,7 @@ namespace hitboxtrail::trailsettings
             {"hitbox-trail-enabled", true},
             {"hitbox-trail-on-death", true},
             {"always-show-hitbox-trail", false},
+            {"mod-detection", true},
             {"only-player-enabled", false},
             {"cube-hitbox-enabled", false},
             {"only-click-release-enabled", false},
@@ -305,7 +307,9 @@ namespace hitboxtrail::trailsettings
         mod->setSavedValue<std::string>("menu-font", "Ubuntu Mono");
         for (auto const &entry : kThicknessEntries)
             mod->setSavedValue<double>(entry.key, entry.fallback);
+#ifndef GEODE_IS_MOBILE
         mod->setSettingValue<bool>("hide-pause-menu-button", false);
+#endif
 
         saveOpenMenuKey(cocos2d::KEY_H);
         saveLayerOrder(kDefaultLayerOrder);

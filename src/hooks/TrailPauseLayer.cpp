@@ -7,6 +7,72 @@
 using namespace geode::prelude;
 using namespace hitboxtrail;
 
+namespace
+{
+    void updateTrailButton(PauseLayer *layer, bool hidden)
+    {
+        if (!layer || !layer->m_mainLayer)
+            return;
+
+        auto existing = layer->getChildByIDRecursive("trail-settings-button"_spr);
+
+        if (hidden)
+        {
+            if (!existing)
+                return;
+            auto parent = existing->getParent();
+            existing->removeFromParent();
+            if (parent)
+            {
+                if (parent->getID() == "trail-settings-fallback-menu"_spr)
+                    parent->removeFromParent();
+                else
+                    parent->updateLayout();
+            }
+            return;
+        }
+
+        if (existing)
+            return;
+
+        auto sprite = CircleButtonSprite::createWithSprite("trail-icon.png"_spr, 1.2f, CircleBaseColor::Green, CircleBaseSize::Medium);
+        sprite->setScale(.6f);
+
+        auto button = CCMenuItemExt::createSpriteExtra(sprite, [](CCMenuItemSpriteExtra *)
+                                                       { showTrailSettings(); });
+        button->setID("trail-settings-button"_spr);
+
+        auto rightMenu = typeinfo_cast<CCMenu *>(layer->m_mainLayer->getChildByID("right-button-menu"));
+        if (rightMenu)
+        {
+            rightMenu->addChild(button);
+            rightMenu->updateLayout();
+            return;
+        }
+
+        auto menu = CCMenu::create();
+        menu->setID("trail-settings-fallback-menu"_spr);
+        menu->addChild(button);
+        auto winSize = CCDirector::get()->getWinSize();
+        constexpr float kTrailButtonOffsetY = 132.f;
+        menu->setPosition({winSize.width - 50.f, winSize.height - kTrailButtonOffsetY});
+        layer->addChild(menu);
+    }
+}
+
+#ifndef GEODE_IS_MOBILE
+$execute
+{
+    static auto s_hideButtonListener = listenForSettingChanges<bool>("hide-pause-menu-button", [](bool hidden)
+    {
+        auto scene = CCDirector::get()->getRunningScene();
+        if (!scene)
+            return;
+        updateTrailButton(scene->getChildByType<PauseLayer>(0), hidden);
+    });
+}
+#endif
+
 class $modify(TrailPauseLayer, PauseLayer)
 {
     void customSetup()
@@ -14,31 +80,12 @@ class $modify(TrailPauseLayer, PauseLayer)
         PauseLayer::customSetup();
         refreshTrail();
         schedule(schedule_selector(TrailPauseLayer::refreshTrailTick), 0.1f);
-        if (Mod::get()->getSettingValue<bool>("hide-pause-menu-button"))
-            return;
-        auto sprite = CircleButtonSprite::createWithSprite("trail-icon.png"_spr, 1.2f, CircleBaseColor::Green, CircleBaseSize::Medium); // 0.75f = 아이콘 크기 (작게: 값↓, 크게: 값↑)
-        sprite->setScale(.6f); // 크기가 안 맞으면 이 값만 조절 (클수록 커짐)
 
-        auto button = CCMenuItemExt::createSpriteExtra(sprite, [](CCMenuItemSpriteExtra *)
-                                                       { showTrailSettings(); });
-        button->setID("trail-settings-button"_spr);
-
-        // 오른쪽 버튼 메뉴는 this 가 아니라 m_mainLayer 안에 있음
-        auto rightMenu = typeinfo_cast<CCMenu *>(m_mainLayer->getChildByID("right-button-menu"));
-        if (rightMenu)
-        {
-            rightMenu->addChild(button);
-            rightMenu->updateLayout(); // 톱니바퀴/숨기기 버튼과 같은 줄·간격으로 자동 정렬
-            return;
-        }
-
-        // right-button-menu 를 못 찾았을 때의 예비 배치
-        auto menu = CCMenu::create();
-        menu->addChild(button);
-        auto winSize = CCDirector::get()->getWinSize();
-        constexpr float kTrailButtonOffsetY = 132.f;
-        menu->setPosition({winSize.width - 50.f, winSize.height - kTrailButtonOffsetY});
-        addChild(menu);
+        bool hidden = false;
+#ifndef GEODE_IS_MOBILE
+        hidden = Mod::get()->getSettingValue<bool>("hide-pause-menu-button");
+#endif
+        updateTrailButton(this, hidden);
     }
     void onEdit(CCObject *sender)
     {

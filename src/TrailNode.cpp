@@ -172,6 +172,8 @@ namespace hitboxtrail
 
     bool TrailNode::shouldShowWhileAlive(GJBaseGameLayer *layer)
     {
+        if (!m_settings.cachedCaptureSettings().modDetection)
+            return false;
         auto includeMegaHack = m_megaHackIgnoreFrames <= 0;
         return ModDetection::enabled(includeMegaHack);
     }
