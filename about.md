@@ -24,7 +24,7 @@ Press H or press pause menu button to open the menu.
 - Color Clicks
 - ...and more
 
-All popup settings take effect immediately, even while paused.
+All popup settings take effect immediately.
 
 Shows hitboxes for actual sub-tick click timings under CBF/CBS. Can be disabled in Geode settings.
 
@@ -40,4 +40,4 @@ Eclipse and QOLMod both show the player hitbox whenever their Show Hitboxes sett
 
 ## Known Issues
 
-- Even if MegaHack's Show Hitboxes is enabled, Better Hitbox Trail may automatically disable itself if MegaHack has no hitboxes of its own to display on screen.
+- Even if MegaHack's Show Hitboxes is enabled, This mod may automatically disable itself if MegaHack has no hitboxes of its own to display on screen.

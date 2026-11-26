@@ -179,9 +179,6 @@ namespace hitboxtrail::trailsettings
         return "";
     }
 
-    // Stored as a comma separated list, bottom to top (e.g. "rotation,circle,main,blue").
-    // Unknown or duplicate names are ignored and missing layers are appended in default order,
-    // so a damaged value can never lose a layer.
     std::array<HitboxLayer, kHitboxLayerCount> loadLayerOrder()
     {
         auto saved = Mod::get()->getSavedValue<std::string>(kLayerOrderKey, layerOrderText(kDefaultLayerOrder));

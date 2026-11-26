@@ -21,19 +21,12 @@ namespace hitboxtrail
 {
     namespace
     {
-        constexpr float kPopupWidth = 350.f;
-        constexpr float kBottomTrim = 20.f;
-        constexpr float kPopupHeight = 260.f - kBottomTrim;
         constexpr float kInfoWidth = 26.f;
         constexpr float kRowWidth = 246.f;
-        constexpr float kRowHeight = 26.f;
-        constexpr float kRowSpacing = 29.f;
-        constexpr float kContentX = 38.f;
-        constexpr float kFirstRowY = 72.f; // 팝업 중앙 기준, 첫 번째 행의 y 위치
-        constexpr float kSidebarX = -134.f;
-        constexpr float kSidebarWidth = 48.f;
-        constexpr float kSidebarSpacing = 24.f;
-        constexpr float kSidebarButtonHeight = 21.f;
+        constexpr float kRowHeight = 24.f;
+        constexpr float kRowSpacing = 27.f;
+        constexpr int kVisibleRows = 6;
+        constexpr float kSidebarGap = 2.f;
         constexpr float kToggleLabelMax = 205.f;
         constexpr float kNumberLabelMax = 120.f;
         constexpr float kChoiceLabelMax = 84.f;
@@ -41,13 +34,12 @@ namespace hitboxtrail
         constexpr float kResetMargin = 6.f;
         constexpr float kResetScale = 0.54f;
         constexpr float kSwatchScale = 0.4f;
-        constexpr float kTabPanelY = 0.f;
-        constexpr float kTabPanelWidth = 70.f;
-        constexpr float kTabPanelHeight = 178.f;
-        constexpr float kContentPanelX = 38.f;
-        constexpr float kContentPanelY = 0.f;
-        constexpr float kContentPanelWidth = 262.f;
-        constexpr float kContentPanelHeight = 178.f;
+        constexpr float kTabPad = 2.f;
+        constexpr float kContentPadX = 2.f;
+        constexpr float kPanelGap = 6.f;
+        constexpr float kPopupMargin = 12.f;
+        constexpr float kTitleSpace = 44.f;
+        constexpr float kScrollbarInset = 2.f;
         constexpr ccColor3B kBackgroundTint{87, 135, 255};
         constexpr ccColor4B kBackgroundOverlay{52, 45, 255, 18};
         constexpr GLubyte kPanelOpacity = 90;
@@ -70,6 +62,62 @@ namespace hitboxtrail
             double hi;
             bool isInt;
         };
+
+        ButtonSprite *makeSidebarSprite(char const *name, bool selected)
+        {
+            return ButtonSprite::create(name, 48, true, "bigFont.fnt",
+                                        selected ? "GJ_button_01.png" : "GJ_button_04.png", 21.f, 0.4f);
+        }
+
+        struct PopupLayout
+        {
+            float popupW, popupH;
+            float rootOffsetY;
+            float tabX, tabY, tabW, tabH;
+            float contentX, contentY, contentW, contentH;
+            float sidebarFirstY, sidebarSpacing;
+            float firstRowY;
+        };
+
+        PopupLayout computeLayout()
+        {
+            PopupLayout l{};
+
+            float buttonW = 0.f;
+            float buttonH = 0.f;
+            for (int i = 0; i < kPageCount; ++i)
+            {
+                auto size = makeSidebarSprite(kPageNames[i], false)->getContentSize();
+                buttonW = std::max(buttonW, size.width);
+                buttonH = std::max(buttonH, size.height);
+            }
+
+            l.sidebarSpacing = buttonH + kSidebarGap;
+            l.tabW = buttonW + 2.f * kTabPad;
+            l.tabH = static_cast<float>(kPageCount - 1) * l.sidebarSpacing + buttonH + 2.f * kTabPad;
+
+            l.contentW = kRowWidth + 2.f * kContentPadX;
+            auto rowsH = static_cast<float>(kVisibleRows - 1) * kRowSpacing + kRowHeight;
+            l.contentH = std::max(rowsH, l.tabH);
+
+            auto panelsW = l.tabW + kPanelGap + l.contentW;
+            auto tallest = std::max(l.tabH, l.contentH);
+            l.popupW = panelsW + 2.f * kPopupMargin;
+            l.popupH = tallest + kTitleSpace + kPopupMargin;
+
+            l.rootOffsetY = -l.popupH / 2.f + kPopupMargin + tallest / 2.f;
+            auto top = tallest / 2.f;
+            l.tabY = top - l.tabH / 2.f;
+            l.contentY = top - l.contentH / 2.f;
+
+            auto left = -panelsW / 2.f;
+            l.tabX = left + l.tabW / 2.f;
+            l.contentX = left + l.tabW + kPanelGap + l.contentW / 2.f;
+
+            l.sidebarFirstY = top - kTabPad - buttonH / 2.f;
+            l.firstRowY = l.contentY + l.contentH / 2.f - kRowHeight / 2.f;
+            return l;
+        }
 
         void fitWidth(CCNode *node, float baseScale, float maxWidth)
         {
@@ -109,7 +157,6 @@ namespace hitboxtrail
             return "";
         }
 
-        // 스크롤 대신 페이지 방식: 모든 행은 팝업 배경(m_bgSprite) 중앙을 기준으로 직접 배치한다.
         class SettingsPopup : public Popup
         {
         public:
@@ -126,11 +173,12 @@ namespace hitboxtrail
             }
 
         private:
-            CCNode *m_root = nullptr;     // 팝업 배경의 중앙에 놓이는 기준 노드
-            CCNode *m_pageRoot = nullptr; // 현재 페이지의 행들이 들어가는 노드
+            CCNode *m_root = nullptr;
+            CCNode *m_pageRoot = nullptr;
             CCNode *m_rowParent = nullptr;
-            float m_rowX = kContentX;
-            float m_rowY = kFirstRowY;
+            PopupLayout m_layout{};
+            float m_rowX = 0.f;
+            float m_rowY = 0.f;
             int m_page = 0;
             int m_rowIndex = 0;
             std::vector<CCMenu *> m_layerRows;
@@ -147,11 +195,11 @@ namespace hitboxtrail
 
             bool setupPopup()
             {
-                if (!Popup::init(kPopupWidth, kPopupHeight))
+                m_layout = computeLayout();
+                if (!Popup::init(m_layout.popupW, m_layout.popupH))
                     return false;
                 setTitle("Better Hitbox Trail");
 
-                // m_mainLayer의 원점/크기에 의존하지 않도록 배경 스프라이트의 중앙을 기준점으로 쓴다.
                 auto bgSize = m_bgSprite->getContentSize();
                 auto anchor = m_bgSprite->getAnchorPoint();
                 CCPoint center = m_bgSprite->getPosition() +
@@ -162,15 +210,15 @@ namespace hitboxtrail
                 addOutline();
 
                 m_root = CCNode::create();
-                m_root->setPosition(center + CCPoint{0.f, -kBottomTrim / 2.f});
+                m_root->setPosition(center + CCPoint{0.f, m_layout.rootOffsetY});
                 m_mainLayer->addChild(m_root);
-                addPanel(m_root, {kSidebarX, kTabPanelY}, {kTabPanelWidth, kTabPanelHeight});
-                addPanel(m_root, {kContentPanelX, kContentPanelY}, {kContentPanelWidth, kContentPanelHeight});
+                addPanel(m_root, {m_layout.tabX, m_layout.tabY}, {m_layout.tabW, m_layout.tabH});
+                addPanel(m_root, {m_layout.contentX, m_layout.contentY}, {m_layout.contentW, m_layout.contentH});
 
                 m_pageRoot = CCNode::create();
                 m_root->addChild(m_pageRoot);
 
-                addTitleResetButton(); // 제목 오른쪽의 Reset 버튼 (모든 페이지에서 보임)
+                addTitleResetButton();
 
                 populate();
                 return true;
@@ -218,11 +266,10 @@ namespace hitboxtrail
                 m_pageRoot->addChild(menu);
                 for (int i = 0; i < kPageCount; ++i)
                 {
-                    auto sprite = ButtonSprite::create(kPageNames[i], static_cast<int>(kSidebarWidth), true, "bigFont.fnt",
-                                                       i == m_page ? "GJ_button_01.png" : "GJ_button_04.png", kSidebarButtonHeight, 0.4f);
+                    auto sprite = makeSidebarSprite(kPageNames[i], i == m_page);
                     auto button = CCMenuItemExt::createSpriteExtra(sprite, [this, i](CCMenuItemSpriteExtra *)
                                                                    { selectPage(i); });
-                    button->setPosition({kSidebarX, kFirstRowY - static_cast<float>(i) * kSidebarSpacing});
+                    button->setPosition({m_layout.tabX, m_layout.sidebarFirstY - static_cast<float>(i) * m_layout.sidebarSpacing});
                     menu->addChild(button);
                 }
             }
@@ -234,11 +281,9 @@ namespace hitboxtrail
 #endif
                 m_pageRoot->removeAllChildren();
                 populate();
-                // 팝업이 열린 뒤에 새로 만든 버튼도 터치를 받도록 우선순위를 맞춘다.
                 handleTouchPriority(this);
             }
 
-            // 버튼 콜백 안에서 곧바로 버튼을 지우면 위험하므로 다음 프레임에 다시 만든다.
             void rebuildLater()
             {
                 scheduleOnce(schedule_selector(SettingsPopup::onRebuild), 0.f);
@@ -499,7 +544,6 @@ namespace hitboxtrail
                                                                             { change(s.step); }));
             }
 
-            // 누르면 확인창이 뜨고, 확인하면 모든 설정을 기본값으로 되돌린다.
             void addTitleResetButton()
             {
                 auto sprite = ButtonSprite::create("Reset");
@@ -516,7 +560,7 @@ namespace hitboxtrail
                                          rebuildLater();
                                      }); });
 
-                button->setPosition({m_title->getPositionX() + (kPopupWidth - sprite->getScaledContentSize().width) / 2.f - kResetMargin,
+                button->setPosition({m_title->getPositionX() + (m_layout.popupW - sprite->getScaledContentSize().width) / 2.f - kResetMargin,
                                      m_title->getPositionY()});
                 auto menu = CCMenu::create();
                 menu->setPosition({0.f, 0.f});
@@ -527,14 +571,14 @@ namespace hitboxtrail
             ScrollLayer *beginScroll(int rows)
             {
                 auto height = static_cast<float>(rows) * kRowSpacing + 8.f;
-                auto scroll = ScrollLayer::create(CCSize{kContentPanelWidth, kContentPanelHeight}, true, true);
+                auto scroll = ScrollLayer::create(CCSize{m_layout.contentW, m_layout.contentH}, true, true);
                 scroll->ignoreAnchorPointForPosition(false);
                 scroll->setAnchorPoint({0.f, 0.f});
-                scroll->setPosition({kContentPanelX - kContentPanelWidth / 2.f, kContentPanelY - kContentPanelHeight / 2.f});
-                scroll->m_contentLayer->setContentSize({kContentPanelWidth, height});
+                scroll->setPosition({m_layout.contentX - m_layout.contentW / 2.f, m_layout.contentY - m_layout.contentH / 2.f});
+                scroll->m_contentLayer->setContentSize({m_layout.contentW, height});
                 m_pageRoot->addChild(scroll);
                 m_rowParent = scroll->m_contentLayer;
-                m_rowX = kContentPanelWidth / 2.f;
+                m_rowX = m_layout.contentW / 2.f;
                 m_rowY = height - 4.f - kRowHeight / 2.f;
                 return scroll;
             }
@@ -543,7 +587,7 @@ namespace hitboxtrail
             {
                 scroll->scrollToTop();
                 auto bar = Scrollbar::create(scroll, Scrollbar::Style::GDScrollbar);
-                bar->setPosition({kContentPanelX + kContentPanelWidth / 2.f - 6.f, kContentPanelY});
+                bar->setPosition({m_layout.contentX + m_layout.contentW / 2.f - kScrollbarInset, m_layout.contentY});
                 m_pageRoot->addChild(bar);
             }
 
@@ -552,8 +596,8 @@ namespace hitboxtrail
                 m_rowIndex = 0;
                 m_layerRows.clear();
                 m_rowParent = m_pageRoot;
-                m_rowX = kContentX;
-                m_rowY = kFirstRowY;
+                m_rowX = m_layout.contentX;
+                m_rowY = m_layout.firstRowY;
                 addSidebar();
 
                 switch (m_page)
