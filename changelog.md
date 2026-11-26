@@ -4,6 +4,10 @@
 
 - Now compatible with mobile
 
+- add pause button menu
+
+- New feature Click Dot
+
 ## v1.0.2
 
 - Moved Color Settings to the settings popup.
