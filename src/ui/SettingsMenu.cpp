@@ -2,7 +2,9 @@
 
 #include <Geode/Geode.hpp>
 #ifndef GEODE_IS_ANDROID
+#include <Geode/modify/CCKeyboardDispatcher.hpp>
 #include <imgui-cocos.hpp>
+#include <misc/freetype/imgui_freetype.h>
 #endif
 #include <algorithm>
 #include <array>
@@ -29,18 +31,72 @@ namespace hitboxtrail
     namespace
     {
         bool s_settingsOpen = false;
+        std::function<void(cocos2d::enumKeyCodes)> s_keyCapture;
+
+        constexpr float kBaseFontSize = 13.f; // font size at scale 1.0
+        struct MenuFont
+        {
+            char const *name; // value of the "menu-font" setting
+            char const *file;
+            ImFont *font;
+        };
+        std::array<MenuFont, 4> s_menuFonts{{
+            {"DejaVu Sans Mono", "DejaVuSansMono.ttf", nullptr},
+            {"Ubuntu Mono", "UbuntuMono-Regular.ttf", nullptr},
+            {"Hack", "Hack-Regular.ttf", nullptr},
+            {"Liberation Mono", "LiberationMono-Regular.ttf", nullptr},
+        }};
+        ImFont *s_fallbackFont = nullptr; // used when a font file is missing
+
+        // FreeType rasterizes these fonts at whatever size is pushed, snapped to whole pixels.
+        // Must run inside setup(): ImGui is re-initialized when toggling fullscreen.
+        void loadMenuFonts()
+        {
+            ImFontConfig config;
+            // No anti-aliasing, so glyph edges are never blurry at any size.
+            config.FontLoaderFlags = ImGuiFreeTypeLoaderFlags_MonoHinting | ImGuiFreeTypeLoaderFlags_Monochrome;
+            auto &io = ImGui::GetIO();
+            s_fallbackFont = io.Fonts->AddFontDefault(&config);
+            for (auto &entry : s_menuFonts)
+            {
+                entry.font = nullptr;
+                auto path = Mod::get()->getResourcesDir() / entry.file;
+                if (!path.exists())
+                {
+                    log::warn("Menu font not found: {}", entry.file);
+                    continue;
+                }
+                entry.font = io.Fonts->AddFontFromFileTTF(path.c_str(), kBaseFontSize, &config);
+            }
+        }
+
+        ImFont *selectedMenuFont()
+        {
+            auto name = Mod::get()->getSavedValue<std::string>("menu-font", "Ubuntu Mono");
+            for (auto const &entry : s_menuFonts)
+                if (entry.font && name == entry.name)
+                    return entry.font;
+            return s_fallbackFont;
+        }
+    }
+#endif
+
+#ifndef GEODE_IS_ANDROID
+    void beginOpenKeyCapture(std::function<void(cocos2d::enumKeyCodes)> done)
+    {
+        s_keyCapture = std::move(done);
+    }
+
+    void cancelOpenKeyCapture()
+    {
+        s_keyCapture = nullptr;
     }
 #endif
 
     void registerSettingsMenu()
     {
-        listenForAllSettingChanges([](std::string_view key, std::shared_ptr<SettingV3>)
-                                   {
-            if (key == "open-settings") return;
-            applySettings(); }, Mod::get());
-
 #ifndef GEODE_IS_ANDROID
-        ImGuiCocos::get().setup([] {}).draw([]
+        ImGuiCocos::get().setup([] { loadMenuFonts(); }).draw([]
                                             {
                 static bool s_wasOpen = false;
                 bool opened = s_settingsOpen && !s_wasOpen;
@@ -58,14 +114,37 @@ namespace hitboxtrail
 
                 auto mod = Mod::get();
                 bool changed = opened;
+                // The menu is scaled in proportion to the window width.
+                constexpr float kBaseWidth = 320.f; // scale 1.0 at this width
+                static float s_width = kBaseWidth;  // window width in the previous frame
                 // Reset sets this so the window goes back to its default size on the next frame.
                 static bool s_resetSize = false;
-                ImGui::SetNextWindowSize(ImVec2(340.f, 0.f), s_resetSize ? ImGuiCond_Always : ImGuiCond_FirstUseEver);
+
+                float wanted = std::clamp(s_width / kBaseWidth, 0.75f, 2.5f);
+                float fontSize = std::round(kBaseFontSize * wanted);
+                // Match the layout to the rounded font size.
+                float scale = fontSize / kBaseFontSize;
+
+                // Font and style apply to this menu only; both are restored on scope exit.
+                struct MenuLook {
+                    ImGuiStyle saved = ImGui::GetStyle();
+                    MenuLook(float fontSize, float scale) {
+                        ImGui::PushFont(selectedMenuFont(), fontSize);
+                        ImGui::GetStyle().ScaleAllSizes(scale);
+                    }
+                    ~MenuLook() {
+                        ImGui::GetStyle() = saved;
+                        ImGui::PopFont();
+                    }
+                } menuLook(fontSize, scale);
+
+                ImGui::SetNextWindowSize(ImVec2(kBaseWidth, 0.f), s_resetSize ? ImGuiCond_Always : ImGuiCond_FirstUseEver);
                 s_resetSize = false;
-                if (!ImGui::Begin("Better Hitbox Trail", &s_settingsOpen)) {
+                if (!ImGui::Begin("Better Hitbox Trail", &s_settingsOpen, ImGuiWindowFlags_NoScrollbar)) {
                     ImGui::End();
                     return;
                 }
+                s_width = ImGui::GetWindowWidth();
 
                 // Reset button in the title bar, right next to the title text (the title itself is untouched).
                 {
@@ -76,7 +155,7 @@ namespace hitboxtrail
                     ImGui::PushClipRect(pos, ImVec2(pos.x + ImGui::GetWindowWidth(), cursor.y), false);
                     // The title text starts after the collapse arrow.
                     ImGui::SetCursorScreenPos(ImVec2(pos.x + style.FramePadding.x + ImGui::GetFontSize() + style.ItemInnerSpacing.x +
-                                                         ImGui::CalcTextSize("Better Hitbox Trail").x + 12.f,
+                                                         ImGui::CalcTextSize("Better Hitbox Trail").x + 12.f * scale,
                                                      pos.y + style.FramePadding.y));
                     if (ImGui::SmallButton("Reset"))
                         ImGui::OpenPopup("Reset Settings");
@@ -98,7 +177,7 @@ namespace hitboxtrail
                     ImGui::EndPopup();
                 }
 
-                ImGui::PushItemWidth(110.f);
+                ImGui::PushItemWidth(110.f * scale);
                 auto checkbox = [&](char const* label, char const* key, bool def) {
                     bool value = mod->getSavedValue<bool>(key, def);
                     if (ImGui::Checkbox(label, &value)) {
@@ -247,17 +326,17 @@ namespace hitboxtrail
                 checkbox("Click Dot", "click-dot", false);
                 ImGui::SameLine();
                 colorEdit("##dot", "click-dot-color");
-                ImGui::SameLine(0.f, 30.f);
+                ImGui::SameLine(0.f, 30.f * scale);
                 ImGui::BeginDisabled(!mod->getSavedValue<bool>("click-dot", false));
-                bool dotCircle = mod->getSavedValue<bool>("click-dot-circle", false);
+                bool dotCircle = mod->getSavedValue<bool>("click-dot-circle", true);
                 bool dotRect = !dotCircle;
-                if (ImGui::Checkbox("Rect", &dotRect)) {
-                    mod->setSavedValue<bool>("click-dot-circle", false);
+                if (ImGui::Checkbox("Circle", &dotCircle)) {
+                    mod->setSavedValue<bool>("click-dot-circle", true);
                     changed = true;
                 }
                 ImGui::SameLine();
-                if (ImGui::Checkbox("Circle", &dotCircle)) {
-                    mod->setSavedValue<bool>("click-dot-circle", true);
+                if (ImGui::Checkbox("Rect", &dotRect)) {
+                    mod->setSavedValue<bool>("click-dot-circle", false);
                     changed = true;
                 }
                 ImGui::EndDisabled();
@@ -274,14 +353,33 @@ namespace hitboxtrail
                 if (changed) applySettings();
                 ImGui::PopItemWidth();
                 ImGui::End(); });
-
-        listenForKeybindSettingPresses("open-settings", [](Keybind const &, bool down, bool repeat, double) -> bool
-                                       {
-                if (down && !repeat) {
-                    s_settingsOpen = !s_settingsOpen;
-                    return true;
-                }
-                return false; });
 #endif
     }
 }
+
+#ifndef GEODE_IS_ANDROID
+class $modify(OpenKeyDispatcher, CCKeyboardDispatcher)
+{
+    bool dispatchKeyboardMSG(enumKeyCodes key, bool down, bool repeat, double timestamp)
+    {
+        if (down && !repeat)
+        {
+            if (hitboxtrail::s_keyCapture)
+            {
+                auto done = std::move(hitboxtrail::s_keyCapture);
+                hitboxtrail::s_keyCapture = nullptr;
+                done(key);
+                return true;
+            }
+            if (key == hitboxtrail::trailsettings::loadOpenMenuKey() &&
+                !CCIMEDispatcher::sharedDispatcher()->hasDelegate() &&
+                !ImGui::GetIO().WantTextInput)
+            {
+                hitboxtrail::s_settingsOpen = !hitboxtrail::s_settingsOpen;
+                return true;
+            }
+        }
+        return CCKeyboardDispatcher::dispatchKeyboardMSG(key, down, repeat, timestamp);
+    }
+};
+#endif

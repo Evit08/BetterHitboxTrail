@@ -29,7 +29,7 @@ namespace hitboxtrail::trailsettings
         bool betweenVisible()
         {
             auto mod = Mod::get();
-            return mod->getSettingValue<bool>("hitbox-between-frames") &&
+            return mod->getSavedValue<bool>("hitbox-between-frames", true) &&
                    (mod->getSavedValue<bool>("color-clicks", true) ||
                     mod->getSavedValue<bool>("only-click-release-enabled", false));
         }
@@ -47,34 +47,17 @@ namespace hitboxtrail::trailsettings
             Blue
         };
 
-        char const *thickKey(ThickKind kind, ThickProfile profile, bool isMini)
+        ThicknessEntry const &thickEntry(ThickKind kind, ThickProfile profile, bool isMini)
         {
-            auto isWave = profile == ThickProfile::Wave;
-            switch (kind)
-            {
-            case ThickKind::Main:
-                return isWave
-                           ? (isMini ? "wave-mini-square-hitbox-thickness" : "wave-square-hitbox-thickness")
-                           : (isMini ? "mini-square-hitbox-thickness" : "square-hitbox-thickness");
-            case ThickKind::Circle:
-                return isWave
-                           ? (isMini ? "wave-mini-circle-hitbox-thickness" : "wave-circle-hitbox-thickness")
-                           : (isMini ? "mini-circle-hitbox-thickness" : "circle-hitbox-thickness");
-            case ThickKind::Rotation:
-                return isWave
-                           ? (isMini ? "rotation-hitbox-wave-mini-thickness" : "rotation-hitbox-wave-thickness")
-                           : (isMini ? "rotation-hitbox-mini-thickness" : "rotation-hitbox-thickness");
-            case ThickKind::Blue:
-                return isWave
-                           ? (isMini ? "wave-mini-blue-hitbox-thickness" : "wave-blue-hitbox-thickness")
-                           : (isMini ? "mini-blue-hitbox-thickness" : "blue-hitbox-thickness");
-            }
-            return "square-hitbox-thickness";
+            static constexpr size_t kKindSlot[] = {0, 2, 3, 1};
+            auto slot = (profile == ThickProfile::Wave ? 8 : 0) + (isMini ? 4 : 0) + kKindSlot[static_cast<size_t>(kind)];
+            return kThicknessEntries[slot];
         }
 
         float loadThick(ThickKind kind, ThickProfile profile, bool isMini)
         {
-            auto value = Mod::get()->getSettingValue<double>(thickKey(kind, profile, isMini));
+            auto const &entry = thickEntry(kind, profile, isMini);
+            auto value = Mod::get()->getSavedValue<double>(entry.key, entry.fallback);
             return std::clamp(static_cast<float>(value), 0.01f, 10.f);
         }
 
@@ -86,14 +69,14 @@ namespace hitboxtrail::trailsettings
             s.trailEnabled = mod->getSavedValue<bool>("hitbox-trail-enabled", true);
             s.onlyClickRelease = shared.onlyClickRelease;
             s.forceSingle = shared.forceSingle;
-            s.showBetweenFrames = mod->getSettingValue<bool>("hitbox-between-frames");
+            s.showBetweenFrames = mod->getSavedValue<bool>("hitbox-between-frames", true);
             s.alwaysShow = mod->getSavedValue<bool>("always-show-hitbox-trail", false);
             s.showOnDeath = mod->getSavedValue<bool>("hitbox-trail-on-death", true);
             s.noLimit = mod->getSavedValue<bool>("trail-no-limit", false);
             s.length = s.noLimit
                            ? std::numeric_limits<size_t>::max()
                            : static_cast<size_t>(mod->getSavedValue<int64_t>("trail-length", 240));
-            s.captureRate = utils::numFromString<double>(mod->getSettingValue<std::string>("trail-capture-rate")).unwrapOr(240.0);
+            s.captureRate = utils::numFromString<double>(mod->getSavedValue<std::string>("trail-capture-rate", "240")).unwrapOr(240.0);
             return s;
         }
 
@@ -111,10 +94,10 @@ namespace hitboxtrail::trailsettings
                 .colorClicks = mod->getSavedValue<bool>("color-clicks", true),
                 .colorHeld = mod->getSavedValue<bool>("color-when-held", true),
                 .fadeWithAge = mod->getSavedValue<bool>("fade-with-age", false),
-                .blueClicks = mod->getSettingValue<bool>("blue-hitbox-color-clicks"),
+                .blueClicks = mod->getSavedValue<bool>("blue-hitbox-color-clicks", false),
                 .fillOn = mod->getSavedValue<bool>("fill-hitbox", false),
                 .clickDot = mod->getSavedValue<bool>("click-dot", false),
-                .dotCircle = mod->getSavedValue<bool>("click-dot-circle", false),
+                .dotCircle = mod->getSavedValue<bool>("click-dot-circle", true),
                 .batchLayers = mod->getSavedValue<bool>("batch-layer-overlap", false),
                 .onlyClickRelease = shared.onlyClickRelease,
                 .showBetweenFrames = betweenVisible(),
@@ -307,7 +290,9 @@ namespace hitboxtrail::trailsettings
             {"fade-with-age", false},
             {"fill-hitbox", false},
             {"click-dot", false},
-            {"click-dot-circle", false},
+            {"click-dot-circle", true},
+            {"hitbox-between-frames", true},
+            {"blue-hitbox-color-clicks", false},
         };
         for (auto const &entry : kBools)
             mod->setSavedValue<bool>(entry.key, entry.value);
@@ -316,9 +301,26 @@ namespace hitboxtrail::trailsettings
         mod->setSavedValue<double>("opacity", 1.0);
         mod->setSavedValue<double>("thickness", 1.0);
         mod->setSavedValue<double>("fill-opacity", 0.25);
+        mod->setSavedValue<std::string>("trail-capture-rate", "240");
+        mod->setSavedValue<std::string>("menu-font", "Ubuntu Mono");
+        for (auto const &entry : kThicknessEntries)
+            mod->setSavedValue<double>(entry.key, entry.fallback);
+        mod->setSettingValue<bool>("hide-pause-menu-button", false);
 
+        saveOpenMenuKey(cocos2d::KEY_H);
         saveLayerOrder(kDefaultLayerOrder);
         resetColors();
+    }
+
+    cocos2d::enumKeyCodes loadOpenMenuKey()
+    {
+        return static_cast<cocos2d::enumKeyCodes>(
+            Mod::get()->getSavedValue<int64_t>("open-menu-key", static_cast<int64_t>(cocos2d::KEY_H)));
+    }
+
+    void saveOpenMenuKey(cocos2d::enumKeyCodes key)
+    {
+        Mod::get()->setSavedValue<int64_t>("open-menu-key", static_cast<int64_t>(key));
     }
 
     CaptureSettings const &TrailSettings::cachedCaptureSettings()
@@ -339,27 +341,5 @@ namespace hitboxtrail::trailsettings
     {
         m_renderCache.reset();
         m_capCache.reset();
-    }
-
-    void healThicknessSettings()
-    {
-        auto mod = Mod::get();
-        auto heal = [mod](char const *key, double lo, double hi)
-        {
-            auto value = mod->getSettingValue<double>(key);
-            auto clamped = std::clamp(value, lo, hi);
-            if (clamped != value)
-                mod->setSettingValue<double>(key, clamped);
-        };
-        for (auto profile : kThickProfiles)
-        {
-            for (auto isMini : {false, true})
-            {
-                heal(thickKey(ThickKind::Main, profile, isMini), 0.01, 10.0);
-                heal(thickKey(ThickKind::Blue, profile, isMini), 0.01, 10.0);
-                heal(thickKey(ThickKind::Circle, profile, isMini), 0.01, 10.0);
-                heal(thickKey(ThickKind::Rotation, profile, isMini), 0.01, 10.0);
-            }
-        }
     }
 }

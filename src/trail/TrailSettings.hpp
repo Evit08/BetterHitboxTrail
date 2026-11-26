@@ -41,6 +41,32 @@ namespace hitboxtrail::trailsettings
 
     using ThickTable = std::array<std::array<float, 2>, kThickProfiles.size()>; // [profile][isMini]
 
+    struct ThicknessEntry
+    {
+        char const *label;
+        char const *key;
+        double fallback;
+    };
+
+    inline constexpr std::array<ThicknessEntry, 16> kThicknessEntries{{
+        {"Square", "square-hitbox-thickness", 1.0},
+        {"Blue", "blue-hitbox-thickness", 1.0},
+        {"Circle", "circle-hitbox-thickness", 1.0},
+        {"Rotation", "rotation-hitbox-thickness", 1.0},
+        {"Mini Square", "mini-square-hitbox-thickness", 0.9},
+        {"Mini Blue", "mini-blue-hitbox-thickness", 0.9},
+        {"Mini Circle", "mini-circle-hitbox-thickness", 0.9},
+        {"Mini Rotation", "rotation-hitbox-mini-thickness", 0.9},
+        {"Wave Square", "wave-square-hitbox-thickness", 0.85},
+        {"Wave Blue", "wave-blue-hitbox-thickness", 0.85},
+        {"Wave Circle", "wave-circle-hitbox-thickness", 0.85},
+        {"Wave Rotation", "rotation-hitbox-wave-thickness", 0.85},
+        {"Wave Mini Square", "wave-mini-square-hitbox-thickness", 0.8},
+        {"Wave Mini Blue", "wave-mini-blue-hitbox-thickness", 0.8},
+        {"Wave Mini Circle", "wave-mini-circle-hitbox-thickness", 0.8},
+        {"Wave Mini Rotation", "rotation-hitbox-wave-mini-thickness", 0.8},
+    }};
+
     inline constexpr std::array<HitboxLayer, kHitboxLayerCount> kDefaultLayerOrder{
         HitboxLayer::Rotation, HitboxLayer::Circle, HitboxLayer::Main, HitboxLayer::Blue};
 
@@ -87,7 +113,8 @@ namespace hitboxtrail::trailsettings
         std::optional<RenderSettings> m_renderCache;
     };
 
-    void healThicknessSettings();
+    cocos2d::enumKeyCodes loadOpenMenuKey();
+    void saveOpenMenuKey(cocos2d::enumKeyCodes key);
 
     // Layer draw order, bottom to top. Stored with the other in-game popup options.
     std::array<HitboxLayer, kHitboxLayerCount> loadLayerOrder();

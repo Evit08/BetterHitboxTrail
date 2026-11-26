@@ -253,7 +253,7 @@ namespace hitboxtrail::trailrenderer
             }
         }
 
-        static constexpr float kClickDotSize = 4.f;
+        static constexpr float kClickDotSize = 3.f;
         static constexpr float kClickDotThickness = 0.5f;
 
         std::vector<BatchItem> m_batch;

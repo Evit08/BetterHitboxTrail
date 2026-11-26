@@ -4,7 +4,7 @@ This mod adds customizable hitbox trail settings and a mod menu.
 
 ## Usage
 
-Press H to open the menu. You can customize thickness for each hitbox and game mode in the Geode settings page.
+Press H or press pause menu button to open the menu.
 
 ## Features
 
